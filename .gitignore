@@ -120,3 +120,8 @@ docs/_build/
 target/
 **pypackages**/
 cython_debug/
+
+
+# ignore database files
+postgres/data/*
+core/media/
