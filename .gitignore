@@ -1,0 +1,122 @@
+# Python
+
+**pycache**/
+*.py[cod]
+*$py.class
+*.so
+
+
+# Virtual Environments
+
+.env
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+
+# Packaging / Build
+
+.Python
+build/
+dist/
+downloads/
+develop-eggs/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+
+# Logs
+
+*.log
+logs/
+log/
+
+
+# Testing / Coverage
+
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+coverage.xml
+nosetests.xml
+*.cover
+
+
+# Type Checkers
+
+.mypy_cache/
+.pyre/
+.pytype/
+.dmypy.json
+dmypy.json
+
+
+# Jupyter
+
+.ipynb_checkpoints/
+
+
+# Django
+
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+
+# Celery
+
+celerybeat-schedule
+celerybeat.pid
+
+# IDEs
+
+.idea/
+.vscode/
+
+
+# Backup files
+
+*.bak
+*.swp
+*.swo
+*~
+
+
+# Secrets
+
+.env.local
+.env.dev
+.env.prod
+.env.production
+
+
+# Sphinx
+
+docs/_build/
+
+
+# Misc
+
+.ropeproject/
+.spyderproject
+.spyproject
+.pybuilder/
+target/
+**pypackages**/
+cython_debug/
