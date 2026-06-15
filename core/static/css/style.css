@@ -1,4 +1,3 @@
-
 /* ================= BASE ================= */
 body {
   margin: 0;
@@ -6,6 +5,10 @@ body {
   background: #ffffff;
   color: #222;
   line-height: 1.6;
+}
+
+section {
+  scroll-margin-top: 80px;
 }
 
 /* ================= TOPBAR ================= */
@@ -40,7 +43,6 @@ body {
   border: 1px solid #ddd;
   border-radius: 10px;
   outline: none;
-  transition: 0.2s;
 }
 
 .search input:focus {
@@ -101,7 +103,7 @@ body {
   padding: 20px;
 }
 
-.feature {
+.features .feature {
   border: 1px solid #eee;
   padding: 15px;
   text-align: center;
@@ -110,8 +112,8 @@ body {
   transition: 0.25s;
 }
 
-.feature:hover {
-  transform: translateY(-3px);
+.features .feature:hover {
+  transform: translateY(-6px);
   border-color: #ff3d00;
 }
 
@@ -120,17 +122,13 @@ body {
   max-width: 1100px;
   margin: 30px auto;
   padding: 40px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-
   background: linear-gradient(135deg, #ff3d00, #ff6a00);
   border-radius: 18px;
-
   color: white;
-  overflow: hidden;
 }
 
 .promo-text {
@@ -139,12 +137,6 @@ body {
 
 .promo-text h2 {
   font-size: 26px;
-  margin-bottom: 10px;
-}
-
-.promo-text p {
-  opacity: 0.9;
-  line-height: 1.6;
 }
 
 .promo-text a {
@@ -156,24 +148,6 @@ body {
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
-  transition: 0.2s;
-}
-
-.promo-text a:hover {
-  transform: scale(1.05);
-}
-
-/* ================= PROMO IMAGE ================= */
-.promo-img {
-  flex: 0 0 240px;
-}
-
-.promo-img img {
-  width: 100%;
-  max-width: 240px;
-  border-radius: 12px;
-  transform: rotate(-3deg);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
 /* ================= CATEGORIES ================= */
@@ -189,21 +163,17 @@ body {
   padding: 20px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   transition: 0.25s;
 }
 
 .cat:hover {
-  transform: translateY(-3px);
+  transform: translateY(-6px);
 }
 
 /* ================= PRODUCTS ================= */
 .products {
   padding: 20px;
-}
-
-.products h2 {
-  margin-bottom: 20px;
 }
 
 .grid {
@@ -216,12 +186,12 @@ body {
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .card img {
@@ -230,12 +200,7 @@ body {
   object-fit: cover;
 }
 
-.card h3 {
-  margin: 10px;
-}
-
 .card p {
-  margin: 10px;
   color: #ff3d00;
   font-weight: bold;
 }
@@ -257,7 +222,6 @@ body {
 .footer a {
   display: block;
   color: #aaa;
-  text-decoration: none;
   margin: 5px 0;
   transition: 0.2s;
 }
@@ -266,95 +230,56 @@ body {
   color: white;
 }
 
-.footer input {
-  padding: 8px;
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: none;
-}
-
-.footer button {
-  background: #ff3d00;
-  color: white;
-  border: none;
-  padding: 8px;
-  width: 100%;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
 .bottom {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #333;
   font-size: 12px;
   color: #aaa;
-
 }
 
-
-/* ================= PAGE HEADER (مثل بقیه صفحات) ================= */
+/* ================= PAGE HEADER ================= */
 .page-header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 70px 20px;
   background: linear-gradient(135deg, #ff3d00, #ff6a00);
   color: white;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
-.page-header h1 {
-  margin: 0;
-  font-size: 36px;
-}
-
-.page-header p {
-  opacity: 0.9;
-  margin-top: 8px;
-}
-
-
-/* ================= CONTACT PAGE ================= */
-.contact-page {
+/* ================= CONTACT ================= */
+.contact-wrapper {
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
-
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 30px;
 }
 
-/* LEFT SIDE INFO */
 .contact-info {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.info-box {
+.contact-info .info-box {
   background: white;
   padding: 18px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-
   display: flex;
-  align-items: center;
   gap: 12px;
-
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   transition: 0.2s;
 }
 
-.info-box i {
-  font-size: 20px;
-  color: #ff3d00;
-}
-
-.info-box:hover {
-  transform: translateY(-3px);
+.contact-info .info-box:hover {
+  transform: translateY(-5px);
   border-right: 3px solid #ff3d00;
 }
 
-/* RIGHT FORM */
 .contact-form-box {
   background: white;
   padding: 25px;
@@ -362,37 +287,18 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.contact-form-box h2 {
-  margin: 0;
-}
-
-.sub {
-  font-size: 13px;
-  color: #777;
-  margin-bottom: 15px;
-}
-
-/* FORM */
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
-}
-
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 10px;
   outline: none;
-  transition: 0.2s;
-  font-family: Vazirmatn;
 }
 
 .contact-form input:focus,
@@ -401,7 +307,6 @@ body {
   box-shadow: 0 0 0 3px rgba(255,61,0,0.1);
 }
 
-/* BUTTON */
 .contact-form button {
   background: linear-gradient(135deg, #ff3d00, #ff6a00);
   color: white;
@@ -409,10 +314,71 @@ body {
   padding: 12px;
   border-radius: 10px;
   cursor: pointer;
-  font-weight: bold;
+}
+
+/* ================= ABOUT ================= */
+.about-intro {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 30px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.about-stats {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.stat {
+  background: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   transition: 0.2s;
 }
 
-.contact-form button:hover {
-  transform: translateY(-2px);
+.stat:hover {
+  transform: translateY(-6px);
+}
+
+.about-values {
+  max-width: 1100px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.value-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: 0.2s;
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+}
+
+.value-card i {
+  color: #ff3d00;
+  font-size: 24px;
 }
