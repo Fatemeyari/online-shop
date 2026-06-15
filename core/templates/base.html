@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Shop</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME (مهم برای آیکن‌ها) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span>🚚 ارسال رایگان برای سفارش بالای 1 میلیون</span>
+    <span>📞 021-000000</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+
+    <div class="logo">SHOP+</div>
+
+    <div class="search">
+      <input type="text" placeholder="جستجو در محصولات...">
+    </div>
+
+    <!-- ICONS -->
+    <div class="icons">
+
+      <span class="icon">
+        <i class="fa-regular fa-user"></i>
+      </span>
+
+      <span class="icon">
+        <i class="fa-regular fa-heart"></i>
+      </span>
+
+      <span class="icon cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- MENU -->
+  <nav class="menu">
+
+    <div class="menu-links">
+      <a href="#">خانه</a>
+      <a href="#">دیجیتال</a>
+      <a href="#">مد و پوشاک</a>
+      <a href="#">تخفیف ویژه 🔥</a>
+    </div>
+
+    <div class="menu-pages">
+      <a href="#">درباره ما</a>
+      <a href="#">تماس با ما</a>
+    </div>
+
+  </nav>
+
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+
+  <div class="footer-grid">
+
+    <div>
+      <h4>SHOP+</h4>
+      <p>
+        ارائه محصولات باکیفیت، قیمت رقابتی و ارسال سریع در سراسر کشور.
+      </p>
+    </div>
+
+    <div>
+      <h4>دسترسی سریع</h4>
+      <a href="#">قوانین</a>
+      <a href="#">حریم خصوصی</a>
+    </div>
+
+    <div>
+      <h4>دسته‌بندی</h4>
+      <a href="#">موبایل</a>
+      <a href="#">لپ‌تاپ</a>
+    </div>
+
+    <div>
+      <h4>پشتیبانی</h4>
+      <a href="#">سوالات متداول</a>
+      <a href="#">راهنما</a>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    © 2026 SHOP+
+  </div>
+
+</footer>
+
+</body>
+</html>
