@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -6,8 +8,7 @@
   <title>Modern Shop</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="static/css/style.css">
-
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -58,15 +59,14 @@
   <nav class="menu">
 
     <div class="menu-links">
-      <a href="#">خانه</a>
-      <a href="#">دیجیتال</a>
+      <a href="/">دیجیتال</a>
       <a href="#">مد و پوشاک</a>
       <a href="#">تخفیف ویژه 🔥</a>
     </div>
 
     <div class="menu-pages">
       <a href="#">درباره ما</a>
-      <a href="#">تماس با ما</a>
+      <a href="{% url 'website:contact' %}">تماس با ما</a>
     </div>
 
   </nav>

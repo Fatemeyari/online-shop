@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>تماس با ما</h1>
+  <p>برای ارتباط با تیم پشتیبانی در هر زمان آماده‌ایم</p>
+</section>
+
+<!-- CONTACT MAIN -->
+<section class="contact-wrapper">
+
+  <!-- INFO -->
+  <div class="contact-info">
+
+    <div class="contact-card">
+      <h3>📍 آدرس</h3>
+      <p>تهران، خیابان نمونه، پلاک ۱۲۳</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>📞 تلفن</h3>
+      <p>021-00000000</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>✉️ ایمیل</h3>
+      <p>support@shop.com</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>⏰ ساعت کاری</h3>
+      <p>هر روز 9 صبح تا 9 شب</p>
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+  <form class="contact-form">
+
+    <h2>ارسال پیام</h2>
+
+    <input type="text" placeholder="نام و نام خانوادگی">
+    <input type="email" placeholder="ایمیل">
+    <input type="text" placeholder="موضوع">
+    <textarea rows="6" placeholder="پیام شما"></textarea>
+
+    <button type="submit">ارسال پیام</button>
+
+  </form>
+
+</section>
+
+{% endblock %}

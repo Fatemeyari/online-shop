@@ -290,4 +290,129 @@ body {
   border-top: 1px solid #333;
   font-size: 12px;
   color: #aaa;
+
+}
+
+
+/* ================= PAGE HEADER (مثل بقیه صفحات) ================= */
+.page-header {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #ff3d00, #ff6a00);
+  color: white;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.page-header p {
+  opacity: 0.9;
+  margin-top: 8px;
+}
+
+
+/* ================= CONTACT PAGE ================= */
+.contact-page {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+}
+
+/* LEFT SIDE INFO */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-box {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  transition: 0.2s;
+}
+
+.info-box i {
+  font-size: 20px;
+  color: #ff3d00;
+}
+
+.info-box:hover {
+  transform: translateY(-3px);
+  border-right: 3px solid #ff3d00;
+}
+
+/* RIGHT FORM */
+.contact-form-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.contact-form-box h2 {
+  margin: 0;
+}
+
+.sub {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s;
+  font-family: Vazirmatn;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff3d00;
+  box-shadow: 0 0 0 3px rgba(255,61,0,0.1);
+}
+
+/* BUTTON */
+.contact-form button {
+  background: linear-gradient(135deg, #ff3d00, #ff6a00);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
 }
