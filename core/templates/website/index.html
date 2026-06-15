@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- FEATURE STRIP-->
+<section class="features">
+
+  <div class="feature">
+    🚚 <span>ارسال سریع</span>
+  </div>
+
+  <div class="feature">
+    💳 <span>پرداخت امن</span>
+  </div>
+
+  <div class="feature">
+    🔥 <span>تخفیف‌های روزانه</span>
+  </div>
+
+  <div class="feature">
+    📞 <span>پشتیبانی واقعی</span>
+  </div>
+
+</section>
+<section class="promo">
+
+  <div class="promo-text">
+    <h2>تخفیف‌های ویژه امروز 🔥</h2>
+    <p>تا ۵۰٪ تخفیف روی محصولات منتخب فقط تا پایان امروز</p>
+    <a href="#products">مشاهده پیشنهادها</a>
+  </div>
+
+  <div class="promo-img">
+    <img src="{% static 'img/hero.jpeg' %}" alt="sale">
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="cats">
+  <div class="cat">📱 موبایل</div>
+  <div class="cat">💻 لپ‌تاپ</div>
+  <div class="cat">🎧 دیجیتال</div>
+  <div class="cat">👕 پوشاک</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <h2>🔥 محصولات پیشنهادی</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img loading="lazy"
+        src="{% static 'img/iphone.jpeg' %}"
+        alt="iPhone">
+
+      <h3>iPhone 14 Pro</h3>
+      <p>58,000,000 تومان</p>
+    </div>
+
+    <div class="card">
+      <img loading="lazy"
+        src="{% static 'img/mackbook.jpeg' %}"
+        alt="MacBook">
+
+      <h3>MacBook Pro</h3>
+      <p>120,000,000 تومان</p>
+    </div>
+
+    <div class="card">
+      <img loading="lazy"
+        src="{% static 'img/applewatch.png' %}"
+        alt="Watch">
+
+      <h3>Apple Watch</h3>
+      <p>15,000,000 تومان</p>
+    </div>
+
+    <div class="card">
+      <img loading="lazy"
+        src="{% static 'img/headphones.jpeg' %}"
+        alt="Headphones">
+
+      <h3>Headphones</h3>
+      <p>3,200,000 تومان</p>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
