@@ -52,7 +52,7 @@ class CustomUserAdmin(UserAdmin):
                 "classes":("wide,"),
                 "fields":(
                     "email",
-                    "password1"
+                    "password1",
                     "password2",
                     "is_staff",
                     "is_active",
