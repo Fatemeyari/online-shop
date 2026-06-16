@@ -59,3 +59,22 @@ class User(AbstractBaseUser ,PermissionsMixin):
         verbose_name_plural="Users"
 
 
+class Profile(models.Model):
+    user=models.OneToOneField('User' , on_delete=models.CASCADE , related_name="user_profile")
+    first_name=models.CharField(max_length=255)
+    last_name=models.CharField(max_length=255)
+    phone_number=models.CharField(max_length=12 , validators=[validation_iranian_cellphone])
+    image=models.ImageField(upload_to="profile/")
+    created_time=models.DateTimeField(auto_now_add=True)
+    updated_time=models.DateTimeField(auto_now=True)
+
+    def get_fullname(self):
+        if self.first_name or self.last_name:
+            return self.first_name + " " + self.last_name
+        return "New User"
+    
+    class Meta:
+        verbose_name="Profile"
+        verbose_name_plural="Profiles"
+
+
