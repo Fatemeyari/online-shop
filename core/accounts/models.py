@@ -78,3 +78,7 @@ class Profile(models.Model):
         verbose_name_plural="Profiles"
 
 
+@receiver(post_save , sender=User)
+def create_profile(sender , instance , created , **kwarge):
+    if created :
+        Profile.objects.create(user=instance , pk=instance.pk)
