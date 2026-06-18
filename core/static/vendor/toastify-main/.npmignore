@@ -1,0 +1,15 @@
+.idea
+/src
+.prettierrc
+.github
+.prettierignore
+eslint.config.mjs
+/docs
+/coverage
+*.tgz
+
+
+# Build and development files
+rollup.config.js
+tsconfig.json
+temp/
