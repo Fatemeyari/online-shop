@@ -41,7 +41,7 @@
 
       {% if user.is_authenticated %}
 
-        <a href="#" class="icon" title="خروج">
+        <a href="{% url 'accounts:logout' %}" class="icon" title="خروج">
           <i class="fa-solid fa-right-from-bracket"></i>
         </a>
 

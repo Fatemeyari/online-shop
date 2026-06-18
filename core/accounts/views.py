@@ -9,3 +9,6 @@ class LoginView(auth_views.LoginView):
     redirect_authenticated_user = True
 
 
+class LogoutView(auth_views.LogoutView):
+    pass
+
