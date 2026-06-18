@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth import views as auth_views
 
-# Create your views here.
+from .forms import AuthenticationForm
+
+class LoginView(auth_views.LoginView):
+    form_class = AuthenticationForm
+    template_name = "accounts/login.html"
+    redirect_authenticated_user = True
+
+
