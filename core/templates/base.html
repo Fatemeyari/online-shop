@@ -6,15 +6,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Modern Shop</title>
-
-  <!-- CSS -->
+    <!-- CSS -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- FONT AWESOME  -->
+    <!-- FONT AWESOME  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  
 </head>
 
 <body>
@@ -39,17 +39,27 @@
     <!-- ICONS -->
     <div class="icons">
 
-      <span class="icon">
-        <i class="fa-regular fa-user"></i>
-      </span>
+      {% if user.is_authenticated %}
 
-      <span class="icon">
+        <a href="#" class="icon" title="خروج">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+
+      {% else %}
+
+        <a href="{% url 'accounts:login' %}" class="icon" title="ورود">
+          <i class="fa-regular fa-user"></i>
+        </a>
+
+      {% endif %}
+
+      <a href="#" class="icon" title="علاقه‌مندی">
         <i class="fa-regular fa-heart"></i>
-      </span>
+      </a>
 
-      <span class="icon cart">
+      <a href="#" class="icon cart" title="سبد خرید">
         <i class="fa-solid fa-cart-shopping"></i>
-      </span>
+      </a>
 
     </div>
 
@@ -83,9 +93,7 @@
 
     <div>
       <h4>SHOP+</h4>
-      <p>
-        ارائه محصولات باکیفیت، قیمت رقابتی و ارسال سریع در سراسر کشور.
-      </p>
+      <p>ارائه محصولات باکیفیت، قیمت رقابتی و ارسال سریع.</p>
     </div>
 
     <div>
