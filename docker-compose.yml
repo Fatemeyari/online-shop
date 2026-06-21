@@ -43,5 +43,28 @@ services:
     environment:
       - ServerOptions__HostName=smtp4dev
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+  celery:
+    container_name: celery
+    build: 
+      network: host
+      context: .
+      dockerfile: ./dockerfiles/dev/django/Dockerfile
+    command: celery -A core worker -l info
+    volumes:
+     - ./core:/usr/src/app
+    working_dir: /usr/src/app
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DEBUG=True
+    restart: always
+
+  
 volumes:
   smtp4dev-data:
+  
