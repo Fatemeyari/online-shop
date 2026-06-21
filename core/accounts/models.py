@@ -82,3 +82,17 @@ class Profile(models.Model):
 def create_profile(sender , instance , created , **kwarge):
     if created :
         Profile.objects.create(user=instance , pk=instance.pk)
+
+
+
+class PasswordResetToken(models.Model):
+    user=models.ForeignKey(User , on_delete=models.CASCADE , related_name='reset_tokens')
+    token=models.CharField(max_length=64,unique=True)
+    is_used=models.BooleanField(default=False)
+    created_time=models.DateTimeField(auto_now_add=True)
+    expires_time=models.DateTimeField()
+
+
+    class Meta:
+        verbose_name="Token"
+        verbose_name_plural="Tokens"
