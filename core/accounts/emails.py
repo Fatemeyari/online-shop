@@ -1,10 +1,18 @@
 from django.core.mail import send_mail
 from django.conf import settings
 
-from .tokens import create_token
-from .models import PasswordResetToken
+from celery import shared_task
+from celery.utils.log import get_task_logger
 
-def send_email(user):
+from .tokens import create_token
+from .models import User
+
+
+logger=get_task_logger(__name__)
+
+@shared_task
+def send_email(user_id):
+    user=User.objects.get(id=user_id)
     token=create_token(user)
     token_link=(f"http://127.0.0.1:8000/accounts/password-reset-confirm/{token}")
 

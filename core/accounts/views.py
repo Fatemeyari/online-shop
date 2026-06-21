@@ -36,7 +36,7 @@ class PasswordResetRequestView(View):
                 form.add_error("email","کاربری با این ایمیل یافت نشد .")
                 return render(request, self.template_name, {"form": form})
 
-        send_email(user)
+        send_email.delay(user.id)
         messages.success(request,"ایمیل بازیابی ارسال شد.")
         return render(request , self.template_name , {"form":form})
 
@@ -74,5 +74,5 @@ class PasswordResetConfirmView(View):
             token_obj.save()
 
             messages.success(request, ".پسورد با موفقیت تغییر یافت.")
-            return redirect("login")  
+            return redirect("http://localhost:8000/accounts/login/")  
         return render(request, self.template_name, {"form": form})
