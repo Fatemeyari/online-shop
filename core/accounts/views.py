@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
+from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
+from django.views import View
+from django.contrib import messages
+from django.utils import timezone
 
-from .forms import AuthenticationForm
+from .forms import AuthenticationForm , PasswordResetRequestForm 
+from .models import User , PasswordResetToken
+from .emails import send_email
 
 class LoginView(auth_views.LoginView):
     form_class = AuthenticationForm
@@ -12,3 +18,25 @@ class LoginView(auth_views.LoginView):
 class LogoutView(auth_views.LogoutView):
     pass
 
+
+class PasswordResetRequestView(View):
+    template_name="accounts/password_reset_request.html"
+
+    def get(self,request):
+        form=PasswordResetRequestForm()
+        return render(request , self.template_name,{"form":form})
+
+    def post(self , request):
+        form=PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email=form.cleaned_data["email"]
+            try:
+                user=User.objects.get(email=email)
+            except User.DoesNotExist:
+                form.add_error("email","کاربری با این ایمیل یافت نشد .")
+                return render(request, self.template_name, {"form": form})
+
+        send_email(user)
+        messages.success(request,"ایمیل بازیابی ارسال شد.")
+        return render(request , self.template_name , {"form":form})
+        
