@@ -8,5 +8,7 @@ urlpatterns = [
     path('login/' ,views.LoginView.as_view() , name="login"),
     path('logout/' ,views.LogoutView.as_view() , name="logout"),
     path('password-reset-request/' , views.PasswordResetRequestView.as_view() , name="password-reset-request"),
+    path('password-reset-confirm/<str:token>' , views.PasswordResetConfirmView.as_view() , name="password-reset-confirm"),
+
 
 ]

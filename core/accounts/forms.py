@@ -11,5 +11,23 @@ class PasswordResetRequestForm(forms.Form):
                           label="email",
                           widget=forms.EmailInput(attrs={"placeholder": "example@gmail.com"}))
 
+class PasswordResetConfirmForm(forms.Form):
+    password1 = forms.CharField(
+        required=True,
+        label="Password",
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "رمز عبور جدید"
+        })
+    )
+
+    password2 = forms.CharField(
+        required=True,
+        label="Confirm_Password",
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "تکرار رمز عبور"
+        })
+    )
+
+
                     
 
