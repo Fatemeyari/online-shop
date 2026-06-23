@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأیید حساب کاربری</title>
+
+    <link rel="stylesheet" href="{% static 'css/signup_confirm.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            Toastify({
+                text: "{{ message|escapejs }}",
+                duration: 4000,
+                gravity: "top",
+                position: "center",
+                style: {
+                    background: "{% if 'error' in message.tags %}#dc2626{% else %}#16a34a{% endif %}"
+                }
+            }).showToast();
+        </script>
+    {% endfor %}
+{% endif %}
+
+<div class="auth-wrapper">
+
+    <div class="auth-box">
+
+        <div class="icon">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                        ❌
+                    {% else %}
+                        ✅
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                🔐
+            {% endif %}
+        </div>
+
+        <h1>تأیید حساب کاربری</h1>
+
+        <p>
+            لینک فعال‌سازی حساب شما بررسی شد.
+        </p>
+
+        <a href="{% url 'accounts:login' %}" class="btn">
+            ورود به حساب کاربری
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

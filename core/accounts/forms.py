@@ -48,3 +48,9 @@ class SignUpForm(forms.Form):
             raise forms.ValidationError("رمز های وارد شده یکسان نیستند.")
         return cleaned_data
  
+
+class SignUpConfirmForm(forms.Form):
+    message = forms.CharField(required=False)
+
+
+                    

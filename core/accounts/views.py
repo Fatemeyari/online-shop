@@ -5,9 +5,9 @@ from django.views import View
 from django.contrib import messages
 from django.utils import timezone
 
-from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm , SignUpForm 
+from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm , SignUpForm , SignUpConfirmForm 
 from .models import User , PasswordResetToken , VerificationToken 
-from .emails import send_email , send_verification_email
+from .emails import send_email , send_verification_email,resend_verification_email
 
 class LoginView(auth_views.LoginView):
     form_class = AuthenticationForm
@@ -111,4 +111,35 @@ class SignUpView(View):
             return redirect("http://localhost:8000/accounts/login/")
         
         return render(request , self.template_name , {"form":form})
- 
+    
+class SignupConfirmView(View):
+    template_name = "accounts/signup_confirm.html"
+
+    def get(self, request, token):
+
+        try:
+            token_obj = VerificationToken.objects.get(token=token)
+        except VerificationToken.DoesNotExist:
+            messages.error(request, "توکن نامعتبر است.")
+            return render(request, self.template_name)
+
+        if token_obj.is_used:
+            messages.error(request, "این توکن قبلاً استفاده شده است.")
+            return render(request, self.template_name)
+
+        if token_obj.expires_time < timezone.now():
+            messages.error(request, "توکن منقضی شده است.")
+            return render(request, self.template_name)
+
+        user = token_obj.user
+        user.is_verified = True
+        user.save()
+
+        token_obj.is_used = True
+        token_obj.save()
+
+        messages.success(request, "حساب شما با موفقیت تایید شد.")
+
+        return render(request, self.template_name)
+    
+

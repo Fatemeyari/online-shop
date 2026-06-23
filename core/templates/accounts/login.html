@@ -96,8 +96,9 @@
             </form>
 
             <div class="extra-links">
-                <a href="#">ثبت نام</a><br>
-                <a href="{% url 'accounts:password-reset-request' %}">فراموشی رمز عبور</a>
+                <a href="{% url 'accounts:signup' %}">ثبت نام</a><br>
+                <a href="{% url 'accounts:password-reset-request' %}">فراموشی رمز عبور</a><br>
+                <a href="{% url 'accounts:resend_verification' %}"> تایید ایمیل</a>
             </div>
 
         </div>
