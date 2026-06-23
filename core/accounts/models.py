@@ -92,7 +92,12 @@ class PasswordResetToken(models.Model):
     created_time=models.DateTimeField(auto_now_add=True)
     expires_time=models.DateTimeField()
 
+    def __str__(self):
+        return f"{self.user.email} - {self.token}"
 
     class Meta:
-        verbose_name="Token"
-        verbose_name_plural="Tokens"
+        verbose_name="Password Reset Token"
+        verbose_name_plural="Password Reset Tokens"
+    
+
+
