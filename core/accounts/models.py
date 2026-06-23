@@ -101,7 +101,7 @@ class PasswordResetToken(models.Model):
     
 
 
-class VerificationToekn(models.Model):
+class VerificationToken(models.Model):
     user=models.ForeignKey(User , on_delete=models.CASCADE , related_name='verification_tokens')
     token=models.CharField(max_length=64,unique=True)
     is_used=models.BooleanField(default=False)
