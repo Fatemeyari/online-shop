@@ -5,15 +5,20 @@ from django.views import View
 from django.contrib import messages
 from django.utils import timezone
 
-from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm
-from .models import User , PasswordResetToken
-from .emails import send_email
+from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm , SignUpForm 
+from .models import User , PasswordResetToken , VerificationToken 
+from .emails import send_email , send_verification_email
 
 class LoginView(auth_views.LoginView):
     form_class = AuthenticationForm
     template_name = "accounts/login.html"
-    redirect_authenticated_user = True
 
+    def form_valid(self, form):
+        user=form.get_user()
+        if not user.is_verified:
+            form.add_error(None , "لطفا ایمیل خود را تایید کنید.")
+            return self.form_invalid(form)
+        return super().form_valid(form)
 
 class LogoutView(auth_views.LogoutView):
     pass
@@ -36,8 +41,9 @@ class PasswordResetRequestView(View):
                 form.add_error("email","کاربری با این ایمیل یافت نشد .")
                 return render(request, self.template_name, {"form": form})
 
-        send_email.delay(user.id)
-        messages.success(request,"ایمیل بازیابی ارسال شد.")
+            send_email.delay(user.id)
+            messages.success(request,"ایمیل بازیابی ارسال شد.")
+            return render(request , self.template_name , {"form":form})
         return render(request , self.template_name , {"form":form})
 
 
@@ -76,3 +82,33 @@ class PasswordResetConfirmView(View):
             messages.success(request, ".پسورد با موفقیت تغییر یافت.")
             return redirect("http://localhost:8000/accounts/login/")  
         return render(request, self.template_name, {"form": form})
+    
+
+class SignUpView(View):
+    template_name="accounts/signup.html"
+
+    def get(self, request):
+        form=SignUpForm()
+        return render(request , self.template_name , {"form":form} )
+    
+    def post(self , request):
+        form=SignUpForm(request.POST)
+        if form.is_valid():
+            email=form.cleaned_data["email"]
+            password1=form.cleaned_data["password1"]
+
+            user=User.objects.create(
+                email=email,
+                is_active=True,
+                is_verified=False
+            )
+            user.set_password(password1)
+            user.save()
+
+            send_verification_email(user.id)
+
+            messages.success(request,"ایمیل تاییدیه برای شما ارسال شد .")
+            return redirect("http://localhost:8000/accounts/login/")
+        
+        return render(request , self.template_name , {"form":form})
+ 

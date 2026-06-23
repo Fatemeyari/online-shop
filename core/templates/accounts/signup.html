@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ثبت نام</title>
+
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Toastify -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+
+<body>
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      Toastify({
+        text: "{{ message|escapejs }}",
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "{% if message.tags == 'error' %}#ff3d00{% else %}#00c853{% endif %}"
+        }
+      }).showToast();
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+
+  {% for field in form %}
+    {% for error in field.errors %}
+      <script>
+        Toastify({
+          text: "{{ error|escapejs }}",
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          style: {
+            background: "#ff3d00"
+          }
+        }).showToast();
+      </script>
+    {% endfor %}
+  {% endfor %}
+
+  {% for error in form.non_field_errors %}
+    <script>
+      Toastify({
+        text: "{{ error|escapejs }}",
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "#ff3d00"
+        }
+      }).showToast();
+    </script>
+  {% endfor %}
+
+{% endif %}
+
+<div class="auth-wrapper">
+
+  <div class="auth-box">
+
+    <h1>ایجاد حساب کاربری</h1>
+    <p>برای شروع خرید ثبت‌نام کنید</p>
+
+    <form method="POST" class="auth-form">
+      {% csrf_token %}
+
+      <label>ایمیل</label>
+      <input type="email" name="email" required>
+
+      <label>رمز عبور</label>
+      <input type="password" name="password1" required>
+
+      <label>تکرار رمز عبور</label>
+      <input type="password" name="password2" required>
+
+      <button type="submit">ثبت نام</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="{% url 'accounts:login' %}">⬅ بازگشت</a>
+      <a href="{% url 'accounts:login' %}">ورود</a>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

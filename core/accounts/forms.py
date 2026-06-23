@@ -28,6 +28,23 @@ class PasswordResetConfirmForm(forms.Form):
         })
     )
 
-
-                    
-
+class SignUpForm(forms.Form):
+    email=forms.EmailField(required=True,
+                           label="email",
+                           widget=forms.EmailInput(attrs={"placeholder":"example@gmail.com"}))
+    password1=forms.CharField(required=True , 
+                              label="password1",
+                              widget=forms.PasswordInput(attrs={"placeholder":"رمز عبور"}))
+    
+    password2=forms.CharField(required=True,
+                              label="password2",
+                              widget=forms.PasswordInput(attrs={"placeholder":"تکرار رمز عبور"}))
+    
+    def clean(self):
+        cleaned_data=super().clean()
+        password1=cleaned_data.get("password1")
+        password2=cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2 :
+            raise forms.ValidationError("رمز های وارد شده یکسان نیستند.")
+        return cleaned_data
+ 
