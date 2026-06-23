@@ -39,3 +39,7 @@ def send_verification_email(user_id):
         recipient_list=[user.email],
         fail_silently=False
     )
+
+@shared_task
+def resend_verification_email(user_id):
+    send_verification_email(user_id)
