@@ -54,3 +54,12 @@ class SignUpConfirmForm(forms.Form):
 
 
                     
+
+
+class ResendVerificationForm(forms.Form):
+    email=forms.EmailField(required=True,
+                           label="email",
+                           widget=forms.EmailInput(attrs={"placeholder": "example@gmail.com"}))
+
+
+                    

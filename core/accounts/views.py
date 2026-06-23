@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib import messages
 from django.utils import timezone
 
-from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm , SignUpForm , SignUpConfirmForm 
+from .forms import AuthenticationForm , PasswordResetRequestForm , PasswordResetConfirmForm , SignUpForm , SignUpConfirmForm , ResendVerificationForm
 from .models import User , PasswordResetToken , VerificationToken 
 from .emails import send_email , send_verification_email,resend_verification_email
 
@@ -143,3 +143,32 @@ class SignupConfirmView(View):
         return render(request, self.template_name)
     
 
+class ResendVerificationView(View):
+    template_name = "accounts/resend_verification.html"
+
+    def get(self, request):
+        form = ResendVerificationForm()
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = ResendVerificationForm(request.POST)
+
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                form.add_error("email", "ایمیل وارد شده وجود ندارد.")
+                return render(request, self.template_name, {"form": form})
+
+            if user.is_verified==True:
+                form.add_error("email", "این حساب قبلاً فعال شده است.")
+                return render(request, self.template_name, {"form": form})
+
+            resend_verification_email.delay(user.id)
+
+            messages.success(request, "ایمیل تاییدیه ارسال شد.")
+            return render(request, self.template_name, {"form": form})
+
+        return render(request, self.template_name, {"form": form})

@@ -11,6 +11,7 @@ urlpatterns = [
     path('password-reset-confirm/<str:token>' , views.PasswordResetConfirmView.as_view() , name="password-reset-confirm"),
     path('signup/' , views.SignUpView.as_view() , name="signup" ),
     path('signup-confirm/<str:token>/' , views.SignupConfirmView.as_view() , name="signup-confirm" ),
+    path('resend_verification/' , views.ResendVerificationView.as_view() , name="resend_verification" ),
 
 
 
