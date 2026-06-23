@@ -101,3 +101,17 @@ class PasswordResetToken(models.Model):
     
 
 
+class VerificationToekn(models.Model):
+    user=models.ForeignKey(User , on_delete=models.CASCADE , related_name='verification_tokens')
+    token=models.CharField(max_length=64,unique=True)
+    is_used=models.BooleanField(default=False)
+    created_time=models.DateTimeField(auto_now_add=True)
+    expires_time=models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.user.email} - {self.token}"
+
+    class Meta:
+        verbose_name="Verification Token"
+        verbose_name_plural="Verification Tokens"
+    
