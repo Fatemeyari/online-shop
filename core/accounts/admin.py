@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
-from .models import Profile , PasswordResetToken
+from .models import Profile , PasswordResetToken ,VerificationToken
 
 
 User=get_user_model()
@@ -73,5 +73,12 @@ class CustomProfileAdmin(admin.ModelAdmin):
 @admin.register(PasswordResetToken)
 class PasswordResetTokenAdmin(admin.ModelAdmin):
     list_display=("id" , "user" , "is_used","created_time" , "expires_time")
-    search_fields=("user",)
+    search_fields=("user__email",)
+    list_filter=("user" , "is_used","expires_time")
+
+
+@admin.register(VerificationToken)
+class VerificationTokenAdmin(admin.ModelAdmin):
+    list_display=("id" , "user" , "is_used","created_time" , "expires_time")
+    search_fields=("user__email",)
     list_filter=("user" , "is_used","expires_time")
