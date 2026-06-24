@@ -15,6 +15,8 @@ class ProductCategory(models.Model):
 
     class Meta:
         ordering=["-created_time"]
+        verbose_name="Category"
+        verbose_name_plural="Categories"
     
     def __str__(self):
         return self.title
@@ -39,6 +41,9 @@ class Product(models.Model):
 
     class Meta:
         ordering = ["-created_time"]
+        verbose_name="Product"
+        verbose_name_plural="Products"
+    
 
     def __str__(self):
         return self.title
@@ -63,6 +68,9 @@ class ProductImage(models.Model):
 
     class Meta:
         ordering = ["-created_time"]
+        verbose_name="Product Image"
+        verbose_name_plural="Product Images"
+    
 
     def __str__(self):
         return self.product.title
@@ -74,7 +82,11 @@ class WishlistProduct(models.Model):
 
     class Meta:
         unique_together = ("user", "product")
+        verbose_name="Whish List Product"
+        verbose_name_plural="Whish List Products"
+    
     def __str__(self):
         return self.product.title
+    
 
         
