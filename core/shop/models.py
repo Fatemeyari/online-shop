@@ -53,3 +53,28 @@ class Product(models.Model):
 
     def is_published(self):
         return self.status== ProductStatusType.publish.value
+
+
+class ProductImage(models.Model):
+    product=models.ForeignKey(Product , on_delete=models.CASCADE , related_name="product_images")
+    file=models.ImageField(upload_to="product/extra-image/")
+    created_time=models.DateTimeField(auto_now_add=True)
+    updated_time=models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_time"]
+
+    def __str__(self):
+        return self.product.title
+
+
+class WishlistProduct(models.Model):
+    user=models.ForeignKey("accounts.User" , on_delete=models.PROTECT)
+    product=models.ForeignKey(Product , on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("user", "product")
+    def __str__(self):
+        return self.product.title
+
+        
