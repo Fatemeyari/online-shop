@@ -1,10 +1,10 @@
 from django.urls import path 
 
-from .views import *
+from shop import views
 
-name_app='shop'
+app_name="shop"
 
 
 urlpatterns = [
-
+    path('product-grid/' , views.ShopProductGridView.as_view() , name="product-grid")
 ]

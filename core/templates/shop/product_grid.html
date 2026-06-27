@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_grid.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-title">
+
+        <span class="page-badge">
+            <i class="fa-solid fa-store"></i>
+            فروشگاه SHOP+
+        </span>
+
+        <h1>لیست محصولات</h1>
+
+        <p>
+            جدیدترین محصولات فروشگاه را مشاهده کنید.
+        </p>
+
+    </div>
+
+</section>
+
+<div class="shop-container">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="shop-sidebar">
+
+        <div class="sidebar-card">
+
+            <h3>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                جستجوی محصول
+            </h3>
+
+            <input
+                type="text"
+                class="search-input"
+                placeholder="نام محصول...">
+
+        </div>
+
+        <div class="sidebar-card">
+
+            <h3>
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                دسته بندی
+
+            </h3>
+
+            <label><input type="checkbox"> موبایل</label>
+
+            <label><input type="checkbox"> لپ تاپ</label>
+
+            <label><input type="checkbox"> هدفون</label>
+
+            <label><input type="checkbox"> ساعت هوشمند</label>
+
+            <label><input type="checkbox"> تبلت</label>
+
+            <label><input type="checkbox"> لوازم جانبی</label>
+
+        </div>
+
+        <div class="sidebar-card">
+
+            <h3>
+
+                <i class="fa-solid fa-copyright"></i>
+
+                برند
+
+            </h3>
+
+            <label><input type="checkbox"> Samsung</label>
+
+            <label><input type="checkbox"> Apple</label>
+
+            <label><input type="checkbox"> Xiaomi</label>
+
+            <label><input type="checkbox"> Sony</label>
+
+            <label><input type="checkbox"> Asus</label>
+
+            <label><input type="checkbox"> Logitech</label>
+
+        </div>
+
+        <div class="sidebar-card">
+
+            <h3>
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                محدوده قیمت
+
+            </h3>
+
+            <input
+                class="search-input"
+                type="number"
+                placeholder="حداقل قیمت">
+
+            <input
+                class="search-input"
+                type="number"
+                placeholder="حداکثر قیمت">
+
+        </div>
+
+        <div class="sidebar-card">
+
+            <h3>
+
+                <i class="fa-solid fa-box-open"></i>
+
+                وضعیت کالا
+
+            </h3>
+
+            <label><input type="checkbox"> فقط کالاهای موجود</label>
+
+            <label><input type="checkbox"> دارای تخفیف</label>
+
+            <label><input type="checkbox"> ارسال رایگان</label>
+
+        </div>
+
+        <button class="filter-btn">
+
+            <i class="fa-solid fa-filter"></i>
+
+            اعمال فیلتر
+
+        </button>
+
+    </aside>
+
+    <!-- ================= Content ================= -->
+
+    <section class="shop-content">
+
+        <div class="shop-toolbar">
+
+            <div class="toolbar-right"><br>
+
+                <strong>
+
+                    <i class="fa-solid fa-box"></i>
+
+                    {{total_items}} محصول
+
+                </strong>
+
+            </div><br>
+
+            <div class="toolbar-left">
+
+                <span>
+
+                    مرتب سازی :
+
+                </span>
+
+                <select>
+
+                    <option>جدیدترین</option>
+
+                    <option>پرفروش ترین</option>
+
+                    <option>محبوب ترین</option>
+
+                    <option>ارزان ترین</option>
+
+                    <option>گران ترین</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+<!-- ================= PRODUCTS ================= -->
+        <div class="products-grid">
+
+        {% for object in object_list %}
+
+            <div class="product-card">
+
+                <button class="wishlist-btn">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <a href="#" class="product-image">
+                    <img src="{{object.image.url}}" alt="{{object.title}}">
+                </a>
+
+                <div class="product-body">
+
+                    <h3 class="product-title">
+                        <a href="#">{{object.title}}</a>
+                    </h3>
+
+                    <p class="product-category">
+                        <i class="fa-solid fa-tag"></i>
+
+                        {% for category in object.category.all %}
+                            {{category.title}}{% if not forloop.last %} ، {% endif %}
+                        {% endfor %}
+                    </p>
+
+                    <div class="product-rate">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="product-price">
+                        <span class="new-price">
+                            {{object.get_price}} تومان
+                        </span>
+                    </div>
+
+                    <div class="product-stock">
+
+                        {% if object.stock > 0 %}
+                            <i class="fa-solid fa-circle-check"></i>
+                            موجود 
+                        {% else %}
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            ناموجود
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="product-footer">
+
+                    <a href="#" class="cart-btn">
+                        افزودن به سبد خرید
+                    </a><br>
+
+                    <a href="#" class="view-btn">
+                        مشاهده
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+        </div>
+
+
+        <!-- ================= PAGINATION ================= -->
+        {% if page_obj.has_other_pages %}
+
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a class="btn btn-prev"
+                href="?page={{page_obj.previous_page_number}}">
+                    قبلی
+                </a>
+            {% endif %}
+
+            <span class="page-number">
+                صفحه {{page_obj.number}} از {{page_obj.paginator.num_pages}}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-next"
+                href="?page={{page_obj.next_page_number}}">
+                    بعدی
+                </a>
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+{% endblock %}
