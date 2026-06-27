@@ -1,0 +1,20 @@
+from django.core.management.base import BaseCommand
+from django.utils.text import slugify
+
+from faker import Faker
+from shop.models import ProductCategory
+
+class Command(BaseCommand):
+    help='Generate fkae categories'
+
+    def handle(self , *args , **kwargs):
+        fake=Faker(local="fa_IR")
+
+        for _ in range(0,10):
+            title=fake.word()
+            slug=slugify(title , allow_unicode=True)
+            ProductCategory.objects.get_or_create(title=title , slug=slug)
+        self.stdout.write(self.style.SUCCESS(
+            'Successfully generated 10 fake'
+        ))
+
