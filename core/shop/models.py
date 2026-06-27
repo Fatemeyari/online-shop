@@ -48,7 +48,7 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def get_discount(self):
+    def get_price(self):
         discount_amount=self.price * Decimal(self.discount_percent / 100)
         discounted_amount=self.price - discount_amount
         return round(discount_amount)
@@ -58,6 +58,8 @@ class Product(models.Model):
 
     def is_published(self):
         return self.status== ProductStatusType.publish.value
+
+    
 
 
 class ProductImage(models.Model):
