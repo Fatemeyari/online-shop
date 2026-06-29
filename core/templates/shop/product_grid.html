@@ -207,7 +207,7 @@
                 <div class="product-body">
 
                     <h3 class="product-title">
-                        <a href="#">{{object.title}}</a>
+                        {{object.title}}
                     </h3>
 
                     <p class="product-category">
@@ -248,7 +248,7 @@
                         افزودن به سبد خرید
                     </a><br>
 
-                    <a href="#" class="view-btn">
+                    <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn">
                         مشاهده
                     </a>
 

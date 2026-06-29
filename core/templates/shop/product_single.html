@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= BREADCRUMB ================= -->
+
+<section class="breadcrumb">
+
+    <a href="{% url 'website:index' %}">
+        خانه
+    </a>
+
+    <i class="fa-solid fa-angle-left"></i>
+
+    <a href="{% url 'shop:product-grid' %}">
+        محصولات
+    </a>
+
+    <i class="fa-solid fa-angle-left"></i>
+
+    <span class="category">
+
+        {% for category in object.category.all %}
+
+            {{category.title}}
+
+            {% if not forloop.last %}
+                -
+            {% endif %}
+
+        {% empty %}
+
+            بدون دسته بندی
+
+        {% endfor %}
+
+    </span>
+
+    <i class="fa-solid fa-angle-left"></i>
+
+    <span>
+
+        {{object.title}}
+
+    </span>
+
+</section>
+
+<!-- ================= PRODUCT ================= -->
+
+<section class="product-detail">
+
+    <!-- ========= GALLERY ========= -->
+
+    <div class="gallery">
+
+        <div class="thumbs">
+
+            {% for image in object.product_images.all %}
+
+                <img src="{{image.file.url}}" alt="{{object.title}}">
+
+            {% empty %}
+
+                <img src="{{object.image.url}}" alt="{{object.title}}">
+
+            {% endfor %}
+
+        </div>
+
+        <div class="main-image">
+
+            <img src="{{object.image.url}}" alt="{{object.title}}">
+
+        </div>
+
+    </div>
+
+    <!-- ========= PRODUCT INFO ========= -->
+
+    <div class="product-info">
+
+        <span class="category-badge">
+
+            {% for category in object.category.all %}
+
+                {{category.title}}
+
+                {% if not forloop.last %}
+                    -
+                {% endif %}
+
+            {% empty %}
+
+                بدون دسته بندی
+
+            {% endfor %}
+
+        </span>
+
+        <h1>
+
+            {{object.title}}
+
+        </h1>
+
+        <div class="rating">
+
+            <div class="stars">
+
+                ★★★★★
+
+            </div>
+
+            <span>
+
+                {{object.avg_rate}}
+
+            </span>
+
+        </div>
+
+        <div class="stock {% if object.stock > 0 %}available{% else %}not-available{% endif %}">
+
+            {% if object.stock > 0 %}
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                موجود در انبار ({{object.stock}} عدد)
+
+            {% else %}
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+                ناموجود
+
+            {% endif %}
+
+        </div>
+
+        <!-- PRICE -->
+
+        <div class="price-box">
+
+            {% if object.discount_percent > 0 %}
+
+                <div class="price-top">
+
+                    <span class="old-price">
+                        قیمت اصلی : {{object.price}} تومان 
+                    </span><br>
+
+                    <span class="discount">
+
+                        درصد تخفیف : {{object.discount_percent}}٪
+
+                    </span>
+
+                </div>
+
+                <div class="new-price">
+                    قیمت نهایی :  {{object.get_price}} تومان 
+
+                </div>
+
+            {% else %}
+
+                <div class="new-price">
+
+                    {{object.price}} تومان
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="short-description">
+
+            {{object.brief_description|default:object.description|truncatewords:35}}
+
+        </div>
+                <!-- ================= ACTION BUTTONS ================= -->
+
+        <div class="actions">
+
+            <a href="#" class="cart-btn">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                افزودن به سبد خرید
+
+            </a>
+
+            <button class="wishlist-btn">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </button>
+
+            <button class="share-btn">
+
+                <i class="fa-solid fa-share-nodes"></i>
+
+            </button>
+
+        </div>
+
+        <!-- ================= FEATURES ================= -->
+
+        <div class="features">
+
+            <div class="feature-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <div>
+                    <strong>ارسال سریع</strong>
+                    <span>ارسال به سراسر کشور</span>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <strong>گارانتی معتبر</strong>
+                    <span>۱۸ ماه ضمانت</span>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <i class="fa-solid fa-credit-card"></i>
+                <div>
+                    <strong>پرداخت امن</strong>
+                    <span>درگاه بانکی امن</span>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <i class="fa-solid fa-rotate-left"></i>
+                <div>
+                    <strong>۷ روز ضمانت بازگشت</strong>
+                    <span>تست و مرجوعی کالا</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= QUICK META ================= -->
+
+        <div class="product-meta">
+
+            <div class="meta-item">
+                <span>برند</span>
+                <strong>
+                    {% for category in object.category.all %}
+                        {{ category.title }}
+                        {% if not forloop.last %}-{% endif %}
+                    {% empty %}
+                        ---
+                    {% endfor %}
+                </strong>
+            </div>
+
+            <div class="meta-item">
+                <span>موجودی</span>
+                <strong>
+                    {{object.stock}} عدد
+                </strong>
+            </div>
+
+            <div class="meta-item">
+                <span>امتیاز</span>
+                <strong>
+                    ⭐ {{object.avg_rate}}
+                </strong>
+            </div>
+
+            <div class="meta-item">
+                <span>تخفیف</span>
+                <strong>
+                    {{object.discount_percent}}٪
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =======================
+        PRODUCT TABS
+======================= -->
+
+<section class="product-tabs">
+
+    <div class="tabs-header">
+
+        <button class="tab-btn active">
+            توضیحات
+        </button>
+
+        <button class="tab-btn">
+            مشخصات
+        </button>
+
+        <button class="tab-btn">
+            نظرات
+        </button>
+
+    </div>
+
+    <!-- ================= DESCRIPTION ================= -->
+
+    <div class="tab-content">
+
+        <h2>توضیحات محصول</h2>
+
+        <p>
+            {{object.description|linebreaks|default:"توضیحی برای این محصول ثبت نشده است."}}
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =======================
+        SPECIFICATIONS
+======================= -->
+
+<section class="spec-section">
+
+    <h2>مشخصات کلی</h2>
+
+    <div class="spec-table">
+
+        <div class="spec-row">
+            <span>نام محصول</span>
+            <strong>{{object.title}}</strong>
+        </div>
+
+        <div class="spec-row">
+            <span>دسته بندی</span>
+            <strong>
+                {% for category in object.category.all %}
+                    {{category.title}}
+                    {% if not forloop.last %}-{% endif %}
+                {% empty %}
+                    ---
+                {% endfor %}
+            </strong>
+        </div>
+
+        <div class="spec-row">
+            <span>موجودی</span>
+            <strong>{{object.stock}} عدد</strong>
+        </div>
+
+        <div class="spec-row">
+            <span>امتیاز</span>
+            <strong>⭐ {{object.avg_rate}}</strong>
+        </div>
+
+        <div class="spec-row">
+            <span>تخفیف</span>
+            <strong>{{object.discount_percent}}٪</strong>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================
+        COMMENTS (STATIC SAMPLE)
+======================= -->
+
+<section class="comments">
+
+    <h2>نظرات کاربران</h2>
+
+    <div class="comment-card">
+
+        <div class="comment-header">
+            <strong>کاربر ۱</strong>
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <p>
+            محصول عالی بود، کیفیت ساخت خیلی خوبه و راضی هستم.
+        </p>
+
+    </div>
+
+    <div class="comment-card">
+
+        <div class="comment-header">
+            <strong>کاربر ۲</strong>
+            <span>⭐⭐⭐⭐</span>
+        </div>
+
+        <p>
+            نسبت به قیمتش ارزش خرید داره.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

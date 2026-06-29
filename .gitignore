@@ -125,3 +125,4 @@ cython_debug/
 # ignore database files
 postgres/data/*
 core/media/
+core/shop/management/commands/images
