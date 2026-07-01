@@ -7,160 +7,204 @@
 
 {% block content %}
 
+<!-- ================= PAGE HEADER ================= -->
+
 <section class="page-header">
 
     <div class="page-title">
 
         <span class="page-badge">
+
             <i class="fa-solid fa-store"></i>
+
             فروشگاه SHOP+
+
         </span>
 
-        <h1>لیست محصولات</h1>
+        <h1>
+
+            لیست محصولات
+
+        </h1>
 
         <p>
+
             جدیدترین محصولات فروشگاه را مشاهده کنید.
+
         </p>
 
     </div>
 
 </section>
 
+<!-- ================= SHOP ================= -->
+
 <div class="shop-container">
 
-    <!-- ================= Sidebar ================= -->
+    <!-- ================= SIDEBAR ================= -->
 
     <aside class="shop-sidebar">
 
-        <div class="sidebar-card">
+        <form method="get">
 
-            <h3>
-                <i class="fa-solid fa-magnifying-glass"></i>
-                جستجوی محصول
-            </h3>
+            <!-- Search -->
 
-            <input
-                type="text"
-                class="search-input"
-                placeholder="نام محصول...">
+            <div class="sidebar-card">
 
-        </div>
+                <h3>
 
-        <div class="sidebar-card">
+                    <i class="fa-solid fa-magnifying-glass"></i>
 
-            <h3>
+                    جستجوی محصول
 
-                <i class="fa-solid fa-layer-group"></i>
+                </h3>
 
-                دسته بندی
+                <input
+                    type="text"
+                    name="q"
+                    class="search-input"
+                    placeholder="نام محصول..."
+                    value="{{request.GET.q}}">
 
-            </h3>
+            </div>
 
-            <label><input type="checkbox"> موبایل</label>
+            <!-- Category -->
 
-            <label><input type="checkbox"> لپ تاپ</label>
+            <div class="sidebar-card">
 
-            <label><input type="checkbox"> هدفون</label>
+                <h3>
 
-            <label><input type="checkbox"> ساعت هوشمند</label>
+                    <i class="fa-solid fa-layer-group"></i>
 
-            <label><input type="checkbox"> تبلت</label>
+                    دسته بندی
 
-            <label><input type="checkbox"> لوازم جانبی</label>
+                </h3>
 
-        </div>
+                <select
+                    name="category"
+                    class="search-input">
 
-        <div class="sidebar-card">
+                    <option value="">
 
-            <h3>
+                        همه دسته‌بندی‌ها
 
-                <i class="fa-solid fa-copyright"></i>
+                    </option>
 
-                برند
+                    {% for category in categories %}
 
-            </h3>
+                        <option
+                            value="{{category.id}}"
+                            {% if request.GET.category == category.id|stringformat:"s" %}
+                                selected
+                            {% endif %}>
 
-            <label><input type="checkbox"> Samsung</label>
+                            {{category.title}}
 
-            <label><input type="checkbox"> Apple</label>
+                        </option>
 
-            <label><input type="checkbox"> Xiaomi</label>
+                    {% endfor %}
 
-            <label><input type="checkbox"> Sony</label>
+                </select>
 
-            <label><input type="checkbox"> Asus</label>
+            </div>
+            <!-- ================= BRAND ================= -->
 
-            <label><input type="checkbox"> Logitech</label>
+            <div class="sidebar-card">
 
-        </div>
+                <h3>
 
-        <div class="sidebar-card">
+                    <i class="fa-solid fa-copyright"></i>
 
-            <h3>
+                    برند
 
-                <i class="fa-solid fa-money-bill-wave"></i>
+                </h3>
 
-                محدوده قیمت
+                <select
+                    name="brand"
+                    class="search-input">
 
-            </h3>
+                    <option value="">
 
-            <input
-                class="search-input"
-                type="number"
-                placeholder="حداقل قیمت">
+                        همه برندها
 
-            <input
-                class="search-input"
-                type="number"
-                placeholder="حداکثر قیمت">
+                    </option>
 
-        </div>
+                    {% for brand in brands %}
 
-        <div class="sidebar-card">
+                        <option
+                            value="{{brand.id}}"
+                            {% if request.GET.brand == brand.id|stringformat:"s" %}
+                                selected
+                            {% endif %}>
 
-            <h3>
+                            {{brand.title}}
 
-                <i class="fa-solid fa-box-open"></i>
+                        </option>
 
-                وضعیت کالا
+                    {% endfor %}
 
-            </h3>
+                </select>
 
-            <label><input type="checkbox"> فقط کالاهای موجود</label>
+            </div>
+            <!-- ================= PRICE ================= -->
 
-            <label><input type="checkbox"> دارای تخفیف</label>
+            <div class="sidebar-card">
 
-            <label><input type="checkbox"> ارسال رایگان</label>
+                <h3>
 
-        </div>
+                    <i class="fa-solid fa-money-bill-wave"></i>
 
-        <button class="filter-btn">
+                    محدوده قیمت
 
-            <i class="fa-solid fa-filter"></i>
+                </h3>
 
-            اعمال فیلتر
+                <input
+                    type="number"
+                    name="min_price"
+                    class="search-input"
+                    placeholder="حداقل قیمت"
+                    value="{{request.GET.min_price}}">
 
-        </button>
+                <input
+                    type="number"
+                    name="max_price"
+                    class="search-input"
+                    placeholder="حداکثر قیمت"
+                    value="{{request.GET.max_price}}">
+
+            </div>
+            <button
+                type="submit"
+                class="filter-btn">
+
+                <i class="fa-solid fa-filter"></i>
+
+                اعمال فیلتر
+
+            </button>
+
+        </form>
 
     </aside>
 
-    <!-- ================= Content ================= -->
+    <!-- ================= SHOP CONTENT ================= -->
 
     <section class="shop-content">
+        <!-- ================= TOOLBAR ================= -->
 
         <div class="shop-toolbar">
 
-            <div class="toolbar-right"><br>
+            <div class="toolbar-right">
 
                 <strong>
 
                     <i class="fa-solid fa-box"></i>
 
-                    {{total_items}} محصول
+                    {{page_obj.paginator.count}} محصول
 
                 </strong>
 
-            </div><br>
+            </div>
 
             <div class="toolbar-left">
 
@@ -169,73 +213,117 @@
                     مرتب سازی :
 
                 </span>
+                <form method="get">
 
-                <select>
+                    <select name="sort" onchange="this.form.submit()">
 
-                    <option>جدیدترین</option>
+                        <option value="">مرتب سازی</option>
+                        <option value="newest">جدیدترین</option>
+                        <option value="oldest">قدیمی‌ترین</option>
+                        <option value="cheap">ارزان‌ترین</option>
+                        <option value="expensive">گران‌ترین</option>
 
-                    <option>پرفروش ترین</option>
+                    </select>
 
-                    <option>محبوب ترین</option>
-
-                    <option>ارزان ترین</option>
-
-                    <option>گران ترین</option>
-
-                </select>
-
+                </form>
             </div>
 
         </div>
 
+        <!-- ================= PRODUCTS ================= -->
 
-<!-- ================= PRODUCTS ================= -->
         <div class="products-grid">
 
-        {% for object in object_list %}
+            {% for object in object_list %}
 
             <div class="product-card">
 
+                {% if object.discount_percent %}
+
+                    <span class="discount">
+
+                        {{object.discount_percent}}٪
+
+                    </span>
+
+                {% endif %}
+
                 <button class="wishlist-btn">
+
                     <i class="fa-regular fa-heart"></i>
+
                 </button>
 
-                <a href="#" class="product-image">
+                <a href="{% url 'shop:product-detail' slug=object.slug %}" class="product-image">
+
                     <img src="{{object.image.url}}" alt="{{object.title}}">
+
                 </a>
 
                 <div class="product-body">
 
                     <h3 class="product-title">
+
                         {{object.title}}
+
                     </h3>
 
                     <p class="product-category">
+
                         <i class="fa-solid fa-tag"></i>
 
                         {% for category in object.category.all %}
+
                             {{category.title}}{% if not forloop.last %} ، {% endif %}
+
                         {% endfor %}
+
                     </p>
 
                     <div class="product-rate">
-                        ⭐⭐⭐⭐⭐
+
+                        ⭐ {{object.avg_rate}}
+
                     </div>
 
                     <div class="product-price">
-                        <span class="new-price">
-                            {{object.get_price}} تومان
-                        </span>
+
+                        {% if object.discount_percent %}
+
+                            <span class="old-price">
+                                قیمت اصلی : {{object.price}}<br>
+                            </span>
+
+                            <span class="new-price">
+                                قیمت با تخفیف : {{object.get_price}}<br>
+                            </span>
+
+                        {% else %}
+
+                            <span class="new-price">
+
+                                {{object.price}} تومان
+
+                            </span>
+
+                        {% endif %}
+
                     </div>
 
                     <div class="product-stock">
 
                         {% if object.stock > 0 %}
+
                             <i class="fa-solid fa-circle-check"></i>
-                            موجود 
+
+                            موجود
+
                         {% else %}
+
                             <i class="fa-solid fa-circle-xmark"></i>
+
                             ناموجود
+
                         {% endif %}
 
                     </div>
@@ -245,46 +333,92 @@
                 <div class="product-footer">
 
                     <a href="#" class="cart-btn">
-                        افزودن به سبد خرید
-                    </a><br>
 
-                    <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn">
-                        مشاهده
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        افزودن به سبد خرید
+
+                    </a>
+
+                    <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn"><br>
+
+                        مشاهده محصول
+
                     </a>
 
                 </div>
 
             </div>
 
-        {% endfor %}
+            {% empty %}
+
+            <div class="no-product">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h2>
+
+                    محصولی یافت نشد.
+
+                </h2>
+
+            </div>
+
+            {% endfor %}
 
         </div>
-
-
         <!-- ================= PAGINATION ================= -->
+
         {% if page_obj.has_other_pages %}
 
         <div class="pagination">
 
             {% if page_obj.has_previous %}
-                <a class="btn btn-prev"
-                href="?page={{page_obj.previous_page_number}}">
+
+                <a
+                    class="page-btn"
+                    href="?page={{page_obj.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
                     قبلی
+
                 </a>
+
             {% endif %}
 
             <span class="page-number">
-                صفحه {{page_obj.number}} از {{page_obj.paginator.num_pages}}
+
+                صفحه
+
+                <strong>{{page_obj.number}}</strong>
+
+                از
+
+                <strong>{{page_obj.paginator.num_pages}}</strong>
+
             </span>
 
             {% if page_obj.has_next %}
-                <a class="btn btn-next"
-                href="?page={{page_obj.next_page_number}}">
+
+                <a
+                    class="page-btn"
+                    href="?page={{page_obj.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}">
+
                     بعدی
+
+                    <i class="fa-solid fa-angle-left"></i>
+
                 </a>
+
             {% endif %}
 
         </div>
 
         {% endif %}
+
+    </section>
+
+</div>
+
 {% endblock %}

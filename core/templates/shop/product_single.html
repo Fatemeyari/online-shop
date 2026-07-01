@@ -256,12 +256,7 @@
             <div class="meta-item">
                 <span>برند</span>
                 <strong>
-                    {% for category in object.category.all %}
-                        {{ category.title }}
-                        {% if not forloop.last %}-{% endif %}
-                    {% empty %}
-                        ---
-                    {% endfor %}
+                   -
                 </strong>
             </div>
 
