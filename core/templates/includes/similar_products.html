@@ -1,0 +1,156 @@
+{% load static %}
+{% load static %}
+<h2>🔥 جدیدترین محصولات </h2>
+
+<div class="products-grid">
+
+            {% for product in similar_products %}
+
+            <div class="product-card">
+
+                {% if product.discount_percent %}
+
+                    <span class="discount">
+
+                        {{product.discount_percent}}٪
+
+                    </span>
+
+                {% endif %}
+
+                <button class="wishlist-btn">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+                <a href="{% url 'shop:product-detail' slug=product.slug %}" class="product-image">
+
+                    <img src="{{product.image.url}}" alt="{{product.title}}">
+
+                </a>
+
+                <div class="product-body">
+
+                    <h3 class="product-title">
+
+                        {{product.title}}
+
+                    </h3>
+
+                    <p class="product-category">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                        {% for category in product.category.all %}
+
+                            {{category.title}}{% if not forloop.last %} ، {% endif %}
+
+                        {% endfor %}
+
+                    </p>
+
+                    <div class="product-rate">
+
+                        ⭐ {{product.avg_rate}}
+
+                    </div>
+
+                    <div class="product-price">
+
+                        {% if product.discount_percent %}
+
+                            <span class="old-price">
+                                قیمت اصلی : {{object.price}}<br>
+                            </span>
+
+                            <span class="new-price">
+                                قیمت با تخفیف : {{product.get_price}}<br>
+                            </span>
+
+                        {% else %}
+
+                            <span class="new-price">
+
+                                {{product.price}} تومان
+
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="product-stock">
+
+                        {% if product.stock > 0 %}
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            موجود
+
+                        {% else %}
+
+                            <i class="fa-solid fa-circle-xmark"></i>
+
+                            ناموجود
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="product-footer">
+
+                    <a href="#" class="cart-btn">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        افزودن به سبد خرید
+
+                    </a>
+
+                    <a href="{% url 'shop:product-detail' slug=product.slug %}" class="view-btn"><br>
+
+                        مشاهده محصول
+
+                    </a>
+                    
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="no-product">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h2>
+
+                    محصولی یافت نشد.
+
+                </h2>
+
+            </div>
+
+            {% endfor %}
+
+</div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

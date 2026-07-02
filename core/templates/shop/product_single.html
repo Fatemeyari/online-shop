@@ -4,7 +4,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
 {% endblock %}
-
+{% load shop_tags %}
 {% block content %}
 
 <!-- ================= BREADCRUMB ================= -->
@@ -286,10 +286,8 @@
     </div>
 
 </section>
-<!-- =======================
-        PRODUCT TABS
-======================= -->
 
+<!-- ================= PRODUCT TABS ================= -->
 <section class="product-tabs">
 
     <div class="tabs-header">
@@ -322,9 +320,8 @@
 
 </section>
 
-<!-- =======================
-        SPECIFICATIONS
-======================= -->
+
+<!-- ================= SPECIFICATIONS ================= -->
 
 <section class="spec-section">
 
@@ -368,9 +365,8 @@
 
 </section>
 
-<!-- =======================
-        COMMENTS (STATIC SAMPLE)
-======================= -->
+
+<!-- ================= COMMENTS (STATIC SAMPLE) ================= -->
 
 <section class="comments">
 
@@ -403,5 +399,5 @@
     </div>
 
 </section>
-
+{% show_similar_products object %}
 {% endblock %}
