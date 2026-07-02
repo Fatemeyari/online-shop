@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load shop_tags %}
 
 {% block content %}
 
@@ -39,56 +40,12 @@
 </section>
 
 <!-- CATEGORIES -->
+<h2>محبوب ترین دسته بندی ها  </h2>
 <section class="cats">
-  <div class="cat">📱 موبایل</div>
-  <div class="cat">💻 لپ‌تاپ</div>
-  <div class="cat">🎧 دیجیتال</div>
-  <div class="cat">👕 پوشاک</div>
+  {% show_categories %}
 </section>
 
-<!-- PRODUCTS -->
-<section class="products">
-  <h2>🔥 محصولات پیشنهادی</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img loading="lazy"
-        src="{% static 'img/iphone.jpeg' %}"
-        alt="iPhone">
-
-      <h3>iPhone 14 Pro</h3>
-      <p>58,000,000 تومان</p>
-    </div>
-
-    <div class="card">
-      <img loading="lazy"
-        src="{% static 'img/mackbook.jpeg' %}"
-        alt="MacBook">
-
-      <h3>MacBook Pro</h3>
-      <p>120,000,000 تومان</p>
-    </div>
-
-    <div class="card">
-      <img loading="lazy"
-        src="{% static 'img/applewatch.png' %}"
-        alt="Watch">
-
-      <h3>Apple Watch</h3>
-      <p>15,000,000 تومان</p>
-    </div>
-
-    <div class="card">
-      <img loading="lazy"
-        src="{% static 'img/headphones.jpeg' %}"
-        alt="Headphones">
-
-      <h3>Headphones</h3>
-      <p>3,200,000 تومان</p>
-    </div>
-
-  </div>
-</section>
+<!--Products-->
+{% show_latest_products %}
 
 {% endblock %}
