@@ -1,9 +1,9 @@
 from django.shortcuts import render , redirect
-from django.views.generic import TemplateView 
+from django.views.generic import TemplateView , CreateView
 from django.views import View
 from django.contrib import messages
 
-from .forms import ContactForm
+from .forms import ContactForm , NewsLetterForm
 from .models import ContactUs
 # Create your views here.
 
@@ -44,3 +44,20 @@ class AboutView(TemplateView):
     template_name = 'website/about.html'
 
     
+class NewsLetterView(CreateView):
+    http_method_names=['post']
+    form_class=NewsLetterForm
+    success_url = '/'
+
+    def form_valid(self , form):
+        form.save()
+        messages.success(
+            self.request ,'از ثبت نام شما متشکریم. اخبار جدید به شما اطلاع رسانی خواهد شد .'
+        )
+        return super().form_valid(form)
+    
+    def form_invalid(self,form):
+        messages.error(
+            self.request , 'ارسال ناموفق بود لطفا اطلاعات را بررسی کنید.'
+        )
+        return redirect('website:index')

@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import ContactUs
+from .models import ContactUs , NewsLetter
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,13 @@ class ContactForm(forms.ModelForm):
                 'max_length': 'محتوای نوشته شده بیشتر از حد مجاز است .'
             }
         }
+
+class NewsLetterForm(forms.ModelForm):
+    class Meta:
+        model=NewsLetter
+        fields=("email",)
+        error_massages={
+                'email':{
+                    'required':'فیلد ایمیل نمی تواند خالی باشد .'  
+                }
+            }

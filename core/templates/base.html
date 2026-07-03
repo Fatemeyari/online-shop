@@ -47,7 +47,7 @@
           type="text"
           name="q"
           placeholder="جستجو در بین محصولات..."
-          value="{{ request.GET.q }}">
+          value="{{request.GET.q}}">
 
       <button type="submit">
 
@@ -143,7 +143,7 @@
           برای اطلاع از جدیدترین محصولات و تخفیف‌های ویژه ایمیل خود را وارد کنید.
       </p>
 
-      <form action="#" method="post" class="newsletter-form">
+      <form action="{% url 'website:newsletter' %}" method="post" class="newsletter-form">
 
           {% csrf_token %}
 
@@ -166,5 +166,21 @@
     </div>
 
 </footer>
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            Toastify({
+                text: "{{ message|escapejs }}",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                close: true,
+                style: {
+                    background: "{% if message.tags == 'success' %}green{% else %}red{% endif %}"
+                }
+            }).showToast();
+        </script>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
