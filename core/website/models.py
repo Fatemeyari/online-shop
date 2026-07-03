@@ -20,3 +20,16 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return self.fullname
+
+class NewsLetter(models.Model):
+    email=models.EmailField()
+    created_time=models.DateTimeField(auto_now_add=True)
+    updated_time=models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering=['-created_time']
+        verbose_name="NewsLetter Subscriber"
+        verbose_name_plural="NewsLetter Subscribers"
+
+    def __str__(self):
+        return self.email
