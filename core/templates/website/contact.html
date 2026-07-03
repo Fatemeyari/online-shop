@@ -38,18 +38,97 @@
   </div>
 
   <!-- FORM -->
-  <form class="contact-form">
+  
+  <form class="contact-form" method="post" action="{% url 'website:contact' %}">
+    {% csrf_token %}
 
-    <h2>ارسال پیام</h2>
+    <!-- Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                Toastify({
+                    text: "{{ message|escapejs }}",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    close: true,
+                    style: {
+                        background:
+                        "{% if message.tags == 'success' %}#22c55e{% else %}#ef4444{% endif %}"
+                    }
+                }).showToast();
+            </script>
+        {% endfor %}
+    {% endif %}
 
-    <input type="text" placeholder="نام و نام خانوادگی">
-    <input type="email" placeholder="ایمیل">
-    <input type="text" placeholder="موضوع">
-    <textarea rows="6" placeholder="پیام شما"></textarea>
+    <!-- Form Errors -->
+    {% if form %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <script>
+                    Toastify({
+                        text: "{{ error|escapejs }}",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        close: true,
+                        style: {
+                            background: "#ef4444"
+                        }
+                    }).showToast();
+                </script>
+            {% endfor %}
+        {% endfor %}
 
-    <button type="submit">ارسال پیام</button>
+        {% for error in form.non_field_errors %}
+            <script>
+                Toastify({
+                    text: "{{ error|escapejs }}",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    close: true,
+                    style: {
+                        background: "#ef4444"
+                    }
+                }).showToast();
+            </script>
+        {% endfor %}
+    {% endif %}
 
-  </form>
+    <input
+        type="text"
+        name="fullname"
+        placeholder="نام و نام خانوادگی"
+        value="{{ form.fullname.value|default:'' }}">
+
+    <input
+        type="email"
+        name="email"
+        placeholder="ایمیل"
+        value="{{ form.email.value|default:'' }}">
+
+    <input
+        type="tel"
+        name="phone_number"
+        placeholder="شماره تماس"
+        value="{{ form.phone_number.value|default:'' }}">
+
+    <input
+        type="text"
+        name="subject"
+        placeholder="موضوع"
+        value="{{ form.subject.value|default:'' }}">
+
+    <textarea
+        rows="6"
+        name="message"
+        placeholder="پیام شما">{{ form.message.value|default:'' }}</textarea>
+
+    <button type="submit">
+        ارسال پیام
+    </button>
+</form>
 
 </section>
 

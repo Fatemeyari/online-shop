@@ -437,6 +437,10 @@ a {
   border-radius: 10px;
   cursor: pointer;
 }
+input, textarea {
+    text-align: right;
+    direction: rtl;
+}
 
 /* ================= ABOUT ================= */
 .about-intro {
@@ -779,4 +783,52 @@ a {
 
     font-size:13px;
 
+}/* ================= NEWSLETTER ================= */
+
+.newsletter p{
+    color:#bdbdbd;
+    margin-bottom:18px;
+    line-height:1.9;
+}
+
+.newsletter-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.newsletter-form input{
+    width:100%;
+    padding:12px 15px;
+    border:none;
+    border-radius:12px;
+    background:#1f1f1f;
+    color:#fff;
+    outline:none;
+    transition:.3s;
+}
+
+.newsletter-form input::placeholder{
+    color:#888;
+}
+
+.newsletter-form input:focus{
+    background:#2b2b2b;
+    box-shadow:0 0 0 2px rgba(255,122,0,.35);
+}
+
+.newsletter-form button{
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,#ff8c00,#ff5f00);
+    transition:.35s;
+}
+
+.newsletter-form button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 25px rgba(255,122,0,.35);
 }

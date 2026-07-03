@@ -14,7 +14,9 @@
 
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- FONT AWESOME  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
@@ -132,6 +134,31 @@
             <a href="#">راهنما</a>
         </div>
 
+    </div>
+    <div class="footer-col newsletter">
+
+      <h4>خبرنامه</h4>
+
+      <p>
+          برای اطلاع از جدیدترین محصولات و تخفیف‌های ویژه ایمیل خود را وارد کنید.
+      </p>
+
+      <form action="#" method="post" class="newsletter-form">
+
+          {% csrf_token %}
+
+          <input
+              type="email"
+              name="email"
+              placeholder="ایمیل شما"
+              required
+          >
+
+          <button type="submit">
+              عضویت
+          </button>
+
+      </form>
     </div>
 
     <div class="bottom">
