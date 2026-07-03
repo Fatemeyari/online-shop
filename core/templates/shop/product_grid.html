@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/product_grid.css' %}">
 {% endblock %}
 
@@ -21,11 +22,7 @@
 
         </span>
 
-        <h1>
-
-            لیست محصولات
-
-        </h1>
+        <h1>لیست محصولات</h1>
 
         <p>
 
@@ -64,7 +61,7 @@
                     name="q"
                     class="search-input"
                     placeholder="نام محصول..."
-                    value="{{request.GET.q}}">
+                    value="{{ request.GET.q }}">
 
             </div>
 
@@ -92,22 +89,22 @@
 
                     {% for category in categories %}
 
-                        <option
-                            value="{{category.id}}"
-                            {% if request.GET.category == category.id|stringformat:"s" %}
-                                selected
-                            {% endif %}>
+                    <option
+                        value="{{category.id}}"
+                        {% if request.GET.category == category.id|stringformat:"s" %}
+                        selected
+                        {% endif %}>
 
-                            {{category.title}}
+                        {{category.title}}
 
-                        </option>
+                    </option>
 
                     {% endfor %}
 
                 </select>
 
             </div>
-            <!-- ================= BRAND ================= -->
+                        <!-- ================= BRAND ================= -->
 
             <div class="sidebar-card">
 
@@ -131,21 +128,22 @@
 
                     {% for brand in brands %}
 
-                        <option
-                            value="{{brand.id}}"
-                            {% if request.GET.brand == brand.id|stringformat:"s" %}
-                                selected
-                            {% endif %}>
+                    <option
+                        value="{{ brand.id }}"
+                        {% if request.GET.brand == brand.id|stringformat:"s" %}
+                        selected
+                        {% endif %}>
 
-                            {{brand.title}}
+                        {{brand.title}}
 
-                        </option>
+                    </option>
 
                     {% endfor %}
 
                 </select>
 
             </div>
+
             <!-- ================= PRICE ================= -->
 
             <div class="sidebar-card">
@@ -173,6 +171,69 @@
                     value="{{request.GET.max_price}}">
 
             </div>
+
+            <!-- ================= SORT ================= -->
+
+            <div class="sidebar-card">
+
+                <h3>
+
+                    <i class="fa-solid fa-sort"></i>
+
+                    مرتب سازی
+
+                </h3>
+
+                <select
+                    name="sort"
+                    class="search-input">
+
+                    <option value="">
+
+                        مرتب سازی
+
+                    </option>
+
+                    <option value="newest"
+                        {% if request.GET.sort == "newest" %}
+                        selected
+                        {% endif %}>
+
+                        جدیدترین
+
+                    </option>
+
+                    <option value="oldest"
+                        {% if request.GET.sort == "oldest" %}
+                        selected
+                        {% endif %}>
+
+                        قدیمی‌ترین
+
+                    </option>
+
+                    <option value="cheap"
+                        {% if request.GET.sort == "cheap" %}
+                        selected
+                        {% endif %}>
+
+                        ارزان‌ترین
+
+                    </option>
+
+                    <option value="expensive"
+                        {% if request.GET.sort == "expensive" %}
+                        selected
+                        {% endif %}>
+
+                        گران‌ترین
+
+                    </option>
+
+                </select>
+
+            </div>
+
             <button
                 type="submit"
                 class="filter-btn">
@@ -190,7 +251,6 @@
     <!-- ================= SHOP CONTENT ================= -->
 
     <section class="shop-content">
-        <!-- ================= TOOLBAR ================= -->
 
         <div class="shop-toolbar">
 
@@ -206,31 +266,8 @@
 
             </div>
 
-            <div class="toolbar-left">
-
-                <span>
-
-                    مرتب سازی :
-
-                </span>
-                <form method="get">
-
-                    <select name="sort" onchange="this.form.submit()">
-
-                        <option value="">مرتب سازی</option>
-                        <option value="newest">جدیدترین</option>
-                        <option value="oldest">قدیمی‌ترین</option>
-                        <option value="cheap">ارزان‌ترین</option>
-                        <option value="expensive">گران‌ترین</option>
-
-                    </select>
-
-                </form>
-            </div>
-
         </div>
-
-        <!-- ================= PRODUCTS ================= -->
+                <!-- ================= PRODUCTS ================= -->
 
         <div class="products-grid">
 
@@ -280,6 +317,18 @@
 
                     </p>
 
+                    {% if object.brand %}
+
+                    <p class="product-brand">
+
+                        <i class="fa-solid fa-copyright"></i>
+
+                        {{object.brand.title}}
+
+                    </p>
+
+                    {% endif %}
+
                     <div class="product-rate">
 
                         ⭐ {{object.avg_rate}}
@@ -291,11 +340,15 @@
                         {% if object.discount_percent %}
 
                             <span class="old-price">
-                                قیمت اصلی : {{object.price}}<br>
+
+                                قیمت اصلی :{{object.price}}<br>
+
                             </span>
 
                             <span class="new-price">
-                                قیمت با تخفیف : {{object.get_price}}<br>
+
+                                قیمت بعد از تخفیف :{{object.get_price}}
+
                             </span>
 
                         {% else %}
@@ -316,7 +369,7 @@
 
                             <i class="fa-solid fa-circle-check"></i>
 
-                            موجود
+                            موجود در انبار
 
                         {% else %}
 
@@ -340,7 +393,7 @@
 
                     </a>
 
-                    <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn"><br>
+                    <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn">
 
                         مشاهده محصول
 
@@ -362,12 +415,18 @@
 
                 </h2>
 
+                <p>
+
+                    فیلترهای انتخابی خود را تغییر دهید.
+
+                </p>
+
             </div>
 
             {% endfor %}
 
         </div>
-        <!-- ================= PAGINATION ================= -->
+                <!-- ================= PAGINATION ================= -->
 
         {% if page_obj.has_other_pages %}
 
@@ -375,41 +434,53 @@
 
             {% if page_obj.has_previous %}
 
-                <a
-                    class="page-btn"
-                    href="?page={{page_obj.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}">
+            <a
+                class="page-btn"
+                href="?page={{page_obj.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}{% if request.GET.brand %}&brand={{request.GET.brand}}{% endif %}{% if request.GET.min_price %}&min_price={{request.GET.min_price}}{% endif %}{% if request.GET.max_price %}&max_price={{request.GET.max_price}}{% endif %}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}">
 
-                    <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-angle-right"></i>
 
-                    قبلی
+                قبلی
 
-                </a>
+            </a>
 
             {% endif %}
 
-            <span class="page-number">
+            {% for page in page_obj.paginator.page_range %}
 
-                صفحه
+                {% if page == page_obj.number %}
 
-                <strong>{{page_obj.number}}</strong>
+                    <span class="page-btn active">
 
-                از
+                        {{page}}
 
-                <strong>{{page_obj.paginator.num_pages}}</strong>
+                    </span>
 
-            </span>
+                {% elif page >= page_obj.number|add:"-2" and page <= page_obj.number|add:"2" %}
+
+                    <a
+                        class="page-btn"
+                        href="?page={{page}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}{% if request.GET.brand %}&brand={{request.GET.brand}}{% endif %}{% if request.GET.min_price %}&min_price={{request.GET.min_price}}{% endif %}{% if request.GET.max_price %}&max_price={{request.GET.max_price}}{% endif %}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}">
+
+                        {{page}}
+
+                    </a>
+
+                {% endif %}
+
+            {% endfor %}
 
             {% if page_obj.has_next %}
 
-                <a
-                    class="page-btn"
-                    href="?page={{page_obj.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}">
+            <a
+                class="page-btn"
+                href="?page={{page_obj.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}{% if request.GET.category %}&category={{request.GET.category}}{% endif %}{% if request.GET.brand %}&brand={{request.GET.brand}}{% endif %}{% if request.GET.min_price %}&min_price={{request.GET.min_price}}{% endif %}{% if request.GET.max_price %}&max_price={{request.GET.max_price}}{% endif %}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}">
 
-                    بعدی
+                بعدی
 
-                    <i class="fa-solid fa-angle-left"></i>
+                <i class="fa-solid fa-angle-left"></i>
 
-                </a>
+            </a>
 
             {% endif %}
 

@@ -215,30 +215,149 @@ a {
 }
 
 /* ================= FOOTER ================= */
-.footer-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:40px;
+
+
+.footer{
+
+    background:#111;
+
+    color:#ddd;
+
+    margin-top:80px;
+
+    padding-top:60px;
+
 }
 
-.footer-col{
-    display:flex;
-    flex-direction:column;
+.footer-grid{
+
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:50px;
+
+    padding-bottom:50px;
+
 }
 
 .footer-col h4{
-    margin-bottom:18px;
+
+    color:#fff;
+
+    margin-bottom:22px;
+
+    font-size:20px;
+
+    position:relative;
+
+}
+
+.footer-col h4::after{
+
+    content:"";
+
+    width:55px;
+
+    height:3px;
+
+    background:#ff7a00;
+
+    display:block;
+
+    margin-top:10px;
+
+    border-radius:20px;
+
+}
+
+.footer-col p{
+
+    color:#999;
+
+    line-height:2;
+
+    font-size:15px;
+
 }
 
 .footer-col a{
+
+    display:block;
+
+    color:#aaa;
+
     text-decoration:none;
-    color:#777;
-    margin-bottom:10px;
+
+    margin:10px 0;
+
     transition:.3s;
+
 }
 
 .footer-col a:hover{
-    color:#ff6600;
+
+    color:#ff7a00;
+
+    transform:translateX(-6px);
+
+}
+.footer-col:first-child h4{
+
+    color:#ff7a00;
+
+    font-size:30px;
+
+    font-weight:800;
+
+}
+.footer-col a{
+
+    position:relative;
+
+    width:fit-content;
+
+}
+
+.footer-col a::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:0;
+    bottom:-4px;
+
+    width:0;
+
+    height:2px;
+
+    background:#ff7a00;
+
+    transition:.3s;
+
+}
+
+.footer-col a:hover::after{
+
+    width:100%;
+
+}
+.bottom{
+
+    border-top:1px solid #2b2b2b;
+
+    text-align:center;
+
+    color:#777;
+
+    padding:22px;
+
+    font-size:14px;
+
 }
 
 /* ================= PAGE HEADER ================= */
@@ -386,9 +505,8 @@ a {
   color: #ff3d00;
   font-size: 24px;
 }
-/*==============================
-        SEARCH BOX
-==============================*/
+
+/* ================= SEARCH BOX ================= */
 
 .search-box{
 
@@ -485,5 +603,180 @@ a {
 .search-box button:active{
 
     transform:scale(.96);
+
+}
+/* ================= HOME LATEST PRODUCTS ================= */
+
+.latest-products{
+    width:90%;
+    max-width:1400px;
+    margin:70px auto;
+}
+
+.latest-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.latest-header h2{
+    font-size:30px;
+    font-weight:800;
+}
+
+.latest-all-btn{
+    background:#ff6a00;
+    color:#fff;
+    padding:12px 22px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.latest-all-btn:hover{
+    background:#e85f00;
+}
+
+.latest-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:25px;
+}
+
+.latest-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    position:relative;
+
+}
+
+.latest-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.latest-image img{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+
+}
+
+.latest-body{
+
+    padding:20px;
+
+}
+
+.latest-body h3{
+
+    margin:0 0 10px;
+
+    font-size:18px;
+
+}
+
+.latest-body p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.latest-rate{
+
+    margin:12px 0;
+
+}
+
+.latest-old-price{
+
+    color:#999;
+
+    text-decoration:line-through;
+
+}
+
+.latest-price{
+
+    color:#ff5f00;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-top:8px;
+
+}
+
+.latest-footer{
+
+    display:flex;
+
+    gap:10px;
+
+    padding:18px;
+
+}
+
+.latest-cart-btn{
+
+    flex:1;
+
+    background:#ff6a00;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:12px;
+
+}
+
+.latest-view-btn{
+
+    background:#222;
+
+    color:#fff;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+}
+
+.latest-discount{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    background:#ff3d00;
+
+    color:#fff;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
 
 }

@@ -1,161 +1,81 @@
-{% load static %}
-{% load static %}
-<h2>🔥 جدیدترین محصولات </h2>
+<section class="latest-products">
 
-<div class="products-grid">
+    <div class="latest-header">
 
-            {% for product in latest_products %}
+        <h2>🔥 جدیدترین محصولات</h2>
 
-            <div class="product-card">
+        <a href="{% url 'shop:product-grid' %}" class="latest-all-btn">
+            مشاهده همه
+        </a>
+
+    </div>
+
+    <div class="latest-grid">
+
+        {% for product in latest_products %}
+
+        <div class="latest-card">
+
+            {% if product.discount_percent %}
+                <span class="latest-discount">
+                    {{product.discount_percent}}٪
+                </span>
+            {% endif %}
+
+            <a href="{% url 'shop:product-detail' slug=product.slug %}" class="latest-image">
+                <img src="{{product.image.url}}" alt="{{product.title}}">
+            </a>
+
+            <div class="latest-body">
+
+                <h3>{{product.title}}</h3>
+
+                <p>
+                    {% for category in product.category.all %}
+                        {{category.title}}{% if not forloop.last %} ، {% endif %}
+                    {% endfor %}
+                </p>
+
+                <div class="latest-rate">
+                    ⭐ {{product.avg_rate}}
+                </div>
 
                 {% if product.discount_percent %}
 
-                    <span class="discount">
+                    <div class="latest-old-price">
+                        {{product.price}} تومان
+                    </div>
 
-                        {{product.discount_percent}}٪
+                    <div class="latest-price">
+                        {{product.get_price}} تومان
+                    </div>
 
-                    </span>
+                {% else %}
+
+                    <div class="latest-price">
+                        {{product.price}} تومان
+                    </div>
 
                 {% endif %}
 
-                <button class="wishlist-btn">
+            </div>
 
-                    <i class="fa-regular fa-heart"></i>
+            <div class="latest-footer">
 
-                </button>
-
-                <a href="{% url 'shop:product-detail' slug=product.slug %}" class="product-image">
-
-                    <img src="{{product.image.url}}" alt="{{product.title}}">
-
+                <a href="#" class="latest-cart-btn">
+                    افزودن به سبد خرید
                 </a>
 
-                <div class="product-body">
-
-                    <h3 class="product-title">
-
-                        {{product.title}}
-
-                    </h3>
-
-                    <p class="product-category">
-
-                        <i class="fa-solid fa-tag"></i>
-
-                        {% for category in product.category.all %}
-
-                            {{category.title}}{% if not forloop.last %} ، {% endif %}
-
-                        {% endfor %}
-
-                    </p>
-
-                    <div class="product-rate">
-
-                        ⭐ {{product.avg_rate}}
-
-                    </div>
-
-                    <div class="product-price">
-
-                        {% if product.discount_percent %}
-
-                            <span class="old-price">
-                                قیمت اصلی : {{object.price}}<br>
-                            </span>
-
-                            <span class="new-price">
-                                قیمت با تخفیف : {{product.get_price}}<br>
-                            </span>
-
-                        {% else %}
-
-                            <span class="new-price">
-
-                                {{product.price}} تومان
-
-                            </span>
-
-                        {% endif %}
-
-                    </div>
-
-                    <div class="product-stock">
-
-                        {% if product.stock > 0 %}
-
-                            <i class="fa-solid fa-circle-check"></i>
-
-                            موجود
-
-                        {% else %}
-
-                            <i class="fa-solid fa-circle-xmark"></i>
-
-                            ناموجود
-
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-                <div class="product-footer">
-
-                    <a href="#" class="cart-btn">
-
-                        <i class="fa-solid fa-cart-shopping"></i>
-
-                        افزودن به سبد خرید
-
-                    </a>
-
-                    <a href="{% url 'shop:product-detail' slug=product.slug %}" class="view-btn"><br>
-
-                        مشاهده محصول
-
-                    </a>
-                    
-
-                </div>
+                <a href="{% url 'shop:product-detail' slug=product.slug %}" class="latest-view-btn">
+                    مشاهده
+                </a>
 
             </div>
 
-            {% empty %}
+        </div>
 
-            <div class="no-product">
+        {% endfor %}
 
-                <i class="fa-solid fa-box-open"></i>
+    </div>
 
-                <h2>
-
-                    محصولی یافت نشد.
-
-                </h2>
-
-            </div>
-
-            {% endfor %}
-
-</div>
-
- <a href="{% url 'shop:product-grid' %}" class="view-btn"><br>مشاهده همه</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+</section>

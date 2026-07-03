@@ -1,5 +1,6 @@
 {% load static %}
 {% load shop_tags %}
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -7,7 +8,9 @@
   <meta charset="UTF-8">
   <title>Modern Shop</title>
     <!-- CSS -->
+  {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% endblock %}
 
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -136,3 +139,5 @@
     </div>
 
 </footer>
+</body>
+</html>
