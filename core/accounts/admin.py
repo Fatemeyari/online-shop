@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
+from django.contrib.sessions.models import Session
 
 from .models import Profile , PasswordResetToken ,VerificationToken
 
@@ -82,3 +83,10 @@ class VerificationTokenAdmin(admin.ModelAdmin):
     list_display=("id" , "user" , "is_used","created_time" , "expires_time")
     search_fields=("user__email",)
     list_filter=("user" , "is_used","expires_time")
+
+class SessionAdmin(admin.ModelAdmin):
+    def _session_data(self, obj):
+        return obj.get_decoded()
+    list_display = ['session_key', '_session_data', 'expire_date']
+admin.site.register(Session, SessionAdmin)
+
