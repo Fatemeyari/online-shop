@@ -160,31 +160,38 @@
         </p>
         <!-- ================= ACTIONS ================= -->
 
-<div class="actions">
+        <div class="actions">
 
-    <a href="#" class="cart-btn">
+        {% if object.stock > 0 %}
 
-        <i class="fa-solid fa-cart-shopping"></i>
+            <form action="{% url 'cart:session-add-product' %}" method="post" class="cart-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ object.id }}">
 
-        افزودن به سبد خرید
+                <button type="submit" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    افزودن به سبد خرید
+                </button>
+            </form>
 
-    </a>
+        {% else %}
 
-    <button class="wishlist-btn">
+            <button type="button" class="cart-btn disabled" disabled>
+                <i class="fa-solid fa-ban"></i>
+                امکان افزودن به سبد خرید وجود ندارد
+            </button>
 
-        <i class="fa-regular fa-heart"></i>
+        {% endif %}
 
-    </button>
+        <button class="wishlist-btn">
+            <i class="fa-regular fa-heart"></i>
+        </button>
 
-    <button class="share-btn">
+        <button class="share-btn">
+            <i class="fa-solid fa-share-nodes"></i>
+        </button>
 
-        <i class="fa-solid fa-share-nodes"></i>
-
-    </button>
-
-</div>
-
-
+    </div>
 <!-- ================= FEATURES ================= -->
 
 <div class="features-grid">

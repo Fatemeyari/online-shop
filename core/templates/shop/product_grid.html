@@ -384,15 +384,22 @@
                 </div>
 
                 <div class="product-footer">
+                {% if object.stock != 0 %}
+                   <form action="{% url 'cart:session-add-product' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{object.id}}">
 
-                    <a href="#" class="cart-btn">
-
-                        <i class="fa-solid fa-cart-shopping"></i>
-
-                        افزودن به سبد خرید
-
-                    </a>
-
+                        <button type="submit" class="cart-btn">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            افزودن به سبد خرید
+                        </button>
+                    </form>
+                {% else %}
+                    <button type="button" class="cart-btn disabled" disabled>
+                        <i class="fa-solid fa-ban"></i>
+                       ناموجود
+                    </button>
+                {% endif %}
                     <a href="{% url 'shop:product-detail' slug=object.slug %}" class="view-btn">
 
                         مشاهده محصول

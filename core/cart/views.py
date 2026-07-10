@@ -1,3 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic import View ,TemplateView
 
+from django.http import JsonResponse
+
+from shop.models import Product ,ProductStatusType
+from .cart import CartSession
 # Create your views here.
+
+class SessionAddProduct(View):
+    def post(self,request,*args, **kwargs):
+        cart=CartSession(request.session)
+        product_id=request.POST.get("product_id")
+        print(product_id)
+        if product_id and Product.objects.filter(id=product_id , status=ProductStatusType.publish.value).exists():
+            cart.add_product(product_id)
+        return redirect(request.META.get("HTTP_REFERER", "/"))        
+            
