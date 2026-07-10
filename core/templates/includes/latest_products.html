@@ -61,10 +61,23 @@
             </div>
 
             <div class="latest-footer">
+            {% if product.stock %}
+                <form action="{% url 'cart:session-add-product' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{product.id}}">
 
-                <a href="#" class="latest-cart-btn">
-                    افزودن به سبد خرید
-                </a>
+                        <button type="submit" class="latest-cart-btn">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                                افزودن به سبد خرید
+                        </button>
+                </form>
+            {% else %}
+                <button type="button" class="cart-btn disabled" disabled>
+                    <i class="fa-solid fa-ban"></i>
+                    ناموجود 
+                </button>
+            {% endif %}
+
 
                 <a href="{% url 'shop:product-detail' slug=product.slug %}" class="latest-view-btn">
                     مشاهده
