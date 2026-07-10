@@ -49,10 +49,14 @@ class Product(models.Model):
         return self.title
 
     def get_price(self):
-        discount_amount=self.price * Decimal(self.discount_percent / 100)
+        discount_amount=(self.price * Decimal(self.discount_percent)) / 100
         discounted_amount=self.price - discount_amount
-        return round(discount_amount)
+        return round(discounted_amount)
     
+    def get_discount(self):
+        discount_amount = (self.price * Decimal(self.discount_percent)) / 100
+        return discount_amount 
+
     def is_discounted(self):
         return self.discount_percent != 0 
 
