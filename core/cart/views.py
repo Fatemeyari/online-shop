@@ -16,3 +16,14 @@ class SessionAddProduct(View):
             cart.add_product(product_id)
         return redirect(request.META.get("HTTP_REFERER", "/"))        
             
+class CartSummaryView(TemplateView):
+    template_name="cart/cart_summary.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart=CartSession(self.request.session)
+        context["cart_items"]=cart.get_cart_items()
+        context["total_price"]=cart.get_total_price()
+        context["total_quantity"]=cart.get_total_quantity()
+        context["discounts"]=cart.get_discount()
+        return context    

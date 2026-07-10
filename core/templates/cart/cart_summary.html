@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cart_summary.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+
+    <div class="cart-header">
+
+        <h1>
+            <i class="fa-solid fa-cart-shopping"></i>
+            سبد خرید
+        </h1>
+    </div>
+
+    <div class="cart-container">
+
+        <!-- محصولات -->
+
+        <div class="cart-items">
+
+            {% for item in cart_items %}
+
+            <div class="cart-card">
+
+                <div class="cart-image">
+
+                    <img src="{{item.product_obj.image.url}}" alt="Image Description">
+
+                </div>
+
+                <div class="cart-content">
+
+                    <h3>
+
+                        {{item.product_obj.title}}
+
+                    </h3>
+
+                    <span class="category">
+
+                        {% for cat in item.product_obj.category.all %}
+                            {{cat.title}}
+                            {% if not forloop.last %} - {% endif %}
+                        {% endfor %}
+
+                    </span>
+
+                    <div class="prices">
+
+                        {% if item.product_obj.discount_percent %}
+
+                            <span class="old-price">
+
+                                {{item.product_obj.price}} تومان
+
+                            </span>
+
+                            <span class="new-price">
+
+                                {{item.product_obj.get_price}} تومان
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="new-price">
+
+                                {{item.product_obj.price}} تومان
+
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="cart-actions">
+
+                    <div class="qty-box">
+
+                        <button>-</button>
+
+                        <input
+                            type="number"
+                            value="{{item.quantity}}"
+                            min="1">
+
+                        <button>+</button>
+
+                    </div>
+
+                    <button class="delete-btn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-cart">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <h2>
+
+                    سبد خرید شما خالی است.
+
+                </h2>
+
+                <a href="{% url 'shop:product-grid' %}" class="shop-btn">
+
+                    مشاهده محصولات
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+                <!-- ================= CART SUMMARY ================= -->
+
+        <aside class="cart-summary">
+
+            <div class="summary-card">
+
+                <h3>
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                    خلاصه سفارش
+
+                </h3>
+
+                <div class="summary-row">
+
+                    <span>
+
+                        تعداد کالاها
+
+                    </span>
+
+                    <strong>
+
+                        {{total_quantity}} کالا
+
+                    </strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+
+                        جمع قیمت کالاها
+
+                    </span>
+
+                    <strong>
+
+                        {{total_price}}
+                    </strong>
+
+                </div>
+
+                <div class="summary-row discount">
+
+                    <span>
+
+                        تخفیف
+
+                    </span>
+
+                    <strong>
+
+                        {{discounts}}
+
+                    </strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+
+                        هزینه ارسال
+
+                    </span>
+
+                    <strong class="free">
+
+                        رایگان
+
+                    </strong>
+
+                </div>
+
+                <hr>
+
+                <div class="summary-row total">
+
+                    <span>
+
+                        مبلغ قابل پرداخت
+
+                    </span>
+
+                    <strong>
+
+                        {{total_price}}
+
+                    </strong>
+
+                </div>
+
+                <button class="checkout-btn">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    ادامه فرایند پرداخت
+
+                </button>
+
+                <a href="{% url 'shop:product-grid' %}" class="continue-btn">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    ادامه خرید
+
+                </a>
+
+                <div class="secure-box">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+
+                        <strong>
+
+                            پرداخت امن
+
+                        </strong>
+
+                        <p>
+
+                            تمامی تراکنش‌ها با SSL رمزنگاری می‌شوند.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -179,6 +179,28 @@ a {
 .cat:hover {
   transform: translateY(-5px);
 }
+.cart-btn{
+    width: 100%;
+    border: none;
+    outline: none;
+    background:linear-gradient(135deg,#ff8c00,#ff4d00);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: inherit;
+    transition: .3s;
+}
+
+.cart-btn:hover{
+    background: #256f47;
+}
 
 /* ================= PRODUCTS ================= */
 .products {
