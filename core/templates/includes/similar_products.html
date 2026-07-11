@@ -90,15 +90,14 @@
 
         <div class="product-footer">
             {% if product.stock != 0 %}
-            <form action="{% url 'cart:session-add-product' %}" method="post">
+             <form action="{% url 'cart:session-add-product' %}" method="post" class="cart-form">
                 {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{object.id}}">
+                <input type="hidden" name="product_id" value="{{product.id}}">
 
-                    <button type="submit" class="cart-btn">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                            افزودن به سبد خرید
-                    </button>
-            
+                <button type="submit" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    افزودن به سبد خرید
+                </button>
             </form>
             {% else %}
             <button type="button" class="cart-btn disabled" disabled>

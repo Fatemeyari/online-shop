@@ -15,7 +15,23 @@ class SessionAddProduct(View):
         if product_id and Product.objects.filter(id=product_id , status=ProductStatusType.publish.value).exists():
             cart.add_product(product_id)
         return redirect(request.META.get("HTTP_REFERER", "/"))        
-            
+
+class DecreaseProductQuantityView(View):
+    def post(self,request , *args , **kwargs):
+        cart=CartSession(request.session)  
+        product_id=request.POST.get("product_id")
+        if product_id:
+            cart.decrease_product_quantity(product_id)
+        return redirect(request.META.get("HTTP_REFERER","/"))
+
+class IncreaseProductQuantityView(View):
+    def post(self,request , *args , **kwargs):
+        cart=CartSession(request.session)  
+        product_id=request.POST.get("product_id")
+        if product_id:
+            cart.increase_product_quantity(product_id)
+        return redirect(request.META.get("HTTP_REFERER","/"))
+    
 class CartSummaryView(TemplateView):
     template_name="cart/cart_summary.html"
     
@@ -26,4 +42,6 @@ class CartSummaryView(TemplateView):
         context["total_price"]=cart.get_total_price()
         context["total_quantity"]=cart.get_total_quantity()
         context["discounts"]=cart.get_discount()
-        return context    
+        return context  
+
+  
