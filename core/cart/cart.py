@@ -18,8 +18,9 @@ class CartSession:
 
     def decrease_stock(self,product_id , quantity):
         product_obj=Product.objects.get(id=product_id , status=ProductStatusType.publish.value)
-        product_obj.stock -= int(quantity)
-        product_obj.save()
+        if product_obj.stock >= quantity:
+            product_obj.stock -= int(quantity) 
+            product_obj.save()
 
     def add_product(self, product_id):
         for item in self._cart["items"]:
@@ -57,11 +58,14 @@ class CartSession:
         return round(discounts)
 
     def increase_product_quantity(self,product_id):
+        product_obj=Product.objects.get(id=product_id , status=ProductStatusType.publish.value)
         for item in self._cart["items"]:
             if item["product_id"] == product_id:
-                item["quantity"]+=1
-                self.decrease_stock(product_id , 1)
-        self.save()
+                if product_obj.stock >0 : 
+                    item["quantity"]+=1
+                    self.decrease_stock(product_id , 1)
+                    self.save()
+                
 
     def decrease_product_quantity(self,product_id):
         for item in self._cart["items"]:
@@ -76,6 +80,14 @@ class CartSession:
                     self._cart["items"].remove(item)
                 break
         self.save()
+
+    def remove_product(self,product_id):
+        for item in self._cart["items"]:
+            if item["product_id"] == product_id:
+                self._cart["items"].remove(item)
+                quantity=item["quantity"]
+                self.increase_stock(product_id , quantity)
+        self.save()  
 
 
     def save(self):

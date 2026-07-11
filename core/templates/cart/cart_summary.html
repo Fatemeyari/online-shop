@@ -161,7 +161,7 @@
 
                     <!-- حذف محصول -->
 
-                   <form method="post" action="#">
+                   <form method="post" action="{% url 'cart:session-remove-product' %}">
                         {% csrf_token %}
 
                         <input

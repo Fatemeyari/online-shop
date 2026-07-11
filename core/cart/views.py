@@ -32,6 +32,15 @@ class IncreaseProductQuantityView(View):
             cart.increase_product_quantity(product_id)
         return redirect(request.META.get("HTTP_REFERER","/"))
     
+
+class RemoveProductView(View):
+    def post(self,request , *args , **kwargs):
+        cart=CartSession(request.session)  
+        product_id=request.POST.get("product_id")
+        if product_id:
+            cart.remove_product(product_id)
+        return redirect(request.META.get("HTTP_REFERER","/"))
+    
 class CartSummaryView(TemplateView):
     template_name="cart/cart_summary.html"
     
