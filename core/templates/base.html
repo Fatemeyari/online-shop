@@ -59,40 +59,70 @@
     <!-- ICONS -->
     <div class="icons">
 
-      {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 
-        <a href="{% url 'accounts:logout' %}" class="icon" title="خروج">
-          <i class="fa-solid fa-right-from-bracket"></i>
+        <!-- پروفایل -->
+        <a href="{% url 'dashboard:home' %}"
+           class="icon"
+           title="پروفایل">
+
+            <i class="fa-regular fa-user"></i>
+
         </a>
 
-      {% else %}
+        <!-- علاقه مندی -->
+        <a href="#"
+           class="icon"
+           title="علاقه‌مندی‌ها">
 
-        <a href="{% url 'accounts:login' %}" class="icon" title="ورود">
-          <i class="fa-regular fa-user"></i>
+            <i class="fa-regular fa-heart"></i>
+
         </a>
 
-      {% endif %}
+        <!-- سبد خرید -->
+        <a href="{% url 'cart:session-cart-summary' %}"
+           class="icon cart"
+           title="سبد خرید">
 
-      <a href="#" class="icon" title="علاقه‌مندی">
-        <i class="fa-regular fa-heart"></i>
-      </a>
+            <i class="fa-solid fa-cart-shopping"></i>
 
-      <a href="{% url 'cart:session-cart-summary' %}" class="icon cart" title="سبد خرید">
-        <i class="fa-solid fa-cart-shopping"></i>
-      </a>
+        </a>
 
-    </div>
+        <!-- خروج -->
+        <a href="{% url 'accounts:logout' %}"
+           class="icon logout"
+           title="خروج">
 
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+        </a>
+
+    {% else %}
+
+        <!-- ورود -->
+        <a href="{% url 'accounts:login' %}"
+           class="icon"
+           title="ورود">
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+        </a>
+
+        <!-- سبد خرید -->
+        <a href="{% url 'cart:session-cart-summary' %}"
+           class="icon cart"
+           title="سبد خرید">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+        </a>
+
+    {% endif %}
   </div>
 
   <!-- MENU -->
   <nav class="menu">
-
-    <div class="menu-links">
-      <a href="{% url 'shop:product-grid' %}">📦 لیست محصولات</a>
-      <a href="#">تخفیف ویژه 🔥</a>
-    </div>
-
+    
     <div class="menu-pages">
       <a href="{% url 'website:about' %}">درباره ما</a>
       <a href="{% url 'website:contact' %}">تماس با ما</a>
@@ -108,64 +138,135 @@
 
 <footer class="footer">
 
-    <div class="footer-grid">
+    <div class="footer-container">
 
-        <div class="footer-col">
-            <h4>SHOP+</h4>
-            <p>ارائه محصولات باکیفیت، قیمت رقابتی و ارسال سریع.</p>
-        </div>
+        <div class="footer-grid">
 
-        <div class="footer-col">
-            <h4>دسترسی سریع</h4>
-            <a href="#">قوانین</a>
-            <a href="#">حریم خصوصی</a>
-        </div>
+            <!-- معرفی فروشگاه -->
+            <div class="footer-col">
 
-        <div class="footer-col">
-            <h4>دسته‌بندی</h4>
+                <h3 class="footer-logo">
+                    SHOP+
+                </h3>
 
-            {% show_categories %}
+                <p>
+                    فروشگاه اینترنتی SHOP+ با ارائه بهترین محصولات،
+                    ارسال سریع، ضمانت اصالت کالا و پشتیبانی ۲۴ ساعته
+                    تجربه‌ای متفاوت از خرید آنلاین را برای شما فراهم می‌کند.
+                </p>
 
-        </div>
+                <div class="footer-social">
 
-        <div class="footer-col">
-            <h4>پشتیبانی</h4>
-            <a href="#">سوالات متداول</a>
-            <a href="#">راهنما</a>
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- دسترسی سریع -->
+
+            <div class="footer-col">
+
+                <h4>دسترسی سریع</h4>
+
+                <a href="{% url 'website:index' %}">
+                    خانه
+                </a>
+
+                <a href="{% url 'shop:product-grid' %}">
+                    محصولات
+                </a>
+
+                <a href="{% url 'website:about' %}">
+                    درباره ما
+                </a>
+
+                <a href="{% url 'website:contact' %}">
+                    تماس با ما
+                </a>
+
+            </div>
+
+            <!-- دسته بندی -->
+
+            <div class="footer-col">
+
+                <h4>
+                    دسته بندی ها
+                </h4>
+
+                {% show_categories %}
+
+            </div>
+
+            <!-- خبرنامه -->
+
+            <div class="footer-col">
+
+                <h4>
+                    عضویت در خبرنامه
+                </h4>
+
+                <p>
+
+                    ایمیل خود را وارد کنید تا از
+                    جدیدترین محصولات و تخفیف‌ها
+                    مطلع شوید.
+
+                </p>
+
+                <form action="{% url 'website:newsletter' %}"
+                      method="post"
+                      class="newsletter-form">
+
+                    {% csrf_token %}
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="ایمیل شما"
+                        required>
+
+                    <button type="submit">
+
+                        عضویت
+
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
 
     </div>
-    <div class="footer-col newsletter">
 
-      <h4>خبرنامه</h4>
+    <div class="footer-bottom">
 
-      <p>
-          برای اطلاع از جدیدترین محصولات و تخفیف‌های ویژه ایمیل خود را وارد کنید.
-      </p>
+        <p>
 
-      <form action="{% url 'website:newsletter' %}" method="post" class="newsletter-form">
+            © 2026 SHOP+ | تمامی حقوق محفوظ است.
 
-          {% csrf_token %}
+        </p>
 
-          <input
-              type="email"
-              name="email"
-              placeholder="ایمیل شما"
-              required
-          >
-
-          <button type="submit">
-              عضویت
-          </button>
-
-      </form>
-    </div>
-
-    <div class="bottom">
-        © 2026 SHOP+
     </div>
 
 </footer>
+   
 {% if messages %}
     {% for message in messages %}
         <script>
