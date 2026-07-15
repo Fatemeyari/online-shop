@@ -1,1 +1,434 @@
-<h1>hi admin</h1>
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="admin-dashboard">
+
+<div class="admin-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+            </div>
+
+            <h2>
+
+                {{request.user.first_name}}{{request.user.last_name}}
+
+            </h2>
+
+            <span>
+
+                مدیر فروشگاه
+
+            </span>
+
+        </div>
+
+
+
+        <nav class="admin-menu">
+
+            <a href="#" class="active">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+
+                    داشبورد
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-user-gear"></i>
+
+                <span>
+
+                    تنظیمات پروفایل
+
+                </span>
+
+            </a>
+
+            <a href="{% url 'dashboard:admin:security-edit' %}">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+
+                    امنیت
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <span>
+
+                    محصولات
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>
+
+                    سفارشات
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-headset"></i>
+
+                <span>
+
+                    تیکت‌ها
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+
+                    لیست کاربران
+
+                </span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fa-solid fa-envelope-open-text"></i>
+
+                <span>
+
+                    خبرنامه
+
+                </span>
+
+            </a>
+
+            <hr>
+
+            <a href="{% url 'accounts:logout' %}" class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+
+                    خروج
+
+                </span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="admin-content">
+
+        <div class="admin-header">
+
+            <div>
+
+                <h1>
+
+                    پنل مدیریت فروشگاه
+
+                </h1>
+
+                <p>
+
+                    مدیریت کامل فروشگاه، سفارش‌ها، کاربران و محصولات
+
+                </p>
+
+            </div>
+
+            <div class="admin-badge">
+
+                <i class="fa-solid fa-crown"></i>
+
+                مدیر سیستم
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <div class="admin-card">
+
+            <div class="card-header">
+
+                <h3>
+
+                    عملیات سریع
+
+                </h3>
+
+            </div>
+
+            <div class="quick-actions">
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    <span>
+
+                        افزودن محصول
+
+                    </span>
+
+                </a>
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>
+
+                        مدیریت کاربران
+
+                    </span>
+
+                </a>
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    <span>
+
+                        سفارشات
+
+                    </span>
+
+                </a>
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-envelope-open-text"></i>
+
+                    <span>
+
+                        خبرنامه
+
+                    </span>
+
+                </a>
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                    <span>
+
+                        دسته‌بندی‌ها
+
+                    </span>
+
+                </a>
+
+                <a href="#" class="quick-card">
+
+                    <i class="fa-solid fa-percent"></i>
+
+                    <span>
+
+                        کد تخفیف
+
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+                <!-- ================= SYSTEM STATUS ================= -->
+
+        <div class="admin-grid">
+
+            <div class="admin-card">
+
+                <div class="card-header">
+
+                    <h3>
+
+                        وضعیت سیستم
+
+                    </h3>
+
+                </div>
+
+                <div class="system-status">
+
+                    <div class="status-row">
+
+                        <span>
+
+                            وضعیت سرور
+
+                        </span>
+
+                        <strong class="online">
+
+                            آنلاین
+
+                        </strong>
+
+                    </div>
+
+                    <div class="status-row">
+
+                        <span>
+
+                            محصولات فعال
+
+                        </span>
+
+                        <strong>
+
+                            128
+
+                        </strong>
+
+                    </div>
+
+                    <div class="status-row">
+
+                        <span>
+
+                            سفارشات امروز
+
+                        </span>
+
+                        <strong>
+
+                            34
+
+                        </strong>
+
+                    </div>
+
+                    <div class="status-row">
+
+                        <span>
+
+                            کاربران آنلاین
+
+                        </span>
+
+                        <strong>
+
+                            17
+
+                        </strong>
+
+                    </div>
+
+                    <div class="status-row">
+
+                        <span>
+
+                            تیکت‌های باز
+
+                        </span>
+
+                        <strong class="warning">
+
+                            8
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= ANNOUNCEMENT ================= -->
+
+            <div class="admin-card admin-welcome">
+
+                <div class="welcome-icon">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                </div>
+
+                <div class="welcome-content">
+
+                    <h2>
+
+                        خوش آمدید مدیر فروشگاه 👋
+
+                    </h2>
+
+                    <p>
+
+                        از این پنل می‌توانید تمامی بخش‌های فروشگاه شامل
+                        محصولات، کاربران، سفارش‌ها، تیکت‌ها و خبرنامه را
+                        به صورت کامل مدیریت کنید.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,295 @@
+.security-page{
+
+    background:#f5f7fb;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:70px 20px;
+
+}
+
+.security-container{
+
+    width:100%;
+
+    max-width:650px;
+
+}
+
+.security-card{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:45px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
+
+}
+
+.security-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.security-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#ff8a00,#ff6200);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+    margin-bottom:22px;
+
+}
+
+.security-header h2{
+
+    font-size:30px;
+
+    color:#222;
+
+    margin-bottom:12px;
+
+}
+
+.security-header p{
+
+    color:#777;
+
+    line-height:2;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:24px;
+
+}
+
+.form-group label{
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    color:#333;
+
+}
+
+.form-group input{
+
+    height:58px;
+
+    border:1px solid #e5e5e5;
+
+    border-radius:16px;
+
+    padding:0 20px;
+
+    font-family:inherit;
+
+    background:#fafafa;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.form-group input:focus{
+
+    outline:none;
+
+    border-color:#ff7a00;
+
+    background:#fff;
+
+    box-shadow:0 0 0 4px rgba(255,122,0,.15);
+
+}
+
+.change-password-btn{
+
+    width:100%;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#ff8a00,#ff6200);
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.35s;
+
+    box-shadow:0 14px 30px rgba(255,122,0,.28);
+
+}
+
+.change-password-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 38px rgba(255,122,0,.35);
+
+}
+
+.change-password-btn i{
+
+    font-size:18px;
+
+}
+
+@media(max-width:768px){
+
+.security-card{
+
+padding:28px;
+
+}
+
+.security-header h2{
+
+font-size:24px;
+
+}
+
+.security-icon{
+
+width:75px;
+
+height:75px;
+
+font-size:28px;
+
+}
+
+}
+/*========================================
+            BACK BUTTON
+========================================*/
+
+.back-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:22px;
+
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:#444;
+
+    font-weight:700;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+}
+
+.back-btn i{
+
+    font-size:15px;
+
+}
+
+.back-btn:hover{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    transform:translateX(5px);
+
+    box-shadow:0 15px 30px rgba(255,122,0,.25);
+
+}
+.form-error{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#dc2626;
+
+    font-size:13px;
+
+    font-weight:500;
+
+}
+
+.form-errors{
+
+    margin-bottom:20px;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    border:1px solid #fecaca;
+
+}
+
+.form-errors p{
+
+    margin:5px 0;
+
+}
