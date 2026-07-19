@@ -1,5 +1,13 @@
 from django.contrib.auth import forms as auth_forms
 from django import forms 
+from django.utils.translation import gettext_lazy as _ 
 
+from accounts.models import Profile
 class AdminPasswordChangeForm(auth_forms.PasswordChangeForm):
-    pass
+    error_messages={
+        "password_incorrect":_(
+            "پسورد قبلی شما اشتباه وارد شده است . دوباره تلاش کنید ."
+        ),
+        "password_mismatch":_("دو پسورد های ورودی باهم مطابقت ندارند ..")
+    }
+
