@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/customer_profile_edit.css' %}">
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-container">
+
+        <!-- Header -->
+
+        <div class="profile-top">
+
+            <a href="{% url 'dashboard:home' %}" class="back-button">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت
+
+            </a>
+
+            <div class="page-title">
+
+                <h1>تنظیمات پروفایل</h1>
+
+                <p>
+
+                    اطلاعات شخصی و تصویر پروفایل خود را مدیریت کنید.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Card -->
+
+        <div class="profile-card">
+
+            <!-- Right Side -->
+
+            <div class="profile-image-side">
+
+                <div class="avatar-box">
+
+                    {% if object.image %}
+
+                        <img src="{{object.image.url }}" alt="profile">
+
+                    {% else %}
+
+                        <i class="fa-solid fa-user"></i>
+
+                    {% endif %}
+
+                </div>
+
+                <h3>تصویر پروفایل</h3>
+
+            </div>
+
+            <!-- Left Side -->
+
+            <div class="profile-form-side">
+
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <!-- Image -->
+
+                    <div class="input-box">
+
+                        <label>
+
+                            <i class="fa-solid fa-camera"></i>
+
+                            تصویر پروفایل
+
+                        </label>
+
+                        <input
+                            type="file"
+                            name="image">
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="input-box">
+
+                        <label>
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            ایمیل
+
+                        </label>
+
+                        <div class="disabled-input">
+
+                            <input
+                                type="email"
+                                value="{{ request.user.email }}"
+                                readonly>
+
+                            <span>
+
+                                <i class="fa-solid fa-lock"></i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- First Name -->
+
+                    <div class="input-box">
+
+                        <label>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            نام
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="first_name"
+                            value="{{ object.first_name }}"
+                            placeholder="نام خود را وارد کنید">
+
+                    </div>
+
+                    <!-- Last Name -->
+
+                    <div class="input-box">
+
+                        <label>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            نام خانوادگی
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            value="{{ object.last_name }}"
+                            placeholder="نام خانوادگی خود را وارد کنید">
+
+                    </div>
+
+                    <!-- Phone -->
+
+                    <div class="input-box">
+
+                        <label>
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            شماره تلفن
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone_number"
+                            value="{{ object.phone_number }}"
+                            placeholder="09123456789">
+
+                    </div>
+
+                    {% if form.errors %}
+
+                        <div class="form-errors">
+
+                            {% for field in form %}
+
+                                {% for error in field.errors %}
+
+                                    <p>{{ error }}</p>
+
+                                {% endfor %}
+
+                            {% endfor %}
+
+                            {% for error in form.non_field_errors %}
+
+                                <p>{{ error }}</p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                    <div class="save-area">
+
+                        <button
+                            type="submit"
+                            class="save-btn">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            ذخیره تغییرات
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

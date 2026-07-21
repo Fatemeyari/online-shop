@@ -20,17 +20,27 @@
 
     <aside class="admin-sidebar">
 
-        <div class="admin-profile">
+       <div class="admin-profile">
 
             <div class="admin-avatar">
 
-                <i class="fa-solid fa-user-shield"></i>
+                {% if request.user.user_profile.image %}
+
+                    <img
+                        src="{{ request.user.user_profile.image.url }}"
+                        alt="{{ request.user.user_profile.get_fullname }}">
+
+                {% else %}
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                {% endif %}
 
             </div>
 
             <h2>
 
-                {{request.user.first_name}}{{request.user.last_name}}
+                {{ request.user.user_profile.get_fullname }}
 
             </h2>
 
@@ -39,7 +49,6 @@
                 مدیر فروشگاه
 
             </span>
-
         </div>
 
 
@@ -58,7 +67,7 @@
 
             </a>
 
-            <a href="#">
+            <a href="{% url 'dashboard:admin:profile-edit' %}">
 
                 <i class="fa-solid fa-user-gear"></i>
 

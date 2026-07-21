@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from dashboard.permissions import HasCustomerAccessPermission
 from accounts.models import User , Profile
-from dashboard.customer.forms import CustomerPasswordChangeForm 
+from dashboard.customer.forms import CustomerPasswordChangeForm ,CustomerProfileEditForm
 
 class CustomerDashboardHomeView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
     template_name="dashboard/customer/home.html"
@@ -20,6 +20,16 @@ class CustomSecurityEditView(LoginRequiredMixin,HasCustomerAccessPermission,Succ
 
     def form_invalid(delf , form):
         return super().form_invalid(form)
+
+
+class CustomProfileEditView(LoginRequiredMixin,HasCustomerAccessPermission,SuccessMessageMixin,UpdateView):
+    template_name="dashboard/admin/profile_edit.html"
+    form_class = CustomerProfileEditForm
+    success_url = reverse_lazy("dashboard:customer:profile-edit")
+    success_message= "به روزرسانی پروفایل  با موفقیت انجام شد."
+
+    def get_object(self, queryset=None):
+        return Profile.objects.get(user=self.request.user)
 
 
 

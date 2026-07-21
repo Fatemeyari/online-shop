@@ -10,3 +10,14 @@ class CustomerPasswordChangeForm(auth_forms.PasswordChangeForm):
         ),
         "password_mismatch":_("دو پسورد های ورودی باهم مطابقت ندارند ..")
     }
+
+class CustomerProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields =[
+            "image",
+            "first_name",
+            "last_name",
+            "phone_number",
+            
+        ]
