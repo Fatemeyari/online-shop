@@ -1,1 +1,281 @@
-<h1>hi customer</h1>
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/customer_home.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+<div class="dashboard-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="profile-box">
+
+            <div class="profile-avatar">
+
+                    {% if request.user.user_profile.image %}
+                        <img
+                            src="{{ request.user.user_profile.image.url }}"
+                            alt="Profile Image">
+                    {% else %}
+                        <i class="fa-solid fa-user"></i>
+                    {% endif %}
+
+            </div>
+
+            <h3>
+                {{ request.user.user_profile.get_fullname }}
+            </h3>
+
+            <span>
+                {{ request.user.email }}
+            </span>
+
+    </div>
+
+
+        <div class="sidebar-menu">
+
+            <a href="#" class="active">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>داشبورد</span>
+
+            </a>
+
+
+            <a href="#">
+
+                <i class="fa-solid fa-user-gear"></i>
+
+                <span>تنظیمات پروفایل</span>
+
+            </a>
+
+
+            <a href="{% url 'dashboard:customer:security-edit' %}">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>امنیت</span>
+
+            </a>
+
+
+            <a href="#">
+
+                <i class="fa-solid fa-box"></i>
+
+                <span>سفارشات شما</span>
+
+            </a>
+
+
+            <a href="#">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span>لیست علاقه‌مندی‌ها</span>
+
+            </a>
+
+
+            <a href="#">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>نشانی‌ها</span>
+
+            </a>
+
+
+            <hr>
+
+
+            <a href="{% url 'accounts:logout' %}" class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>خروج</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="dashboard-content">
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <h1>
+
+                    سلام
+                    {{request.user.first_name}}
+                    👋
+
+                </h1>
+
+                <p>
+
+                    خوش اومدی، مدیریت حساب کاربری از این قسمت انجام میشه.
+
+                </p>
+
+            </div>
+
+            <div class="dashboard-badge">
+
+                <i class="fa-solid fa-crown"></i>
+
+                حساب کاربری
+
+            </div>
+
+        </div>
+
+
+
+       
+         
+            <!-- ================= ACCOUNT ================= -->
+
+            <div class="dashboard-card">
+
+                <div class="card-title">
+
+                    <h3>
+
+                        اطلاعات حساب
+
+                    </h3>
+
+                </div>
+
+                <ul class="account-info">
+
+                    <li>
+
+                        <span>
+
+                            نام
+
+                        </span>
+
+                        <strong>
+
+                            {{ request.user.user_profile.first_name }}
+
+                        </strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>
+
+                            نام خانوادگی
+
+                        </span>
+
+                        <strong>
+
+                            {{request.user.user_profile.last_name}}
+
+                        </strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>
+
+                            ایمیل
+
+                        </span>
+
+                        <strong>
+
+                            {{request.user.user_profile.email}}
+
+                        </strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>
+
+                            نام کاربری
+
+                        </span>
+
+                        <strong>
+
+                            {{ request.user.user_profile.get_fullname }}
+
+                        </strong>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SYSTEM MESSAGE ================= -->
+
+        <div class="dashboard-card system-card">
+
+            <div class="system-icon">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    اطلاعیه
+
+                </h4>
+
+                <p>
+
+                    برای افزایش امنیت حساب کاربری، پیشنهاد می‌شود
+                    رمز عبور خود را هر چند وقت یکبار تغییر دهید.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</section>
+
+{% endblock %}

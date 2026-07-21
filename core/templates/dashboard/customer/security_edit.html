@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/customer_security_edit.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="security-page">
+
+    <div class="security-container">
+
+        <div class="security-card">
+
+            <div class="security-header">
+
+                <div class="security-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <h2>تغییر رمز عبور</h2>
+
+                <p>
+                    برای افزایش امنیت حساب کاربری، رمز عبور جدیدی انتخاب کنید.
+                </p>
+
+            </div>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label>رمز عبور فعلی</label>
+
+                    <input
+                        type="password"
+                        name="old_password"
+                        placeholder="رمز عبور فعلی">
+
+                    {% if form.old_password.errors %}
+                        <small class="form-error">
+                            {{ form.old_password.errors.0 }}
+                        </small>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>رمز عبور جدید</label>
+
+                    <input
+                        type="password"
+                        name="new_password1"
+                        placeholder="رمز عبور جدید">
+
+                    {% if form.new_password1.errors %}
+                        <small class="form-error">
+                            {{ form.new_password1.errors.0 }}
+                        </small>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>تکرار رمز عبور جدید</label>
+
+                    <input
+                        type="password"
+                        name="new_password2"
+                        placeholder="تکرار رمز عبور جدید">
+
+                    {% if form.new_password2.errors %}
+                        <small class="form-error">
+                            {{ form.new_password2.errors.0 }}
+                        </small>
+                    {% endif %}
+
+                </div>
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>{{ error }}</p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+                <button type="submit" class="change-password-btn">
+
+                    <i class="fa-solid fa-key"></i>
+
+                    تغییر رمز عبور
+
+                </button>
+                <a href="{% url 'dashboard:home' %}" class="back-btn">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    بازگشت به داشبورد
+
+                </a>
+                                
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

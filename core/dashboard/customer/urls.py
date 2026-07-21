@@ -6,5 +6,5 @@ app_name ='customer'
 
 urlpatterns = [
    path('home/' , views.CustomerDashboardHomeView.as_view() , name="home"),
-  
+   path('security-edit/' , views.CustomSecurityEditView.as_view() , name="security-edit"),
 ]
