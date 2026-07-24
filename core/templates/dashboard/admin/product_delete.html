@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet"
+      href="{% static 'css/product_delete.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="delete-page">
+
+    <div class="delete-container">
+
+        <div class="delete-card">
+
+            <div class="delete-icon">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+            </div>
+
+            <h1>
+
+                حذف محصول
+
+            </h1>
+
+            <p class="delete-text">
+
+                آیا از حذف این محصول اطمینان دارید؟
+
+            </p>
+
+            <div class="product-box">
+
+                <div class="product-item">
+
+                    <span>
+
+                        عنوان محصول
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.title }}
+
+                    </strong>
+
+                </div>
+
+                <div class="product-item">
+
+                    <span>
+
+                        شناسه محصول
+
+                    </span>
+
+                    <strong>
+
+                        #{{ object.id }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="warning-box">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>
+
+                    پس از حذف، امکان بازگردانی این محصول وجود ندارد.
+
+                </span>
+
+            </div>
+
+            <form method="post">
+
+                {% csrf_token %}
+                                <div class="delete-actions">
+
+                    <a href="{% url 'dashboard:admin:product-edit' object.pk %}"
+                       class="cancel-btn">
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                        بازگشت
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="delete-btn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        حذف محصول
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

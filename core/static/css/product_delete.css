@@ -1,0 +1,554 @@
+/*======================================================
+                    ROOT
+======================================================*/
+
+:root{
+
+    --primary:#ff7a18;
+    --danger:#ef4444;
+    --danger-dark:#dc2626;
+    --danger-light:#fef2f2;
+
+    --success:#10b981;
+
+    --text:#1f2937;
+    --muted:#6b7280;
+
+    --border:#e8edf3;
+
+    --background:#f7f9fc;
+
+    --card:#ffffff;
+
+}
+
+
+
+/*======================================================
+                    PAGE
+======================================================*/
+
+.delete-page{
+
+    min-height:85vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:50px 20px;
+
+    background:var(--background);
+
+}
+
+
+
+.delete-container{
+
+    width:100%;
+    max-width:700px;
+
+}
+
+
+
+/*======================================================
+                    CARD
+======================================================*/
+
+.delete-card{
+
+    background:var(--card);
+
+    border-radius:28px;
+
+    padding:45px;
+
+    border:1px solid var(--border);
+
+    box-shadow:0 20px 45px rgba(15,23,42,.06);
+
+    text-align:center;
+
+}
+
+
+
+/*======================================================
+                    ICON
+======================================================*/
+
+.delete-icon{
+
+    width:95px;
+
+    height:95px;
+
+    margin:auto auto 25px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--danger-light);
+
+    color:var(--danger);
+
+    font-size:38px;
+
+}
+
+
+
+/*======================================================
+                    TITLE
+======================================================*/
+
+.delete-card h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#111827;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.delete-text{
+
+    color:var(--muted);
+
+    font-size:16px;
+
+    margin-bottom:35px;
+
+    line-height:1.9;
+
+}
+/*======================================================
+                PRODUCT INFO BOX
+======================================================*/
+
+.product-box{
+
+    background:#fafbfd;
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:24px;
+
+    margin-bottom:28px;
+
+}
+
+
+
+.product-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 0;
+
+}
+
+
+
+.product-item:not(:last-child){
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+
+.product-item span{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+
+.product-item strong{
+
+    color:var(--text);
+
+    font-size:16px;
+
+    font-weight:800;
+
+}
+
+
+
+/*======================================================
+                    WARNING
+======================================================*/
+
+.warning-box{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    background:#fff7ed;
+
+    color:#b45309;
+
+    border:1px solid #fed7aa;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:35px;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+
+.warning-box i{
+
+    font-size:20px;
+
+    flex-shrink:0;
+
+}
+
+
+
+/*======================================================
+                    ACTIONS
+======================================================*/
+
+.delete-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin-top:10px;
+
+}
+
+
+
+/*======================================================
+                BACK BUTTON
+======================================================*/
+
+.cancel-btn{
+
+    flex:1;
+
+    height:58px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:#fff;
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+
+
+.cancel-btn:hover{
+
+    background:#f8fafc;
+
+    border-color:#d6dde6;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/*======================================================
+                DELETE BUTTON
+======================================================*/
+
+.delete-btn{
+
+    flex:1;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+    color:#fff;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 15px 35px rgba(239,68,68,.25);
+
+}
+
+
+
+.delete-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 22px 45px rgba(239,68,68,.35);
+
+}
+
+
+
+.delete-btn:active{
+
+    transform:scale(.98);
+
+}
+/*======================================================
+                    HOVER EFFECTS
+======================================================*/
+
+.delete-card{
+
+    transition:.35s;
+
+}
+
+.delete-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 28px 60px rgba(15,23,42,.08);
+
+}
+
+
+
+/*======================================================
+                    ANIMATION
+======================================================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.delete-card{
+
+    animation:fadeUp .45s ease;
+
+}
+
+
+
+/*======================================================
+                    SCROLLBAR
+======================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef2f7;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cfd8e3;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#b6c2cf;
+
+}
+
+
+
+/*======================================================
+                    RESPONSIVE
+======================================================*/
+
+@media(max-width:768px){
+
+    .delete-card{
+
+        padding:35px 24px;
+
+    }
+
+    .delete-card h1{
+
+        font-size:28px;
+
+    }
+
+    .delete-text{
+
+        font-size:15px;
+
+    }
+
+    .product-item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:8px;
+
+    }
+
+    .warning-box{
+
+        justify-content:flex-start;
+
+        text-align:right;
+
+    }
+
+    .delete-actions{
+
+        flex-direction:column;
+
+    }
+
+    .cancel-btn,
+
+    .delete-btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+
+@media(max-width:480px){
+
+    .delete-page{
+
+        padding:30px 15px;
+
+    }
+
+    .delete-card{
+
+        border-radius:22px;
+
+        padding:28px 18px;
+
+    }
+
+    .delete-icon{
+
+        width:80px;
+
+        height:80px;
+
+        font-size:32px;
+
+    }
+
+    .delete-card h1{
+
+        font-size:24px;
+
+    }
+
+    .product-box{
+
+        padding:18px;
+
+    }
+
+}

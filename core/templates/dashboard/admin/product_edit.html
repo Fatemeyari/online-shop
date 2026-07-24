@@ -263,36 +263,43 @@
 
         <div class="action-box">
 
-            <div class="left-actions">
+        <div class="left-actions">
 
-                <a href="{% url 'dashboard:admin:product-list' %}"
-                   class="cancel-btn">
+            <a href="{% url 'dashboard:admin:product-list' %}"
+            class="cancel-btn">
 
-                    <i class="fa-solid fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right"></i>
 
-                    انصراف
+                انصراف
 
-                </a>
-
-            </div>
-
-            <div class="right-actions">
-
-                <button
-                    type="submit"
-                    class="save-btn">
-
-                    <i class="fa-solid fa-floppy-disk"></i>
-
-                    ذخیره تغییرات
-
-                </button>
-
-            </div>
+            </a>
 
         </div>
 
-    </form>
+        <div class="right-actions">
+
+            <a href="{% url 'dashboard:admin:product-delete' object.id %}"
+            class="delete-btn">
+
+                <i class="fa-solid fa-trash"></i>
+
+                حذف محصول
+
+            </a>
+
+            <button
+                type="submit"
+                class="save-btn">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                ذخیره تغییرات
+
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
