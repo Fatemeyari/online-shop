@@ -1,0 +1,1318 @@
+/* ================= ADMIN PRODUCT PAGE RESET ================= */
+.admin-product-page{
+
+    width:100%;
+
+    min-height:100vh;
+
+    background:#f6f7fb;
+
+    padding:40px 0 80px;
+
+    direction:rtl;
+
+}
+
+.admin-product-page *{
+
+    box-sizing:border-box;
+
+    font-family:"Vazirmatn", sans-serif;
+
+}
+
+.admin-product-container{
+
+    width:min(1400px,92%);
+
+    margin:auto;
+
+}
+
+/* ================= HEADER ================= */
+
+.admin-product-header{
+
+
+    background:#ffffff;
+
+
+    border-radius:24px;
+
+
+    padding:35px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    margin-bottom:30px;
+
+
+    box-shadow:
+
+    0 10px 35px rgba(0,0,0,.05);
+
+
+}
+
+.admin-product-header-info h1{
+
+
+    font-size:34px;
+
+
+    font-weight:900;
+
+
+    color:#222;
+
+
+    margin-bottom:8px;
+
+
+}
+
+.admin-product-header-info p{
+
+
+    color:#777;
+
+
+    font-size:15px;
+
+
+}
+
+/* ================= ADD PRODUCT BUTTON ================= */
+
+.admin-product-add-btn{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ff8a00,
+        #ff5500
+    );
+
+
+    color:#fff;
+
+
+    padding:14px 28px;
+
+
+    border-radius:14px;
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+    transition:.3s;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(255,106,0,.25);
+
+
+}
+
+.admin-product-add-btn:hover{
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(255,106,0,.35);
+
+
+}
+
+
+.admin-product-add-btn i{
+
+
+    font-size:16px;
+
+
+}
+
+/* ================= FILTER BOX ================= */
+
+
+.admin-product-filter-box{
+
+
+    background:#fff;
+
+
+    border-radius:24px;
+
+
+    padding:30px;
+
+
+    margin-bottom:30px;
+
+
+    box-shadow:
+
+    0 10px 35px rgba(0,0,0,.05);
+
+
+}
+
+
+.admin-product-filter-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:22px;
+
+
+}
+
+.admin-product-field{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:8px;
+
+
+}
+
+.admin-product-field label{
+
+
+    font-size:14px;
+
+
+    color:#444;
+
+
+    font-weight:700;
+
+
+}
+
+.admin-product-field input,
+.admin-product-field select{
+
+
+    width:100%;
+
+
+    height:50px;
+
+
+    border:1px solid #e5e7eb;
+
+
+    border-radius:12px;
+
+
+    padding:0 15px;
+
+
+    background:#fafafa;
+
+
+    outline:none;
+
+
+    font-size:14px;
+
+
+    transition:.3s;
+
+
+}
+
+.admin-product-field input:focus,
+.admin-product-field select:focus{
+
+
+    border-color:#ff6a00;
+
+
+    background:#fff;
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(255,106,0,.12);
+
+
+}
+
+/* ================= FILTER BUTTONS ================= */
+
+
+.admin-product-filter-actions{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+    margin-top:25px;
+
+
+}
+
+.admin-product-filter-btn{
+
+
+    height:50px;
+
+
+    padding:0 28px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    background:#ff6a00;
+
+
+    color:#fff;
+
+
+    cursor:pointer;
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    transition:.3s;
+
+
+}
+
+.admin-product-filter-btn:hover{
+
+
+    background:#e85d00;
+
+
+    transform:translateY(-2px);
+
+
+}
+
+.admin-product-reset-btn{
+
+
+    height:50px;
+
+
+    padding:0 28px;
+
+
+    border-radius:14px;
+
+
+    background:#f1f3f5;
+
+
+    color:#555;
+
+
+    font-weight:700;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    transition:.3s;
+
+
+}
+
+.admin-product-reset-btn:hover{
+
+
+    background:#222;
+
+
+    color:#fff;
+
+
+}
+
+/* ================= STAT CARD ================= */
+
+.admin-product-stat-wrapper{
+
+
+    margin-bottom:30px;
+
+
+}
+
+.admin-product-stat-card{
+
+
+    width:280px;
+
+
+    background:#fff;
+
+
+    border-radius:22px;
+
+
+    padding:22px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:18px;
+
+
+    box-shadow:
+
+
+    0 10px 30px rgba(0,0,0,.05);
+
+
+}
+
+.admin-product-stat-icon{
+
+
+    width:65px;
+
+
+    height:65px;
+
+
+    border-radius:18px;
+
+
+    background:#fff1e8;
+
+
+    color:#ff6a00;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:26px;
+
+
+}
+
+.admin-product-stat-content span{
+
+
+    display:block;
+
+
+    color:#777;
+
+
+    font-size:14px;
+
+
+    margin-bottom:5px;
+
+
+}
+
+
+.admin-product-stat-content strong{
+
+
+    font-size:28px;
+
+
+    font-weight:900;
+
+
+    color:#222;
+
+}
+
+/* ================= PRODUCT GRID ================= */
+
+.admin-product-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fill,minmax(300px,1fr));
+
+
+    gap:25px;
+
+
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.admin-product-card{
+
+
+    background:#fff;
+
+
+    border-radius:24px;
+
+
+    overflow:hidden;
+
+
+    box-shadow:
+
+
+    0 10px 30px rgba(0,0,0,.06);
+
+
+    transition:.3s;
+
+
+}
+
+.admin-product-card:hover{
+
+
+    transform:translateY(-6px);
+
+
+    box-shadow:
+
+
+    0 18px 40px rgba(0,0,0,.12);
+
+
+}
+
+
+/* PRODUCT IMAGE */
+
+
+.admin-product-image{
+
+
+    height:240px;
+
+
+    background:#fafafa;
+
+
+    position:relative;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    padding:25px;
+
+
+}
+
+.admin-product-image img{
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:contain;
+
+
+}
+
+/* STATUS */
+
+
+.admin-product-status{
+
+
+    position:absolute;
+
+
+    top:15px;
+
+
+    right:15px;
+
+
+    padding:6px 14px;
+
+
+    border-radius:30px;
+
+
+    font-size:12px;
+
+
+    font-weight:700;
+
+
+}
+
+
+.admin-product-status.published{
+
+
+    background:#dcfce7;
+
+
+    color:#16a34a;
+
+
+}
+
+.admin-product-status.draft{
+
+
+    background:#ffedd5;
+
+
+    color:#ea580c;
+
+
+}
+
+/* ================= PRODUCT CONTENT ================= */
+
+.admin-product-content{
+
+
+    padding:22px;
+
+
+}
+
+.admin-product-content h3{
+
+
+    font-size:19px;
+
+
+    font-weight:900;
+
+
+    color:#222;
+
+
+    margin-bottom:15px;
+
+
+    line-height:1.8;
+
+
+}
+
+/* CATEGORY */
+
+
+.admin-product-category{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:8px;
+
+
+    color:#777;
+
+
+    font-size:14px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+.admin-product-category i{
+
+
+    color:#ff6a00;
+
+
+}
+
+/* INFO ROW */
+
+
+.admin-product-info{
+
+
+    height:48px;
+
+
+    background:#f8f9fa;
+
+
+    border-radius:12px;
+
+
+    padding:0 15px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    margin-bottom:12px;
+
+
+}
+
+.admin-product-info span{
+
+
+    color:#777;
+
+
+    font-size:14px;
+
+
+}
+
+.admin-product-info strong{
+
+
+    font-size:16px;
+
+
+    font-weight:800;
+
+
+    color:#222;
+
+
+}
+
+.admin-product-info .admin-product-price{
+
+
+    color:#ff6a00;
+
+
+}
+
+/* ================= ACTION BUTTONS ================= */
+
+.admin-product-actions{
+
+
+    display:grid;
+
+
+    grid-template-columns:repeat(3,1fr);
+
+
+    gap:10px;
+
+
+    margin-top:22px;
+
+
+}
+
+.admin-product-actions a{
+
+
+    height:40px;
+
+
+    border-radius:12px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:6px;
+
+
+    font-size:13px;
+
+
+    font-weight:700;
+
+
+    transition:.3s;
+
+
+}
+
+/* VIEW BUTTON */
+
+
+.admin-product-view-btn{
+
+
+    background:#eff6ff;
+
+
+    color:#2563eb;
+
+
+}
+.admin-product-view-btn:hover{
+
+
+    background:#2563eb;
+
+
+    color:#fff;
+
+
+}
+/* EDIT BUTTON */
+
+
+.admin-product-edit-btn{
+
+
+    background:#fff7ed;
+
+
+    color:#ea580c;
+
+
+}
+
+.admin-product-edit-btn:hover{
+
+
+    background:#ea580c;
+
+
+    color:#fff;
+
+
+}
+
+/* DELETE BUTTON */
+
+
+.admin-product-delete-btn{
+
+
+    background:#fef2f2;
+
+
+    color:#dc2626;
+
+
+}
+.admin-product-delete-btn:hover{
+
+
+    background:#dc2626;
+
+
+    color:#fff;
+
+
+}
+
+/* ================= EMPTY PRODUCT ================= */
+
+
+.admin-product-empty{
+
+
+    grid-column:1/-1;
+
+
+    background:#fff;
+
+
+    border-radius:24px;
+
+
+    padding:70px 20px;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+
+    0 10px 30px rgba(0,0,0,.05);
+
+
+}
+.admin-product-empty i{
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    margin:0 auto 20px;
+
+
+    background:#fff1e8;
+
+
+    color:#ff6a00;
+
+
+    font-size:40px;
+
+
+}
+
+.admin-product-empty h2{
+
+
+    font-size:25px;
+
+
+    font-weight:900;
+
+
+    margin-bottom:10px;
+
+
+}
+
+.admin-product-empty p{
+
+
+    color:#777;
+
+
+}
+
+/* ================= PAGINATION ================= */
+
+
+.admin-product-pagination{
+
+
+    margin-top:45px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+}
+.admin-product-pagination a,
+.admin-product-pagination span{
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+    border-radius:14px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-weight:700;
+
+
+    transition:.3s;
+
+
+}
+
+.admin-product-pagination a{
+
+
+    background:#fff;
+
+
+    color:#555;
+
+
+    box-shadow:
+
+
+    0 8px 25px rgba(0,0,0,.06);
+
+
+}
+
+.admin-product-pagination a:hover{
+
+
+    background:#ff6a00;
+
+
+    color:#fff;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+.admin-product-pagination .active{
+
+
+    background:#ff6a00;
+
+
+    color:#fff;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(255,106,0,.25);
+
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+
+
+    .admin-product-filter-grid{
+
+
+        grid-template-columns:repeat(2,1fr);
+
+
+    }
+
+
+
+
+}
+
+@media(max-width:850px){
+
+
+
+    .admin-product-header{
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+        gap:20px;
+
+
+    }
+
+    .admin-product-add-btn{
+
+
+        width:100%;
+
+
+        justify-content:center;
+
+
+    }
+
+    .admin-product-filter-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+    .admin-product-filter-actions{
+
+
+        flex-direction:column;
+
+
+    }
+
+    .admin-product-filter-btn,
+    .admin-product-reset-btn{
+
+
+        width:100%;
+
+
+    }
+
+    .admin-product-stat-card{
+
+
+        width:100%;
+
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+
+
+    .admin-product-page{
+
+
+        padding-top:20px;
+
+
+    }
+
+    .admin-product-container{
+
+
+        width:94%;
+
+
+    }
+
+    .admin-product-header{
+
+
+        padding:25px;
+
+
+        border-radius:20px;
+
+
+    }
+
+    .admin-product-header-info h1{
+
+
+        font-size:26px;
+
+
+    }
+
+    .admin-product-filter-box{
+
+
+        padding:20px;
+
+
+    }
+
+    .admin-product-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+    .admin-product-actions{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+    .admin-product-pagination{
+
+
+        gap:7px;
+
+
+    }
+
+    .admin-product-pagination a,
+    .admin-product-pagination span{
+
+
+        width:38px;
+
+
+        height:38px;
+
+
+    }
+
+}
+
+/* ================= SCROLLBAR ================= */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+::-webkit-scrollbar-track{
+
+
+    background:#f1f1f1;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#ff6a00;
+
+
+    border-radius:30px;
+
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:#e85d00;
+
+
+}
