@@ -1,0 +1,1294 @@
+/* ==========================================
+                Root
+========================================== */
+
+:root{
+
+    --primary:#ff7a18;
+    --primary-dark:#ff6200;
+    --primary-light:#fff5ec;
+
+    --success:#16c47f;
+    --danger:#ef4444;
+
+    --text:#1f2937;
+    --muted:#6b7280;
+
+    --border:#edf1f5;
+
+    --card:#ffffff;
+    --background:#f7f9fc;
+
+    --radius:22px;
+
+}
+
+
+
+/* ==========================================
+                Reset
+========================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+body{
+
+    background:var(--background);
+
+    font-family:Vazirmatn,sans-serif;
+
+    color:var(--text);
+
+}
+
+
+
+/* ==========================================
+            Page
+========================================== */
+
+.product-edit-page{
+
+    width:min(1450px,95%);
+
+    margin:40px auto 70px;
+
+}
+
+
+
+/* ==========================================
+            Header
+========================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+}
+
+
+
+.page-icon{
+
+    width:78px;
+
+    height:78px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    color:#fff;
+
+    background:linear-gradient(135deg,#ff9940,#ff6200);
+
+    box-shadow:0 18px 40px rgba(255,122,24,.25);
+
+}
+
+
+
+.page-header h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+}
+
+
+
+.page-header p{
+
+    color:var(--muted);
+
+}
+
+
+
+/* ==========================================
+            Buttons
+========================================== */
+
+.back-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    padding:14px 26px;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+
+
+.back-btn:hover{
+
+    background:var(--primary-light);
+
+    border-color:#ffd5b6;
+
+}
+
+
+
+/* ==========================================
+            Grid
+========================================== */
+
+.edit-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:28px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+/* ==========================================
+            Cards
+========================================== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    border:1px solid var(--border);
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.04);
+
+}
+
+
+
+.card-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:24px 30px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+
+.card-header i{
+
+    width:46px;
+
+    height:46px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:14px;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    font-size:18px;
+
+}
+
+
+
+.card-header h3{
+
+    font-size:20px;
+
+    font-weight:800;
+
+}
+
+
+
+.card-body{
+
+    padding:30px;
+
+}
+/* ==========================================
+                Form
+========================================== */
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:22px;
+
+    margin-bottom:22px;
+
+}
+
+.form-row.two-column{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.form-row.three-column{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#374151;
+
+}
+
+
+
+/* ==========================================
+                Inputs
+========================================== */
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea{
+
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:#fafbfd;
+
+    border-radius:16px;
+
+    padding:16px 18px;
+
+    font-size:15px;
+
+    font-family:inherit;
+
+    color:var(--text);
+
+    transition:.25s;
+
+    outline:none;
+
+}
+
+
+
+.form-group textarea{
+
+    min-height:180px;
+
+    resize:vertical;
+
+    line-height:1.9;
+
+}
+
+
+
+/* ==========================================
+                Focus
+========================================== */
+
+.form-group input:focus,
+
+.form-group select:focus,
+
+.form-group textarea:focus{
+
+    border-color:var(--primary);
+
+    background:#fff;
+
+    box-shadow:0 0 0 5px rgba(255,122,24,.10);
+
+}
+
+
+
+/* ==========================================
+                Placeholder
+========================================== */
+
+.form-group input::placeholder,
+
+.form-group textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+
+
+/* ==========================================
+                Select
+========================================== */
+
+.form-group select{
+
+    cursor:pointer;
+
+    appearance:none;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:left 18px center;
+
+    background-size:18px;
+
+    padding-left:48px;
+
+}
+
+
+
+/* ==========================================
+            Disabled
+========================================== */
+
+.form-group input:disabled,
+
+.form-group textarea:disabled,
+
+.form-group select:disabled{
+
+    background:#f3f4f6;
+
+    cursor:not-allowed;
+
+    opacity:.7;
+
+}
+
+
+
+/* ==========================================
+            Error Style
+========================================== */
+
+.errorlist{
+
+    list-style:none;
+
+    margin-top:8px;
+
+    color:#dc2626;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.errorlist li{
+
+    margin-top:4px;
+
+}
+/* ==========================================
+                Image Card
+========================================== */
+
+.image-card{
+
+    position:sticky;
+
+    top:30px;
+
+}
+
+
+
+/* ==========================================
+            Preview
+========================================== */
+
+.image-preview{
+
+    width:100%;
+
+    height:280px;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    border:2px dashed #dbe3ec;
+
+    background:#fafbfd;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+    transition:.3s;
+
+}
+
+
+
+.image-preview:hover{
+
+    border-color:var(--primary);
+
+    background:#fffaf6;
+
+}
+
+
+
+.image-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+/* ==========================================
+            Empty Image
+========================================== */
+
+.no-image{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:16px;
+
+    color:#94a3b8;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+
+
+.no-image i{
+
+    font-size:70px;
+
+    color:#cbd5e1;
+
+}
+
+
+
+.no-image span{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ==========================================
+            Upload Box
+========================================== */
+
+.upload-box{
+
+    position:relative;
+
+}
+
+
+
+.upload-box label{
+
+    width:100%;
+
+    height:150px;
+
+    border:2px dashed #d7dee8;
+
+    border-radius:22px;
+
+    background:#fcfcfd;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    transition:.3s;
+
+}
+
+
+
+.upload-box label:hover{
+
+    border-color:var(--primary);
+
+    background:#fff8f3;
+
+}
+
+
+
+.upload-box label i{
+
+    font-size:42px;
+
+    color:var(--primary);
+
+}
+
+
+
+.upload-box label span{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#374151;
+
+}
+
+
+
+/* ==========================================
+            File Input
+========================================== */
+
+.upload-box input[type=file]{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    opacity:0;
+
+    cursor:pointer;
+
+}
+
+
+
+/* ==========================================
+            Upload Help
+========================================== */
+
+.upload-help{
+
+    display:block;
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:#9ca3af;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ==========================================
+            Upload Animation
+========================================== */
+
+.upload-box label{
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+
+
+.upload-box label::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    background:rgba(255,122,24,.08);
+
+    border-radius:50%;
+
+    top:-90px;
+
+    left:-90px;
+
+    transform:scale(0);
+
+    transition:.45s;
+
+}
+
+
+
+.upload-box label:hover::before{
+
+    transform:scale(6);
+
+}
+
+
+
+.upload-box label>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+/* ==========================================
+                Action Box
+========================================== */
+
+.action-box{
+
+    margin-top:35px;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:24px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.05);
+
+}
+
+
+
+.left-actions,
+
+.right-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+
+
+/* ==========================================
+                Save Button
+========================================== */
+
+.save-btn{
+
+    border:none;
+
+    height:56px;
+
+    padding:0 34px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#ff923d,#ff6200);
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 15px 35px rgba(255,122,24,.20);
+
+}
+
+
+
+.save-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 22px 40px rgba(255,122,24,.28);
+
+}
+
+
+
+.save-btn:active{
+
+    transform:scale(.98);
+
+}
+
+
+
+/* ==========================================
+                Cancel Button
+========================================== */
+
+.cancel-btn{
+
+    height:56px;
+
+    padding:0 30px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:#fff;
+
+    color:#374151;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+
+
+.cancel-btn:hover{
+
+    background:#f8fafc;
+
+    border-color:#d7dee8;
+
+}
+
+
+
+/* ==========================================
+                Delete Button
+========================================== */
+
+.delete-btn{
+
+    height:56px;
+
+    padding:0 28px;
+
+    border-radius:16px;
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    border:1px solid #fecaca;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+    color:#fff;
+
+}
+
+
+
+/* ==========================================
+                Card Hover
+========================================== */
+
+.card{
+
+    transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 22px 45px rgba(15,23,42,.08);
+
+}
+
+
+
+/* ==========================================
+                Responsive
+========================================== */
+
+@media(max-width:1200px){
+
+    .edit-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .image-card{
+
+        position:static;
+
+    }
+
+}
+
+
+
+@media(max-width:992px){
+
+    .form-row.two-column{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .form-row.three-column{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+    .header-left{
+
+        align-items:flex-start;
+
+    }
+
+    .page-icon{
+
+        width:64px;
+
+        height:64px;
+
+        font-size:22px;
+
+    }
+
+    .page-header h1{
+
+        font-size:28px;
+
+    }
+
+    .action-box{
+
+        flex-direction:column;
+
+        gap:18px;
+
+        align-items:stretch;
+
+    }
+
+    .left-actions,
+
+    .right-actions{
+
+        width:100%;
+
+    }
+
+    .save-btn,
+
+    .cancel-btn,
+
+    .delete-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+
+
+
+@media(max-width:576px){
+
+    .product-edit-page{
+
+        width:94%;
+
+    }
+
+    .card-body{
+
+        padding:22px;
+
+    }
+
+    .card-header{
+
+        padding:20px 22px;
+
+    }
+
+    .image-preview{
+
+        height:220px;
+
+    }
+
+}
+/* ==========================================
+            Smooth Animation
+========================================== */
+
+.card,
+.save-btn,
+.cancel-btn,
+.delete-btn,
+.back-btn,
+.upload-box label,
+.form-group input,
+.form-group textarea,
+.form-group select{
+
+    transition:all .3s ease;
+
+}
+
+
+
+/* ==========================================
+            Selection
+========================================== */
+
+::selection{
+
+    background:#ff7a18;
+
+    color:#fff;
+
+}
+
+
+
+/* ==========================================
+            Scrollbar
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef2f7;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#d6dce5;
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#b9c4d2;
+
+}
+
+
+
+/* ==========================================
+            Autofill
+========================================== */
+
+input:-webkit-autofill{
+
+    -webkit-box-shadow:0 0 0 1000px #fafbfd inset;
+
+    -webkit-text-fill-color:#111827;
+
+}
+
+
+
+/* ==========================================
+            Input Hover
+========================================== */
+
+.form-group input:hover,
+
+.form-group textarea:hover,
+
+.form-group select:hover{
+
+    border-color:#d5dde7;
+
+}
+
+
+
+/* ==========================================
+            Image Hover
+========================================== */
+
+.image-preview img{
+
+    transition:.35s;
+
+}
+
+.image-preview:hover img{
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* ==========================================
+            Button Icons
+========================================== */
+
+.save-btn i,
+
+.cancel-btn i,
+
+.delete-btn i,
+
+.back-btn i{
+
+    transition:.25s;
+
+}
+
+.save-btn:hover i{
+
+    transform:rotate(-10deg);
+
+}
+
+.cancel-btn:hover i{
+
+    transform:translateX(5px);
+
+}
+
+.back-btn:hover i{
+
+    transform:translateX(5px);
+
+}
+
+.delete-btn:hover i{
+
+    transform:scale(1.15);
+
+}
+
+
+
+/* ==========================================
+            Fade Up
+========================================== */
+
+.card{
+
+    animation:fadeUp .45s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}

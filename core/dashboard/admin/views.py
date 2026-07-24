@@ -1,13 +1,13 @@
 from django.shortcuts import render , redirect
 from django.urls import reverse_lazy
-from django.views.generic import View , TemplateView , UpdateView , ListView
+from django.views.generic import View , TemplateView , UpdateView , ListView , UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin 
 
 from dashboard.permissions import HasAdminAccessPermission
 from accounts.models import User , Profile
-from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm
+from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm
 from shop.models import Product,ProductCategory,ProductStatusType
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
@@ -87,7 +87,11 @@ class AdminProductListView(LoginRequiredMixin,HasAdminAccessPermission,ListView)
         return context  
 
 
+class AdminProductEditView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,UpdateView):
+    template_name="dashboard/admin/product_edit.html"
+    queryset=Product.objects.all()
+    form_class=ProductForm
+    success_message="ویرایش محصول با موفقیت انجام شد."
+    def get_success_url(self):
+        return reverse_lazy("dashboard:admin:product-edit" , kwargs={"pk":self.get_object().pk}) 
 
-
-
-        

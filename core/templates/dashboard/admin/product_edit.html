@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet"
+      href="{% static 'css/product_edit.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="product-edit-page">
+
+    <div class="page-header">
+
+        <div class="header-left">
+
+            <div class="page-icon">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+            </div>
+
+            <div>
+
+                <h1>
+
+                    ویرایش محصول
+
+                </h1>
+
+                <p>
+
+                    اطلاعات محصول را بروزرسانی و مدیریت کنید.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a href="{% url 'dashboard:admin:product-list' %}"
+               class="back-btn">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <form method="post"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+
+        <div class="edit-grid">
+                        <!-- ========================= -->
+            <!-- Main Information -->
+            <!-- ========================= -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    <h3>
+
+                        اطلاعات اصلی
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+
+                                عنوان محصول
+
+                            </label>
+
+                            {{ form.title }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row two-column">
+
+                        <div class="form-group">
+
+                            <label>
+
+                                اسلاگ
+
+                            </label>
+
+                            {{ form.slug }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+
+                                دسته بندی
+
+                            </label>
+
+                            {{ form.category }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+
+                                وضعیت
+
+                            </label>
+
+                            {{ form.status }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card">
+
+            <div class="card-header">
+
+                <i class="fa-solid fa-coins"></i>
+
+                <h3>اطلاعات فروش</h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="form-row three-column">
+
+                    <div class="form-group">
+
+                        <label>قیمت</label>
+
+                        {{ form.price }}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>موجودی</label>
+
+                        {{ form.stock }}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>درصد تخفیف</label>
+
+                        {{ form.discount_percent }}
+
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>امتیاز</label>
+
+                        {{ form.avg_rate }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ========================= -->
+        <!-- Description -->
+        <!-- ========================= -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <i class="fa-solid fa-align-left"></i>
+
+                <h3>
+
+                    توضیحات محصول
+
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="form-group">
+
+                    <label>
+
+                        توضیح کوتاه
+
+                    </label>
+
+                    {{ form.short_description }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        توضیحات کامل
+
+                    </label>
+
+                    {{ form.description }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- Action Buttons -->
+        <!-- ========================= -->
+
+        <div class="action-box">
+
+            <div class="left-actions">
+
+                <a href="{% url 'dashboard:admin:product-list' %}"
+                   class="cancel-btn">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    انصراف
+
+                </a>
+
+            </div>
+
+            <div class="right-actions">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    ذخیره تغییرات
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

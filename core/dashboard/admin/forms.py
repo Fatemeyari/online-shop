@@ -3,6 +3,8 @@ from django import forms
 from django.utils.translation import gettext_lazy as _ 
 
 from accounts.models import Profile
+from shop.models import Product 
+
 class AdminPasswordChangeForm(auth_forms.PasswordChangeForm):
     error_messages={
         "password_incorrect":_(
@@ -20,4 +22,11 @@ class AdminProfileEditForm(forms.ModelForm):
             "last_name",
             "phone_number",
             
+        ]
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model=Product
+        fields=[
+            "category","title","slug","image","description","brief_description","stock","status","discount_percent","price","avg_rate"  
         ]
