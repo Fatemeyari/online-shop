@@ -1,505 +1,556 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block extra_css %}
 
 {{ block.super }}
 
-<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+<link rel="stylesheet"
+      href="{% static 'css/dashboard/admin/product_list.css' %}">
 
 {% endblock %}
 
-
-
 {% block content %}
 
+<section class="products-page">
 
-<section class="admin-product-page">
+<div class="products-container">
+
+    <!-- ================= Header ================= -->
+
+    <div class="page-header">
+
+        <div class="header-content">
+
+            <span class="page-badge">
+
+                <i class="fa-solid fa-box"></i>
+
+                مدیریت فروشگاه
+
+            </span>
+
+            <h1>
+
+                مدیریت محصولات
+
+            </h1>
+
+            <p>
+
+                تمامی محصولات فروشگاه را مشاهده، جستجو، ویرایش و مدیریت کنید.
+
+            </p>
+
+        </div>
+
+        <a href="#"
+           class="add-product-btn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            افزودن محصول
+
+        </a>
+
+    </div>
 
 
-    <div class="admin-product-container">
 
+    <!-- ================= Statistics ================= -->
 
+    <div class="stats-grid">
 
-        <!-- ================= HEADER ================= -->
+        <div class="stat-card">
 
+            <div class="stat-icon">
 
-        <div class="admin-product-header">
-
-
-            <div class="admin-product-header-info">
-
-
-                <h1>
-                    مدیریت محصولات
-                </h1>
-
-
-                <p>
-                    مشاهده، جستجو، فیلتر و مدیریت محصولات فروشگاه
-                </p>
-
+                <i class="fa-solid fa-box-open"></i>
 
             </div>
 
-            <a href="#"
-               class="admin-product-add-btn">
+            <div>
 
+                <span>
 
-                <i class="fa-solid fa-plus"></i>
+                    تعداد محصولات
 
-                افزودن محصول
+                </span>
 
+                <h2>
 
-            </a>
+                    {{ total_items }}
 
+                </h2>
+
+            </div>
 
         </div>
 
-        <!-- ================= FILTER BOX ================= -->
+        <div class="stat-card">
 
+            <div class="stat-icon success">
 
-        <div class="admin-product-filter-box">
+                <i class="fa-solid fa-check"></i>
 
+            </div>
 
-            <form method="get">
+            <div>
 
+                <span>
 
+                    محصولات منتشر شده
 
-                <div class="admin-product-filter-grid">
+                </span>
 
+                <h2>
 
+                    {{ object_list|length }}
 
-                    <!-- Search -->
+                </h2>
 
-
-                    <div class="admin-product-field">
-
-
-                        <label>
-                            جستجوی محصول
-                        </label>
-
-
-                        <input
-                            type="text"
-                            name="q"
-                            placeholder="نام محصول..."
-                            value="{{ request.GET.q }}">
-
-
-                    </div>
-
-                    <!-- Category -->
-
-
-                    <div class="admin-product-field">
-
-
-                        <label>
-                            دسته‌بندی
-                        </label>
-
-                        <select name="category">
-
-
-                            <option value="">
-                                همه دسته‌ها
-                            </option>
-
-                            {% for category in categories %}
-
-
-                                <option
-                                    value="{{ category.id }}"
-                                    {% if request.GET.category == category.id|stringformat:"s" %}
-                                        selected
-                                    {% endif %}>
-
-
-                                    {{ category.title }}
-
-
-                                </option>
-
-
-                            {% endfor %}
-
-
-                        </select>
-
-
-                    </div>
-
-                    <!-- Sort -->
-
-
-                    <div class="admin-product-field">
-
-
-                        <label>
-                            مرتب‌سازی
-                        </label>
-
-
-
-                        <select name="sort">
-
-
-                            <option value="">
-                                انتخاب کنید
-                            </option>
-
-
-                            <option value="newest">
-                                جدیدترین
-                            </option>
-
-
-                            <option value="oldest">
-                                قدیمی‌ترین
-                            </option>
-
-
-                            <option value="cheap">
-                                ارزان‌ترین
-                            </option>
-
-
-                            <option value="expensive">
-                                گران‌ترین
-                            </option>
-
-
-
-                        </select>
-
-
-                    </div>
-
-                    <!-- Min Price -->
-
-
-                    <div class="admin-product-field">
-
-
-                        <label>
-                            حداقل قیمت
-                        </label>
-
-
-                        <input
-                            type="number"
-                            name="min_price"
-                            placeholder="از..."
-                            value="{{ request.GET.min_price }}">
-
-
-                    </div>
-
-                    <!-- Max Price -->
-
-
-                    <div class="admin-product-field">
-
-
-                        <label>
-                            حداکثر قیمت
-                        </label>
-
-
-
-                        <input
-                            type="number"
-                            name="max_price"
-                            placeholder="تا..."
-                            value="{{ request.GET.max_price }}">
-
-
-                    </div>
-
-
-
-                </div>
-
-                <!-- Filter Buttons -->
-
-
-                <div class="admin-product-filter-actions">
-
-
-                    <button
-                        type="submit"
-                        class="admin-product-filter-btn">
-
-
-                        <i class="fa-solid fa-filter"></i>
-
-                        اعمال فیلتر
-
-
-                    </button>
-
-                </div>
-
-
-
-            </form>
+            </div>
 
         </div>
-        <!-- ================= PRODUCT STAT ================= -->
+
+    </div>
 
 
-        <div class="admin-product-stat-wrapper">
 
+    <!-- ================= Filter Card ================= -->
 
-            <div class="admin-product-stat-card">
+    <div class="filter-card">
 
+        <div class="filter-header">
 
-                <div class="admin-product-stat-icon">
+            <h3>
 
+                <i class="fa-solid fa-sliders"></i>
 
-                    <i class="fa-solid fa-box-open"></i>
+                جستجو و فیلتر
 
+            </h3>
+
+        </div>
+
+        <form method="get"
+              class="filter-form">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="نام محصول را جستجو کنید..."
+                    value="{{ request.GET.q }}">
+
+            </div>
+
+            <div class="filter-grid">
+                                <!-- Category -->
+
+                <div class="field">
+
+                    <label>
+
+                        دسته بندی
+
+                    </label>
+
+                    <select name="category">
+
+                        <option value="">
+
+                            همه دسته‌ها
+
+                        </option>
+
+                        {% for category in categories %}
+
+                            <option
+                                value="{{ category.id }}"
+                                {% if request.GET.category == category.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}>
+
+                                {{ category.title }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
 
                 </div>
 
-                <div class="admin-product-stat-content">
 
 
-                    <span>
-                        تعداد محصولات
-                    </span>
+                <!-- Sort -->
 
-                    <strong>
-                        {{ total_items }}
-                    </strong>
+                <div class="field">
 
+                    <label>
+
+                        مرتب سازی
+
+                    </label>
+
+                    <select name="sort">
+
+                        <option value="">
+
+                            انتخاب کنید
+
+                        </option>
+
+                        <option value="newest"
+                                {% if request.GET.sort == "newest" %}
+                                    selected
+                                {% endif %}>
+
+                            جدیدترین
+
+                        </option>
+
+                        <option value="oldest"
+                                {% if request.GET.sort == "oldest" %}
+                                    selected
+                                {% endif %}>
+
+                            قدیمی‌ترین
+
+                        </option>
+
+                        <option value="cheap"
+                                {% if request.GET.sort == "cheap" %}
+                                    selected
+                                {% endif %}>
+
+                            ارزان‌ترین
+
+                        </option>
+
+                        <option value="expensive"
+                                {% if request.GET.sort == "expensive" %}
+                                    selected
+                                {% endif %}>
+
+                            گران‌ترین
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Minimum Price -->
+
+                <div class="field">
+
+                    <label>
+
+                        حداقل قیمت
+
+                    </label>
+
+                    <input
+                        type="number"
+                        name="min_price"
+                        placeholder="مثلاً 100000"
+                        value="{{ request.GET.min_price }}">
+
+                </div>
+
+
+
+                <!-- Maximum Price -->
+
+                <div class="field">
+
+                    <label>
+
+                        حداکثر قیمت
+
+                    </label>
+
+                    <input
+                        type="number"
+                        name="max_price"
+                        placeholder="مثلاً 900000"
+                        value="{{ request.GET.max_price }}">
 
                 </div>
 
             </div>
-        </div>
-        <!-- ================= PRODUCT LIST ================= -->
-
-
-        <div class="admin-product-grid">
-
-            {% for product in object_list %}
 
 
 
-                <div class="admin-product-card">
-                    <!-- Product Image -->
-                    <div class="admin-product-image">
-                        {% if product.image %}
+            <!-- Filter Buttons -->
 
-                            <img
-                                src="{{ product.image.url }}"
-                                alt="{{ product.title }}">
+            <div class="filter-actions">
 
-                        {% else %}
+                <button
+                    type="submit"
+                    class="filter-btn">
 
-                            <img
-                                alt="No Image">
+                    <i class="fa-solid fa-filter"></i>
 
-                        {% endif %}
+                    اعمال فیلتر
 
-                        <!-- Status -->
+                </button>
 
-                        {% if product.status == 1 %}
+                <a href="{% url 'dashboard:admin:product-list' %}"
+                   class="reset-btn">
 
-                            <span class="admin-product-status published">
+                    <i class="fa-solid fa-rotate-left"></i>
 
-                                منتشر شده
+                    حذف فیلترها
 
-                            </span>
+                </a>
 
-                        {% else %}
-                            <span class="admin-product-status draft">
+            </div>
 
-                                پیش‌نویس
+        </form>
 
-                            </span>
-                        {% endif %}
-
-                    </div>
-
-                    <!-- Product Content -->
-
-
-                    <div class="admin-product-content">
-
-
-                        <h3>
-
-                            {{ product.title }}
-
-                        </h3>
-
-
-                        <div class="admin-product-category">
-
-
-                            <i class="fa-solid fa-layer-group"></i>
+    </div>
 
 
 
-                            <span>
+    <!-- ================= Products ================= -->
 
-                                {{ product.category.title }}
+    <div class="products-grid">
+                {% for product in object_list %}
 
-                            </span>
+            <div class="product-card">
 
+                <!-- Product Image -->
+
+                <div class="product-image">
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.title }}">
+
+                    {% else %}
+
+                        <div class="no-image">
+
+                            <i class="fa-regular fa-image"></i>
 
                         </div>
 
+                    {% endif %}
 
-                        <div class="admin-product-info">
 
+                    {% if product.status == 1 %}
 
-                            <span>
-                                قیمت
-                            </span>
+                        <span class="status published">
 
-                            <strong class="admin-product-price">
-
-
-                                {{ product.price }}
-
-                                تومان
-
-
-                            </strong>
-
-                        </div>
-
-
-                        <div class="admin-product-info">
-
-
-                            <span>
-                                موجودی
-                            </span>
-
-
-
-                            <strong>
-
-
-                                {{ product.stock }}
-
-
-                            </strong>
-
-
-                        </div>
-
-                        <!-- Actions -->
-
-
-                        <div class="admin-product-actions">
-
-                            <a
-                                href="#"
-                                class="admin-product-view-btn">
-
-
-                                <i class="fa-solid fa-eye"></i>
-
-
-                                مشاهده
-
-
-                            </a>
-
-                            <a
-                                href="#"
-                                class="admin-product-edit-btn">
-
-
-                                <i class="fa-solid fa-pen"></i>
-
-
-                                ویرایش
-
-
-                            </a>
-
-                            <a
-                                href="#"
-                                class="admin-product-delete-btn">
-
-
-                                <i class="fa-solid fa-trash"></i>
-
-
-                                حذف
-
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            {% empty %}
-
-                <div class="admin-product-empty">
-
-                    <i class="fa-solid fa-box-open"></i>
-
-                    <h2>
-
-                        محصولی پیدا نشد
-
-                    </h2>
-
-                    <p>
-
-                        با فیلترهای انتخاب شده محصولی وجود ندارد.
-
-                    </p>
-
-                </div>
-
-            {% endfor %}
-
-        </div>
-                <!-- ================= PAGINATION ================= -->
-
-        {% if page_obj.has_other_pages %}
-
-            <div class="admin-product-pagination">
-                {% if page_obj.has_previous %}
-
-                    <a href="?page={{ page_obj.previous_page_number }}"
-                       class="admin-pagination-arrow">
-
-
-                        <i class="fa-solid fa-angle-right"></i>
-
-
-                    </a>
-
-                {% endif %}
-
-                {% for page in paginator.page_range %}
-
-                    {% if page == page_obj.number %}
-
-                        <span class="active">
-
-                            {{ page }}
+                            منتشر شده
 
                         </span>
 
                     {% else %}
 
-                        <a href="?page={{ page }}">
+                        <span class="status draft">
+
+                            پیش نویس
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Content -->
+
+                <div class="product-body">
+
+                    <div class="product-category">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                        {{ product.category.title }}
+
+                    </div>
+
+
+                    <h3>
+
+                        {{ product.title }}
+
+                    </h3>
+
+
+                    <div class="product-price">
+
+                        {{ product.price }}
+
+                        تومان
+
+                    </div>
+
+
+
+                    <div class="product-meta">
+
+                        <div>
+
+                            <span>
+
+                                موجودی
+
+                            </span>
+
+                            <strong>
+
+                                {{ product.stock }}
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+
+                                شناسه
+
+                            </span>
+
+                            <strong>
+
+                                #{{ product.id }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="product-actions">
+
+                        <a
+                            href="{% url 'dashboard:admin:product-edit' product.id %}"
+                            class="edit-btn">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </a>
+
+                        <a
+                            href="#"
+                            class="delete-btn">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-products">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h2>
+
+                    محصولی پیدا نشد
+
+                </h2>
+
+                <p>
+
+                    با این فیلتر محصولی وجود ندارد.
+
+                </p>
+
+            </div>
+
+        {% endfor %}
+            </div>
+
+    <!-- ================= Pagination ================= -->
+
+    {% if page_obj.has_other_pages %}
+
+        <div class="pagination-wrapper">
+
+            <div class="pagination-info">
+
+                نمایش
+
+                <strong>
+
+                    {{ page_obj.start_index }}
+
+                </strong>
+
+                تا
+
+                <strong>
+
+                    {{ page_obj.end_index }}
+
+                </strong>
+
+                از
+
+                <strong>
+
+                    {{ paginator.count }}
+
+                </strong>
+
+                محصول
+
+            </div>
+
+
+            <div class="pagination">
+
+                {% if page_obj.has_previous %}
+
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}"
+                       class="page-btn">
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </a>
+
+                {% endif %}
+
+
+
+                {% for page in paginator.page_range %}
+
+                    {% if page == page_obj.number %}
+
+                        <span class="page-btn active">
+
+                            {{ page }}
+
+                        </span>
+
+                    {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+
+                        <a href="?page={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}"
+                           class="page-btn">
 
                             {{ page }}
 
@@ -509,14 +560,14 @@
 
                 {% endfor %}
 
+
+
                 {% if page_obj.has_next %}
 
-                    <a href="?page={{ page_obj.next_page_number }}"
-                       class="admin-pagination-arrow">
-
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}"
+                       class="page-btn">
 
                         <i class="fa-solid fa-angle-left"></i>
-
 
                     </a>
 
@@ -524,13 +575,12 @@
 
             </div>
 
-        {% endif %}
+        </div>
 
-    </div>
+    {% endif %}
 
+</div>
 
 </section>
-
-
 
 {% endblock %}
