@@ -1,6 +1,7 @@
 from django.contrib.auth import forms as auth_forms
 from django import forms 
 from django.utils.translation import gettext_lazy as _ 
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from accounts.models import Profile
 from shop.models import Product 
@@ -25,8 +26,10 @@ class AdminProfileEditForm(forms.ModelForm):
         ]
 
 class ProductForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget())
+
     class Meta:
         model=Product
         fields=[
-            "image","category","title","slug","image","description","brief_description","stock","status","discount_percent","price","avg_rate"  
+            "image","category","title","slug","description","brief_description","stock","status","discount_percent","price","avg_rate"  
         ]

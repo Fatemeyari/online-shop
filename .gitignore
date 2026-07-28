@@ -126,3 +126,4 @@ cython_debug/
 postgres/data/*
 core/media/
 core/shop/management/commands/images
+core/staticfiles
