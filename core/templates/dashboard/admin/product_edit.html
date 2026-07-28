@@ -5,12 +5,12 @@
 
 {{ block.super }}
 
-<link rel="stylesheet"
-      href="{% static 'css/product_edit.css' %}">
-      {{ form.media }}
+<link rel="stylesheet" href="{% static 'css/product_edit.css' %}">
 
+{{ form.media }}
 
 {% endblock %}
+
 
 {% block content %}
 
@@ -29,15 +29,11 @@
             <div>
 
                 <h1>
-
                     ویرایش محصول
-
                 </h1>
 
                 <p>
-
                     اطلاعات محصول را بروزرسانی و مدیریت کنید.
-
                 </p>
 
             </div>
@@ -59,15 +55,18 @@
 
     </div>
 
+
     <form method="post"
           enctype="multipart/form-data">
 
         {% csrf_token %}
 
+
         <div class="edit-grid">
 
+
             <!-- ========================= -->
-            <!-- Product Image -->
+            <!-- Product Main Image -->
             <!-- ========================= -->
 
             <div class="card">
@@ -77,9 +76,7 @@
                     <i class="fa-solid fa-image"></i>
 
                     <h3>
-
-                        عکس اصلی محصول
-
+                        تصویر اصلی محصول
                     </h3>
 
                 </div>
@@ -89,9 +86,7 @@
                     <div class="form-group">
 
                         <label for="{{ form.image.id_for_label }}">
-
-                            انتخاب عکس اصلی
-
+                            انتخاب تصویر اصلی
                         </label>
 
                         {{ form.image }}
@@ -115,14 +110,13 @@
 
                     </div>
 
+
                     {% if object.image %}
 
                         <div class="current-image">
 
                             <p>
-
                                 تصویر فعلی
-
                             </p>
 
                             <img src="{{ object.image.url }}"
@@ -131,6 +125,96 @@
                         </div>
 
                     {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ========================= -->
+            <!-- Product Gallery -->
+            <!-- ========================= -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <i class="fa-solid fa-images"></i>
+
+                    <h3>
+
+                        تصاویر بیشتر محصول
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    {{ images_formset.management_form }}
+
+                    {% for image_form in images_formset %}
+
+                        <div class="gallery-item">
+
+                            {{ image_form.id }}
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    تصویر {{ forloop.counter }}
+
+                                </label>
+
+                                {{ image_form.file }}
+
+                                {% if image_form.file.errors %}
+
+                                    <div class="field-errors">
+
+                                        {{ image_form.file.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            {% if image_form.instance.pk %}
+
+                                <div class="current-image">
+
+                                    <p>
+
+                                        تصویر فعلی
+
+                                    </p>
+
+                                    <img src="{{ image_form.instance.file.url }}"
+                                         alt="{{ object.title }}">
+
+                                </div>
+
+                                <div class="delete-image">
+
+                                    {{ image_form.DELETE }}
+
+                                    <label for="{{ image_form.DELETE.id_for_label }}">
+
+                                        حذف این تصویر
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
 
                 </div>
 
@@ -159,7 +243,7 @@
 
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.title.id_for_label }}">
 
                                 عنوان محصول
 
@@ -167,17 +251,26 @@
 
                             {{ form.title }}
 
-                            {{ form.title.errors }}
+                            {% if form.title.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.title.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
                     </div>
 
+
                     <div class="form-row two-column">
 
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.slug.id_for_label }}">
 
                                 اسلاگ
 
@@ -185,31 +278,49 @@
 
                             {{ form.slug }}
 
-                            {{ form.slug.errors }}
+                            {% if form.slug.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.slug.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
+
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.category.id_for_label }}">
 
-                                دسته بندی
+                                دسته‌بندی
 
                             </label>
 
                             {{ form.category }}
 
-                            {{ form.category.errors }}
+                            {% if form.category.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.category.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
                     </div>
 
+
                     <div class="form-row">
 
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.status.id_for_label }}">
 
                                 وضعیت محصول
 
@@ -217,7 +328,15 @@
 
                             {{ form.status }}
 
-                            {{ form.status.errors }}
+                            {% if form.status.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.status.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
@@ -226,6 +345,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- ========================= -->
@@ -252,7 +372,7 @@
 
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.price.id_for_label }}">
 
                                 قیمت
 
@@ -260,27 +380,45 @@
 
                             {{ form.price }}
 
-                            {{ form.price.errors }}
+                            {% if form.price.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.price.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
+
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.stock.id_for_label }}">
 
-                                موجودی
+                                موجودی انبار
 
                             </label>
 
                             {{ form.stock }}
 
-                            {{ form.stock.errors }}
+                            {% if form.stock.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.stock.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
+
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.discount_percent.id_for_label }}">
 
                                 درصد تخفیف
 
@@ -288,17 +426,26 @@
 
                             {{ form.discount_percent }}
 
-                            {{ form.discount_percent.errors }}
+                            {% if form.discount_percent.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.discount_percent.errors }}
+
+                                </div>
+
+                            {% endif %}
 
                         </div>
 
                     </div>
 
+
                     <div class="form-row">
 
                         <div class="form-group">
 
-                            <label>
+                            <label for="{{ form.avg_rate.id_for_label }}">
 
                                 امتیاز محصول
 
@@ -306,7 +453,21 @@
 
                             {{ form.avg_rate }}
 
-                            {{ form.avg_rate.errors }}
+                            {% if form.avg_rate.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ form.avg_rate.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                            <small class="form-help">
+
+                                عددی بین ۰ تا ۵ وارد کنید.
+
+                            </small>
 
                         </div>
 
@@ -315,7 +476,10 @@
                 </div>
 
             </div>
-                        <!-- ========================= -->
+
+
+
+            <!-- ========================= -->
             <!-- Description -->
             <!-- ========================= -->
 
@@ -337,7 +501,7 @@
 
                     <div class="form-group">
 
-                        <label>
+                        <label for="{{ form.brief_description.id_for_label }}">
 
                             توضیح کوتاه
 
@@ -345,13 +509,28 @@
 
                         {{ form.brief_description }}
 
-                        {{ form.brief_description.errors }}
+                        {% if form.brief_description.errors %}
+
+                            <div class="field-errors">
+
+                                {{ form.brief_description.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                        <small class="form-help">
+
+                            این متن در کارت محصول نمایش داده می‌شود.
+
+                        </small>
 
                     </div>
 
+
                     <div class="form-group">
 
-                        <label>
+                        <label for="{{ form.description.id_for_label }}">
 
                             توضیحات کامل
 
@@ -359,16 +538,22 @@
 
                         {{ form.description }}
 
-                        {{ form.description.errors }}
+                        {% if form.description.errors %}
+
+                            <div class="field-errors">
+
+                                {{ form.description.errors }}
+
+                            </div>
+
+                        {% endif %}
 
                     </div>
 
                 </div>
 
             </div>
-
-
-            <!-- ========================= -->
+                        <!-- ========================= -->
             <!-- Action Buttons -->
             <!-- ========================= -->
 
@@ -402,9 +587,8 @@
 
                     {% endif %}
 
-                    <button
-                        type="submit"
-                        class="save-btn">
+                    <button type="submit"
+                            class="save-btn">
 
                         <i class="fa-solid fa-floppy-disk"></i>
 

@@ -30,14 +30,11 @@
 
                 <h1>
 
-                    ویرایش محصول
-
+                   اضافه کردن محصول 
                 </h1>
 
                 <p>
-
-                    اطلاعات محصول را بروزرسانی و مدیریت کنید.
-
+                    اطلاعات مربوط به محصول را وارد کنید .
                 </p>
 
             </div>
@@ -131,6 +128,118 @@
                         </div>
 
                     {% endif %}
+
+                </div>
+
+            </div>
+            <!-- ========================= -->
+            <!-- Product Gallery Images -->
+            <!-- ========================= -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <i class="fa-solid fa-images"></i>
+
+                    <h3>
+                        تصاویر محصول
+                    </h3>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    {{ images_formset.management_form }}
+
+
+                    {% for image_form in images_formset %}
+
+
+                        <div class="image-box">
+
+
+                            {{ image_form.id }}
+
+
+                            <div class="form-group">
+
+
+                                <label>
+                                    تصویر {{ forloop.counter }}
+                                </label>
+
+
+                                {{ image_form.file }}
+
+
+
+                                {% if image_form.file.errors %}
+
+                                    <div class="field-errors">
+
+                                        {{ image_form.file.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+
+
+                            </div>
+
+
+
+                            {% if image_form.instance.file %}
+
+
+                                <div class="current-image">
+
+
+                                    <p>
+                                        تصویر فعلی
+                                    </p>
+
+
+                                    <img src="{{ image_form.instance.file.url }}"
+                                        width="120">
+
+
+                                </div>
+
+
+                            {% endif %}
+
+
+
+                            {% if image_form.DELETE %}
+
+
+                                <div class="delete-image">
+
+
+                                    {{ image_form.DELETE }}
+
+
+                                    <label>
+                                        حذف این تصویر
+                                    </label>
+
+
+                                </div>
+
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
 
                 </div>
 
@@ -258,7 +367,7 @@
                 </div>
 
             </div>
-                        <!-- ========================= -->
+            <!-- ========================= -->
             <!-- Sales Information -->
             <!-- ========================= -->
 
@@ -383,7 +492,7 @@
                 </div>
 
             </div>
-                        <!-- ========================= -->
+            <!-- ========================= -->
             <!-- Description -->
             <!-- ========================= -->
 
@@ -502,7 +611,7 @@
 
                         <i class="fa-solid fa-floppy-disk"></i>
 
-                        ذخیره تغییرات
+                        ذخیره 
 
                     </button>
 
@@ -517,3 +626,4 @@
 </section>
 
 {% endblock %}
+

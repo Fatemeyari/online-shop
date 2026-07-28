@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from dashboard.permissions import HasAdminAccessPermission
 from accounts.models import User , Profile
-from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm
+from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet
 from shop.models import Product,ProductCategory,ProductStatusType
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
@@ -95,15 +95,68 @@ class AdminProductEditView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMe
     def get_success_url(self):
         return reverse_lazy("dashboard:admin:product-edit" , kwargs={"pk":self.get_object().pk}) 
 
+
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+        if self.request.method == "POST":
+            context["images_formset"] = ProductImageFormSet(
+                self.request.POST,
+                self.request.FILES,
+                instance = self.object
+            )
+        else:
+            context["images_formset"] = ProductImageFormSet(
+                instance=self.object,
+            )
+        
+        return context
+
+    def form_valid(self , form):
+        context = self.get_context_data()
+        images_formset=context["images_formset"]
+        
+        if images_formset.is_valid():
+            self.object = form.save()
+            images_formset.instance = self.object
+            images_formset.save()
+
+            return super().form_valid(form)
+            
+        return self.render_to_response(context)        
+
 class AdminProductCreateView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,CreateView):
     template_name = "dashboard/admin/product_create.html"
     queryset = Product.objects.all()
     form_class = ProductForm
     success_message = "ایجاد محصول با موفقیت انجام شد."
 
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+        if self.request.POST:
+            context["images_formset"] = ProductImageFormSet(
+                self.request.POST,
+                self.request.FILES,
+            )
+        else:
+            context["images_formset"] = ProductImageFormSet()
+        
+        return context
+
+
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        context=self.get_context_data()
+        images_formset=context["images_formset"]
+
+        if images_formset.is_valid():
+            form.instance.user = self.request.user
+            self.object=form.save()
+            images_formset.instance=self.object
+            images_formset.save()
+
+            return super().form_valid(form)
+            
+        return self.render_to_response(context)
 
     def get_success_url(self):
         return reverse_lazy("dashboard:admin:product-list")
