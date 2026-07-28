@@ -25,7 +25,9 @@ urlpatterns = [
     path('dashboard/' , include('dashboard.urls')),
     path('accounts/' , include('accounts.urls')),
     path('shop/' , include('shop.urls')),
-    path('cart/' , include('cart.urls'))
+    path('cart/' , include('cart.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
 ]
 
 if settings.DEBUG:

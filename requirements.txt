@@ -9,3 +9,4 @@ typing_extensions==4.15.0
 celery==5.4.0
 redis==5.0.1
 Faker==40.23.0
+django-ckeditor==6.7.2
