@@ -1292,3 +1292,56 @@ input:-webkit-autofill{
     }
 
 }
+.current-image{
+
+    margin-top:20px;
+
+}
+
+.current-image p{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    color:#64748b;
+
+}
+
+.current-image img{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.form-help{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    color:#94a3b8;
+
+}
+
+.field-errors{
+
+    color:#ef4444;
+
+    font-size:13px;
+
+    margin-top:8px;
+
+}
