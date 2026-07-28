@@ -1,6 +1,7 @@
 from django.db import models
 from decimal import Decimal 
 from django.core.validators import MaxValueValidator , MinValueValidator
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class ProductStatusType(models.IntegerChoices):
@@ -12,6 +13,8 @@ class ProductCategory(models.Model):
     slug=models.SlugField(allow_unicode=True ,unique=True)
     created_time=models.DateTimeField(auto_now_add=True)
     updated_time=models.DateTimeField(auto_now=True)
+    
+
 
     class Meta:
         ordering=["-created_time"]
@@ -29,7 +32,7 @@ class Product(models.Model):
     title=models.CharField(max_length=255)
     slug=models.SlugField(allow_unicode=True , unique=True)
     image=models.ImageField(upload_to="product/img/")
-    description=models.TextField()
+    description=RichTextUploadingField()
     brief_description=models.TextField(null=True , blank=True)
     stock=models.PositiveIntegerField(default=0)
     status=models.IntegerField(choices=ProductStatusType.choices , default=ProductStatusType.draft.value)
