@@ -7,13 +7,16 @@ from shop.models import Product ,ProductStatusType
 from .cart import CartSession
 # Create your views here.
 
-class SessionAddProduct(View):
+class SessionAddProductView(View):
     def post(self,request,*args, **kwargs):
         cart=CartSession(request.session)
         product_id=request.POST.get("product_id")
         print(product_id)
         if product_id and Product.objects.filter(id=product_id , status=ProductStatusType.publish.value).exists():
             cart.add_product(product_id)
+        if request.user.is_authenticated:
+            cart.merge_session_cart_in_db(request.user)
+
         return redirect(request.META.get("HTTP_REFERER", "/"))        
 
 class DecreaseProductQuantityView(View):
@@ -22,6 +25,9 @@ class DecreaseProductQuantityView(View):
         product_id=request.POST.get("product_id")
         if product_id:
             cart.decrease_product_quantity(product_id)
+        if request.user.is_authenticated:
+            cart.merge_session_cart_in_db(request.user)
+
         return redirect(request.META.get("HTTP_REFERER","/"))
 
 class IncreaseProductQuantityView(View):
@@ -30,6 +36,9 @@ class IncreaseProductQuantityView(View):
         product_id=request.POST.get("product_id")
         if product_id:
             cart.increase_product_quantity(product_id)
+        if request.user.is_authenticated:
+            cart.merge_session_cart_in_db(request.user)
+
         return redirect(request.META.get("HTTP_REFERER","/"))
     
 
