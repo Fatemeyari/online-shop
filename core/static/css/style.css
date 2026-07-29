@@ -950,3 +950,29 @@ input, textarea {
 .icon.logout:hover{
     background:#ef4444;
 }
+.products-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:10px 18px;
+
+    background:#ff6a00;
+    color:#fff;
+    text-decoration:none;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.products-btn:hover{
+    background:#e5710c;
+    transform:translateY(-2px);
+}
+
+.products-btn i{
+    font-size:15px;
+}

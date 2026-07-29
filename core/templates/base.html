@@ -26,109 +26,149 @@
 
 <header class="header">
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <span>🚚 ارسال رایگان برای سفارش بالای 1 میلیون</span>
-    <span>📞 021-000000</span>
-  </div>
+    <!-- TOPBAR -->
+    <div class="topbar">
 
-  <!-- NAVBAR -->
-  <div class="navbar">
+        <span>🚚 ارسال رایگان برای سفارش بالای ۱ میلیون</span>
 
-    <div class="logo">SHOP+</div>
+        <span>📞 021-000000</span>
 
-    <form method="get"
-      action="{% url 'shop:product-grid' %}"
-      class="search-box">
-
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-
-      <input
-          type="text"
-          name="q"
-          placeholder="جستجو در بین محصولات..."
-          value="{{request.GET.q}}">
-
-      <button type="submit">
-
-          جستجو
-
-      </button>
-
-    </form>
-    <!-- ICONS -->
-    <div class="icons">
-
-    {% if user.is_authenticated %}
-
-        <!-- پروفایل -->
-        <a href="{% url 'dashboard:home' %}"
-           class="icon"
-           title="پروفایل">
-
-            <i class="fa-regular fa-user"></i>
-
-        </a>
-
-        <!-- علاقه مندی -->
-        <a href="#"
-           class="icon"
-           title="علاقه‌مندی‌ها">
-
-            <i class="fa-regular fa-heart"></i>
-
-        </a>
-
-        <!-- سبد خرید -->
-        <a href="{% url 'cart:session-cart-summary' %}"
-           class="icon cart"
-           title="سبد خرید">
-
-            <i class="fa-solid fa-cart-shopping"></i>
-
-        </a>
-
-        <!-- خروج -->
-        <a href="{% url 'accounts:logout' %}"
-           class="icon logout"
-           title="خروج">
-
-            <i class="fa-solid fa-right-from-bracket"></i>
-
-        </a>
-
-    {% else %}
-
-        <!-- ورود -->
-        <a href="{% url 'accounts:login' %}"
-           class="icon"
-           title="ورود">
-
-            <i class="fa-solid fa-right-to-bracket"></i>
-
-        </a>
-
-        <!-- سبد خرید -->
-        <a href="{% url 'cart:session-cart-summary' %}"
-           class="icon cart"
-           title="سبد خرید">
-
-            <i class="fa-solid fa-cart-shopping"></i>
-
-        </a>
-
-    {% endif %}
-  </div>
-
-  <!-- MENU -->
-  <nav class="menu">
-    
-    <div class="menu-pages">
-      <a href="{% url 'website:about' %}">درباره ما</a>
-      <a href="{% url 'website:contact' %}">تماس با ما</a>
     </div>
 
-  </nav>
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <!-- Logo -->
+
+        <a href="{% url 'website:index' %}" class="logo">
+
+            SHOP+
+
+        </a>
+
+        <!-- Search -->
+
+        <form method="get"
+              action="{% url 'shop:product-grid' %}"
+              class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+            <input
+                type="text"
+                name="q"
+                placeholder="جستجو در بین محصولات..."
+                value="{{ request.GET.q }}">
+
+            <button type="submit">
+
+                جستجو
+
+            </button>
+
+        </form>
+
+        <!-- Products Button -->
+
+        <a href="{% url 'shop:product-grid' %}"
+           class="products-btn">
+
+            <i class="fa-solid fa-box-open"></i>
+
+            محصولات
+
+        </a>
+
+        <!-- Icons -->
+
+        <div class="icons">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard:home' %}"
+                   class="icon"
+                   title="پروفایل">
+
+                    <i class="fa-regular fa-user"></i>
+
+                </a>
+
+                <a href="#"
+                   class="icon"
+                   title="علاقه‌مندی‌ها">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </a>
+
+                <a href="{% url 'cart:session-cart-summary' %}"
+                   class="icon cart"
+                   title="سبد خرید">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </a>
+
+                <a href="{% url 'accounts:logout' %}"
+                   class="icon logout"
+                   title="خروج">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'accounts:login' %}"
+                   class="icon"
+                   title="ورود">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                </a>
+
+                <a href="{% url 'cart:session-cart-summary' %}"
+                   class="icon cart"
+                   title="سبد خرید">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- MENU -->
+
+    <nav class="menu">
+
+        <div class="menu-pages">
+
+            <a href="{% url 'website:index' %}">
+
+                خانه
+
+            </a>
+
+            <a href="{% url 'website:about' %}">
+
+                درباره ما
+
+            </a>
+
+            <a href="{% url 'website:contact' %}">
+
+                تماس با ما
+
+            </a>
+
+        </div>
+
+    </nav>
 
 </header>
 
