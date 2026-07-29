@@ -15,7 +15,7 @@ class CartModel(models.Model):
 
     
     def __str__(self):
-        return self.user.phone_number
+        return self.user.email
 
 class CartItemModel(models.Model):
     cart = models.ForeignKey(CartModel ,on_delete=models.CASCADE)
@@ -30,6 +30,6 @@ class CartItemModel(models.Model):
         verbose_name_plural='Cart Items'
 
     def __str__(self):
-        return self.cart
+        return f"{self.product.title} - {self.cart.id}"
 
 
