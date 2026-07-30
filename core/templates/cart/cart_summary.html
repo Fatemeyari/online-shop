@@ -327,15 +327,13 @@
 
                 </div>
 
-                <button
-                    type="button"
-                    class="checkout-btn">
+                <a href="{% url 'order:checkout' %}" class="checkout-btn">
 
                     <i class="fa-solid fa-credit-card"></i>
 
                     ادامه فرایند پرداخت
 
-                </button>
+                </a>
 
                 <a
                     href="{% url 'shop:product-grid' %}"

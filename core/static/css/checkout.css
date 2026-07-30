@@ -1,0 +1,982 @@
+/*==================================================
+                    CHECKOUT PAGE
+==================================================*/
+
+.checkout-page{
+
+    padding:70px 0;
+
+    background:#f7f8fc;
+
+    min-height:100vh;
+
+}
+
+.checkout-container{
+
+    width:min(1400px,92%);
+
+    margin:auto;
+
+}
+
+
+/*==================================================
+                    HEADER
+==================================================*/
+
+.checkout-header{
+
+    text-align:center;
+
+    margin-bottom:45px;
+
+}
+
+.checkout-header h1{
+
+    font-size:38px;
+
+    color:#222;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+.checkout-header p{
+
+    color:#777;
+
+    font-size:16px;
+
+}
+
+
+/*==================================================
+                    STEPS
+==================================================*/
+
+.checkout-steps{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:50px;
+
+}
+
+.step{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.step-circle{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    background:#ececec;
+
+    color:#777;
+
+    transition:.35s;
+
+}
+
+.step span{
+
+    font-size:14px;
+
+    color:#777;
+
+}
+
+.step.active .step-circle{
+
+    background:#ff8a00;
+
+    color:#fff;
+
+    box-shadow:0 8px 20px rgba(255,138,0,.35);
+
+}
+
+.step.active span{
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.step.completed .step-circle{
+
+    background:#27ae60;
+
+    color:#fff;
+
+}
+
+.step-line{
+
+    width:130px;
+
+    height:3px;
+
+    background:#ddd;
+
+    margin:0 15px;
+
+}
+
+.step-line.active{
+
+    background:#ff8a00;
+
+}
+
+
+/*==================================================
+                MAIN LAYOUT
+==================================================*/
+
+.checkout-layout{
+
+    display:grid;
+
+    grid-template-columns:2fr 420px;
+
+    gap:35px;
+
+    align-items:start;
+
+}
+/*==================================================
+                    CARDS
+==================================================*/
+
+.checkout-card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    margin-bottom:28px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    border:1px solid #efefef;
+
+}
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.card-title i{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:15px;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+}
+
+.card-title h2{
+
+    font-size:24px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+
+/*==================================================
+                    FORM
+==================================================*/
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.full-width{
+
+    margin-top:25px;
+
+}
+
+.form-group label{
+
+    margin-bottom:10px;
+
+    color:#555;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+.form-group small{
+
+    color:#999;
+
+    font-weight:400;
+
+}
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea{
+
+    width:100%;
+
+    border:1px solid #ddd;
+
+    border-radius:15px;
+
+    padding:16px 18px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    background:#fafafa;
+
+    transition:.3s;
+
+    resize:none;
+
+}
+
+.form-group input:focus,
+
+.form-group select:focus,
+
+.form-group textarea:focus{
+
+    outline:none;
+
+    border-color:#ff8a00;
+
+    background:#fff;
+
+    box-shadow:0 0 0 4px rgba(255,138,0,.12);
+
+}
+
+.form-group input:disabled{
+
+    background:#f1f1f1;
+
+    color:#777;
+
+    cursor:not-allowed;
+
+}
+
+textarea{
+
+    min-height:130px;
+
+}
+/*==================================================
+                SHIPPING & PAYMENT
+==================================================*/
+
+.shipping-grid,
+.payment-grid{
+
+    display:grid;
+    gap:18px;
+
+}
+
+.shipping-card,
+.payment-card{
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:22px;
+
+    border:2px solid #ececec;
+    border-radius:18px;
+
+    cursor:pointer;
+
+    background:#fff;
+
+    transition:.35s;
+
+    position:relative;
+
+}
+
+.shipping-card:hover,
+.payment-card:hover{
+
+    border-color:#ff8a00;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+}
+
+/* مخفی کردن Radio */
+
+.shipping-card input,
+.payment-card input{
+
+    display:none;
+
+}
+
+/* کارت انتخاب شده */
+
+.shipping-card:has(input:checked),
+.payment-card:has(input:checked){
+
+    border-color:#ff8a00;
+
+    background:#fffaf4;
+
+    box-shadow:0 8px 25px rgba(255,138,0,.18);
+
+}
+
+/* آیکون */
+
+.shipping-icon,
+.payment-icon{
+
+    width:64px;
+    height:64px;
+
+    border-radius:18px;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:26px;
+
+    flex-shrink:0;
+
+}
+
+/* متن */
+
+.shipping-info,
+.payment-info{
+
+    flex:1;
+
+}
+
+.shipping-info h3,
+.payment-info h3{
+
+    font-size:18px;
+
+    color:#222;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+}
+
+.shipping-info p,
+.payment-info p{
+
+    color:#777;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+/* قیمت ارسال */
+
+.shipping-price{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#ff8a00;
+
+    white-space:nowrap;
+
+}
+/*==================================================
+                ORDER SUMMARY
+==================================================*/
+
+.checkout-sidebar{
+
+    position:sticky;
+
+    top:30px;
+
+}
+
+.summary-card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    border:1px solid #ededed;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.06);
+
+}
+
+.summary-card h2{
+
+    font-size:24px;
+
+    margin-bottom:28px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+.summary-row strong{
+
+    color:#222;
+
+    font-size:16px;
+
+}
+
+.summary-row.discount strong{
+
+    color:#27ae60;
+
+}
+
+.summary-card hr{
+
+    border:none;
+
+    border-top:1px solid #ececec;
+
+    margin:25px 0;
+
+}
+
+
+/*==================================================
+                    COUPON
+==================================================*/
+
+.coupon-box{
+
+    margin-bottom:25px;
+
+}
+
+.coupon-box label{
+
+    display:block;
+
+    margin-bottom:12px;
+
+    color:#555;
+
+    font-weight:600;
+
+}
+
+.coupon-input{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.coupon-input input{
+
+    flex:1;
+
+    border:1px solid #ddd;
+
+    border-radius:14px;
+
+    padding:14px 16px;
+
+    background:#fafafa;
+
+    transition:.3s;
+
+}
+
+.coupon-input input:focus{
+
+    outline:none;
+
+    border-color:#ff8a00;
+
+    background:#fff;
+
+}
+
+.coupon-input button{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:0 22px;
+
+    background:#ff8a00;
+
+    color:#fff;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.coupon-input button:hover{
+
+    background:#f07b00;
+
+}
+
+
+/*==================================================
+                    TOTAL
+==================================================*/
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:30px 0;
+
+    padding-top:25px;
+
+    border-top:2px dashed #ececec;
+
+}
+
+.summary-total span{
+
+    font-size:17px;
+
+    color:#444;
+
+    font-weight:700;
+
+}
+
+.summary-total strong{
+
+    color:#ff8a00;
+
+    font-size:28px;
+
+    font-weight:800;
+
+}
+
+
+/*==================================================
+                CHECKOUT BUTTON
+==================================================*/
+
+.checkout-btn{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    background:linear-gradient(135deg,#ff8a00,#ff6a00);
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-family:inherit;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.checkout-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(255,138,0,.35);
+
+}
+/*==================================================
+                TRUST BOX
+==================================================*/
+
+.trust-box{
+
+    margin-top:35px;
+
+    display:grid;
+
+    gap:18px;
+
+}
+
+.trust-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:20px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    border:1px solid #ececec;
+
+    transition:.35s;
+
+}
+
+.trust-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.trust-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    flex-shrink:0;
+
+}
+
+.trust-item h4{
+
+    font-size:17px;
+
+    margin-bottom:6px;
+
+    color:#222;
+
+}
+
+.trust-item p{
+
+    font-size:14px;
+
+    color:#777;
+
+    line-height:1.7;
+
+}
+
+
+/*==================================================
+                    RESPONSIVE
+==================================================*/
+
+@media(max-width:1100px){
+
+    .checkout-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .checkout-sidebar{
+
+        position:static;
+
+        margin-top:20px;
+
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .checkout-page{
+
+        padding:45px 0;
+
+    }
+
+    .checkout-header h1{
+
+        font-size:30px;
+
+    }
+
+    .checkout-header p{
+
+        font-size:14px;
+
+    }
+
+    .checkout-card{
+
+        padding:24px;
+
+    }
+
+    .summary-card{
+
+        padding:24px;
+
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .shipping-card,
+    .payment-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        text-align:right;
+
+    }
+
+    .shipping-price{
+
+        margin-top:10px;
+
+    }
+
+    .coupon-input{
+
+        flex-direction:column;
+
+    }
+
+    .coupon-input button{
+
+        width:100%;
+
+        height:52px;
+
+    }
+
+}
+
+
+@media(max-width:560px){
+
+    .checkout-steps{
+
+        gap:10px;
+
+    }
+
+    .step-line{
+
+        display:none;
+
+    }
+
+    .step-circle{
+
+        width:46px;
+
+        height:46px;
+
+        font-size:15px;
+
+    }
+
+    .step span{
+
+        font-size:12px;
+
+    }
+
+    .card-title{
+
+        gap:12px;
+
+    }
+
+    .card-title i{
+
+        width:42px;
+
+        height:42px;
+
+        font-size:18px;
+
+    }
+
+    .card-title h2{
+
+        font-size:20px;
+
+    }
+
+    .summary-total strong{
+
+        font-size:22px;
+
+    }
+
+    .checkout-btn{
+
+        font-size:16px;
+
+        padding:16px;
+
+    }
+
+}

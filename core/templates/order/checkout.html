@@ -1,0 +1,840 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="checkout-page">
+
+    <div class="checkout-container">
+
+        <!-- Header -->
+
+        <div class="checkout-header">
+
+            <h1>
+
+                تکمیل سفارش
+
+            </h1>
+
+            <p>
+
+                فقط یک مرحله تا ثبت سفارش شما باقی مانده است.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Steps -->
+
+        <div class="checkout-steps">
+
+            <div class="step completed">
+
+                <div class="step-circle">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <span>
+
+                    سبد خرید
+
+                </span>
+
+            </div>
+
+            <div class="step-line active"></div>
+
+            <div class="step active">
+
+                <div class="step-circle">
+
+                    2
+
+                </div>
+
+                <span>
+
+                    تکمیل سفارش
+
+                </span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step">
+
+                <div class="step-circle">
+
+                    3
+
+                </div>
+
+                <span>
+
+                    پرداخت
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Main Layout -->
+
+        <div class="checkout-layout">
+
+
+
+            <!-- LEFT -->
+
+            <div class="checkout-content">
+
+                <form method="post">
+
+                    {% csrf_token %}
+                                    <!-- Customer Information -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <h2>
+
+                            اطلاعات گیرنده
+
+                        </h2>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <!-- First Name -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                نام
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="first_name"
+                                value="{{ request.user.first_name }}"
+                                placeholder="نام">
+
+                        </div>
+
+
+
+                        <!-- Last Name -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                نام خانوادگی
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="last_name"
+                                value="{{ request.user.last_name }}"
+                                placeholder="نام خانوادگی">
+
+                        </div>
+
+
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                ایمیل
+
+                            </label>
+
+                            <input
+                                type="email"
+                                value="{{ request.user.email }}"
+                                disabled>
+
+                        </div>
+
+
+
+                        <!-- Phone -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                شماره موبایل
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="phone"
+                                value="{{ request.user.profile.phone }}"
+                                placeholder="09123456789">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Address -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h2>
+
+                            آدرس ارسال
+
+                        </h2>
+
+                    </div>
+                                        <div class="form-grid">
+
+                        <!-- Province -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                استان
+
+                            </label>
+
+                            <select name="province">
+
+                                <option value="">انتخاب استان</option>
+
+                                {% for province in provinces %}
+
+                                    <option value="{{ province.id }}">
+
+                                        {{ province.name }}
+
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- City -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                شهر
+
+                            </label>
+
+                            <select name="city">
+
+                                <option value="">
+
+                                    ابتدا استان را انتخاب کنید
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- Postal Code -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                کد پستی
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="postal_code"
+                                placeholder="1234567890">
+
+                        </div>
+
+
+
+                        <!-- Unit -->
+
+                        <div class="form-group">
+
+                            <label>
+
+                                پلاک / واحد
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="unit"
+                                placeholder="مثلاً پلاک ۱۲ - واحد ۳">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Full Address -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+
+                            آدرس کامل
+
+                        </label>
+
+                        <textarea
+                            name="address"
+                            rows="5"
+                            placeholder="آدرس کامل محل تحویل سفارش را وارد کنید..."></textarea>
+
+                    </div>
+
+
+
+                    <!-- Order Note -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+
+                            توضیحات سفارش
+
+                            <small>(اختیاری)</small>
+
+                        </label>
+
+                        <textarea
+                            name="description"
+                            rows="3"
+                            placeholder="مثلاً زنگ واحد خراب است، قبل از ارسال تماس بگیرید."></textarea>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Shipping Method -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-truck-fast"></i>
+
+                        <h2>
+
+                            روش ارسال
+
+                        </h2>
+
+                    </div>
+                                        <div class="shipping-grid">
+
+                        <!-- Post -->
+
+                        <label class="shipping-card">
+
+                            <input
+                                type="radio"
+                                name="shipping"
+                                value="post"
+                                checked>
+
+                            <div class="shipping-icon">
+
+                                <i class="fa-solid fa-box"></i>
+
+                            </div>
+
+                            <div class="shipping-info">
+
+                                <h3>
+
+                                    پست پیشتاز
+
+                                </h3>
+
+                                <p>
+
+                                    تحویل ۲ تا ۴ روز کاری
+
+                                </p>
+
+                            </div>
+
+                            <span class="shipping-price">
+
+                                ۵۰,۰۰۰ تومان
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- Tipax -->
+
+                        <label class="shipping-card">
+
+                            <input
+                                type="radio"
+                                name="shipping"
+                                value="tipax">
+
+                            <div class="shipping-icon">
+
+                                <i class="fa-solid fa-truck"></i>
+
+                            </div>
+
+                            <div class="shipping-info">
+
+                                <h3>
+
+                                    تیپاکس
+
+                                </h3>
+
+                                <p>
+
+                                    تحویل ۱ تا ۲ روز کاری
+
+                                </p>
+
+                            </div>
+
+                            <span class="shipping-price">
+
+                                ۸۰,۰۰۰ تومان
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- Express -->
+
+                        <label class="shipping-card">
+
+                            <input
+                                type="radio"
+                                name="shipping"
+                                value="express">
+
+                            <div class="shipping-icon">
+
+                                <i class="fa-solid fa-bolt"></i>
+
+                            </div>
+
+                            <div class="shipping-info">
+
+                                <h3>
+
+                                    ارسال فوری
+
+                                </h3>
+
+                                <p>
+
+                                    تحویل امروز
+
+                                </p>
+
+                            </div>
+
+                            <span class="shipping-price">
+
+                                ۱۲۰,۰۰۰ تومان
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Payment Method -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                        <h2>
+
+                            روش پرداخت
+
+                        </h2>
+
+                    </div>
+
+                    <div class="payment-grid">
+                                            <!-- Online Payment -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="online"
+                                checked>
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-credit-card"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <h3>
+
+                                    پرداخت آنلاین
+
+                                </h3>
+
+                                <p>
+
+                                    پرداخت از طریق درگاه بانکی امن
+
+                                </p>
+
+                            </div>
+
+                        </label>
+
+
+
+                        <!-- Cash On Delivery -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cash">
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-money-bill-wave"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <h3>
+
+                                    پرداخت هنگام تحویل
+
+                                </h3>
+
+                                <p>
+
+                                    پرداخت نقدی هنگام دریافت سفارش
+
+                                </p>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================
+                    ORDER SUMMARY
+            =========================== -->
+
+            <aside class="checkout-sidebar">
+
+                <div class="summary-card">
+
+                    <h2>
+
+                        خلاصه سفارش
+
+                    </h2>
+
+                    <div class="summary-row">
+
+                        <span>
+
+                            تعداد کالا
+
+                        </span>
+
+                        <strong>
+
+                            {{ cart.total_quantity }}
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span>
+
+                            جمع کالاها
+
+                        </span>
+
+                        <strong>
+
+                            {{ cart.total_price }} تومان
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span>
+
+                            هزینه ارسال
+
+                        </span>
+
+                        <strong>
+
+                            ۵۰,۰۰۰ تومان
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-row discount">
+
+                        <span>
+
+                            تخفیف
+
+                        </span>
+
+                        <strong>
+
+                            {{ cart.discount|default:"۰" }} تومان
+
+                        </strong>
+
+                    </div>
+
+                    <hr>
+
+
+
+                    <!-- Coupon -->
+
+                    <div class="coupon-box">
+
+                        <label>
+
+                            کد تخفیف
+
+                        </label>
+
+                        <div class="coupon-input">
+
+                            <input
+                                type="text"
+                                name="coupon"
+                                placeholder="کد تخفیف">
+
+                            <button type="button">
+
+                                اعمال
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="summary-total">
+
+                        <span>
+
+                            مبلغ قابل پرداخت
+
+                        </span>
+
+                        <strong>
+
+                            {{ cart.final_price }} تومان
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <button class="checkout-btn" type="submit">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        پرداخت و ثبت سفارش
+
+                    </button>
+
+                </div>
+                                <!-- Trust Features -->
+
+                <div class="trust-box">
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h4>
+
+                                پرداخت امن
+
+                            </h4>
+
+                            <p>
+
+                                تمامی پرداخت‌ها از طریق درگاه بانکی امن انجام می‌شوند.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+
+                            <i class="fa-solid fa-truck-fast"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h4>
+
+                                ارسال سریع
+
+                            </h4>
+
+                            <p>
+
+                                سفارش شما در کوتاه‌ترین زمان ممکن ارسال خواهد شد.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+
+                            <i class="fa-solid fa-rotate-left"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h4>
+
+                                ضمانت بازگشت
+
+                            </h4>
+
+                            <p>
+
+                                تا ۷ روز امکان بازگشت کالا مطابق قوانین فروشگاه وجود دارد.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
