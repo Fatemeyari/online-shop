@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/address_list.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="address-page">
+
+    <div class="address-container">
+
+        <!-- Header -->
+
+        <div class="address-header">
+
+            <div class="header-left">
+
+                <span class="page-tag">
+
+                    مدیریت آدرس‌ها
+
+                </span>
+
+                <h1>
+
+                    آدرس‌های من
+
+                </h1>
+
+                <p>
+
+                    آدرس‌های ثبت شده خود را مدیریت کنید یا یک آدرس جدید اضافه کنید.
+
+                </p>
+
+            </div>
+
+            <a href="#"
+               class="btn-add-address">
+
+                <i class="fa-solid fa-plus"></i>
+
+                افزودن آدرس جدید
+
+            </a>
+
+        </div>
+
+
+
+        {% if object_list %}
+
+        <div class="address-grid">
+            {% for address in object_list %}
+
+            <article class="address-card">
+
+                <!-- Card Header -->
+
+                <div class="card-header">
+
+                    <div class="card-title">
+
+                        <div class="address-icon">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                        </div>
+
+                        <div class="title-content">
+
+                            <h3>
+
+                                آدرس ثبت شده
+
+                            </h3>
+
+                            {% if address.is_default %}
+                            <div class="address-badge">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                آدرس پیش‌فرض
+
+                            </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-actions">
+
+                        <a href="#"
+                           class="action-btn edit-btn"
+                           title="ویرایش">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="action-btn delete-btn"
+                           title="حذف">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Address -->
+
+                <div class="address-content">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <p>
+
+                        {{ address.address }}
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- Info -->
+
+                <div class="address-info">
+
+                    <div class="info-item">
+
+                        <span>
+
+                            استان
+
+                        </span>
+
+                        <strong>
+
+                            {{ address.state }}
+
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span>
+
+                            شهر
+
+                        </span>
+
+                        <strong>
+
+                            {{ address.city }}
+
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span>
+
+                            کدپستی
+
+                        </span>
+
+                        <strong>
+
+                            {{ address.zip_code }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+            {% else %}
+
+        <!-- Empty State -->
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+            </div>
+
+            <h2>
+
+                هنوز هیچ آدرسی ثبت نکرده‌اید
+
+            </h2>
+
+            <p>
+
+                برای ثبت سفارش و ارسال سریع‌تر، اولین آدرس خود را اضافه کنید.
+
+            </p>
+
+            <a href="#"
+               class="btn-add-address">
+
+                <i class="fa-solid fa-plus"></i>
+
+                افزودن اولین آدرس
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- Footer -->
+
+        <div class="page-footer">
+
+            <a href="javascript:history.back()"
+               class="back-btn">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

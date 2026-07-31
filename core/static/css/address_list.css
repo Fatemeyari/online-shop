@@ -1,0 +1,833 @@
+/*==================================================
+                    ADDRESS PAGE
+==================================================*/
+
+.address-page{
+
+    min-height:100vh;
+
+    padding:70px 0;
+
+    background:#f6f8fc;
+
+}
+
+.address-container{
+
+    width:min(1250px,92%);
+
+    margin:auto;
+
+}
+
+
+
+/*==================================================
+                    HEADER
+==================================================*/
+
+.address-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    gap:30px;
+
+    margin-bottom:40px;
+
+    flex-wrap:wrap;
+
+}
+
+.page-subtitle{
+
+    display:inline-block;
+
+    padding:7px 15px;
+
+    border-radius:999px;
+
+    background:#fff2e6;
+
+    color:#ff8a00;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+.address-header h1{
+
+    font-size:38px;
+
+    color:#222;
+
+    margin-bottom:10px;
+
+    font-weight:800;
+
+}
+
+.address-header p{
+
+    color:#777;
+
+    font-size:15px;
+
+    line-height:1.9;
+
+}
+
+
+
+/*==================================================
+                ADD ADDRESS BUTTON
+==================================================*/
+
+.btn-add-address{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:15px 24px;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:700;
+
+    background:linear-gradient(135deg,#ff8a00,#ff6b00);
+
+    box-shadow:0 12px 30px rgba(255,138,0,.22);
+
+    transition:.35s;
+
+}
+
+.btn-add-address:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(255,138,0,.32);
+
+}
+
+.btn-add-address i{
+
+    font-size:16px;
+
+}
+
+
+
+/*==================================================
+                    GRID
+==================================================*/
+
+.address-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+
+    gap:22px;
+
+}
+/*==================================================
+                    ADDRESS CARD
+==================================================*/
+
+.address-card{
+
+    background:#fff;
+
+    border:1px solid #eceff3;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    transition:.35s;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.05);
+
+}
+
+.address-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#ff8a00;
+
+    box-shadow:0 18px 40px rgba(15,23,42,.10);
+
+}
+
+
+
+/*==================================================
+                    CARD HEADER
+==================================================*/
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.address-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:14px;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+.card-title h3{
+
+    font-size:18px;
+
+    color:#222;
+
+    font-weight:700;
+
+    margin-bottom:4px;
+
+}
+
+.card-title span{
+
+    color:#999;
+
+    font-size:13px;
+
+}
+
+
+
+/*==================================================
+                ACTION BUTTONS
+==================================================*/
+
+.card-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.card-actions a{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.edit-btn{
+
+    background:#fff6eb;
+
+    color:#ff8a00;
+
+}
+
+.edit-btn:hover{
+
+    background:#ff8a00;
+
+    color:#fff;
+
+}
+
+.delete-btn{
+
+    background:#fff2f2;
+
+    color:#e53935;
+
+}
+
+.delete-btn:hover{
+
+    background:#e53935;
+
+    color:#fff;
+
+}
+/*==================================================
+                    ADDRESS TEXT
+==================================================*/
+
+.address-text{
+
+    margin:18px 0 22px;
+
+    padding:16px 18px;
+
+    border-radius:14px;
+
+    background:#fafbfc;
+
+    border:1px solid #eef1f4;
+
+    color:#444;
+
+    line-height:2;
+
+    font-size:14px;
+
+}
+
+
+
+/*==================================================
+                    ADDRESS META
+==================================================*/
+
+.address-meta{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.address-meta span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 16px;
+
+    background:#fff;
+
+    border:1px solid #eceff3;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    color:#555;
+
+    transition:.3s;
+
+}
+
+.address-meta span:hover{
+
+    border-color:#ff8a00;
+
+    color:#ff8a00;
+
+    background:#fffaf5;
+
+}
+
+.address-meta i{
+
+    color:#ff8a00;
+
+    font-size:13px;
+
+}
+/*==================================================
+                EMPTY STATE
+==================================================*/
+
+.empty-address{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:70px 30px;
+
+    text-align:center;
+
+    border:1px solid #eceff3;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.empty-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+}
+
+.empty-address h2{
+
+    font-size:28px;
+
+    color:#222;
+
+    margin-bottom:12px;
+
+}
+
+.empty-address p{
+
+    color:#777;
+
+    margin-bottom:30px;
+
+    line-height:1.9;
+
+}
+
+
+
+/*==================================================
+                FOOTER
+==================================================*/
+
+.address-footer{
+
+    margin-top:40px;
+
+}
+
+.back-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:#fff;
+
+    color:#555;
+
+    border:1px solid #e8e8e8;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.back-btn:hover{
+
+    background:#222;
+
+    color:#fff;
+
+    border-color:#222;
+
+}
+
+
+
+/*==================================================
+                RESPONSIVE
+==================================================*/
+
+@media(max-width:992px){
+
+    .address-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .address-page{
+
+        padding:45px 0;
+
+    }
+
+    .address-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .address-header h1{
+
+        font-size:30px;
+
+    }
+
+    .btn-add-address{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .address-card{
+
+        padding:18px;
+
+    }
+
+    .card-header{
+
+        gap:15px;
+
+    }
+
+    .address-meta{
+
+        gap:8px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .card-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .card-actions{
+
+        width:100%;
+
+        justify-content:flex-end;
+
+    }
+
+    .address-meta{
+
+        flex-direction:column;
+
+    }
+
+    .address-meta span{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+    }
+
+    .back-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+/*==================================================
+                EMPTY STATE
+==================================================*/
+
+.empty-address{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:70px 30px;
+
+    text-align:center;
+
+    border:1px solid #eceff3;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.empty-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:#fff3e7;
+
+    color:#ff8a00;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+}
+
+.empty-address h2{
+
+    font-size:28px;
+
+    color:#222;
+
+    margin-bottom:12px;
+
+}
+
+.empty-address p{
+
+    color:#777;
+
+    margin-bottom:30px;
+
+    line-height:1.9;
+
+}
+
+
+
+/*==================================================
+                FOOTER
+==================================================*/
+
+.address-footer{
+
+    margin-top:40px;
+
+}
+
+.back-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:#fff;
+
+    color:#555;
+
+    border:1px solid #e8e8e8;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.back-btn:hover{
+
+    background:#222;
+
+    color:#fff;
+
+    border-color:#222;
+
+}
+
+
+
+/*==================================================
+                RESPONSIVE
+==================================================*/
+
+@media(max-width:992px){
+
+    .address-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .address-page{
+
+        padding:45px 0;
+
+    }
+
+    .address-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .address-header h1{
+
+        font-size:30px;
+
+    }
+
+    .btn-add-address{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .address-card{
+
+        padding:18px;
+
+    }
+
+    .card-header{
+
+        gap:15px;
+
+    }
+
+    .address-meta{
+
+        gap:8px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .card-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .card-actions{
+
+        width:100%;
+
+        justify-content:flex-end;
+
+    }
+
+    .address-meta{
+
+        flex-direction:column;
+
+    }
+
+    .address-meta span{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+    }
+
+    .back-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
