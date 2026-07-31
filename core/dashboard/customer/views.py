@@ -68,3 +68,17 @@ class CustomerAddressCreateView(LoginRequiredMixin,HasCustomerAccessPermission,C
     def get_success_url(self):
         return reverse_lazy("dashboard:customer:address-list")
 
+
+class CustomerAddressEditView(LoginRequiredMixin,HasCustomerAccessPermission,UpdateView):
+    template_name="dashboard/customer/address_edit.html"
+    form_class=UserAddressForm
+    success_message= "آدرس با موفقیت تغییر یافت."
+
+    def get_queryset(self):
+        return UserAddressModel.objects.filter(user=self.request.user)
+    
+    def get_success_url(self):
+        return reverse_lazy("dashboard:customer:address-list")
+
+
+

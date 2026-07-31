@@ -81,7 +81,6 @@
 
                             </h3>
 
-                            {% if address.is_default %}
                             <div class="address-badge">
 
                                 <i class="fa-solid fa-star"></i>
@@ -89,7 +88,6 @@
                                 آدرس پیش‌فرض
 
                             </div>
-                            {% endif %}
 
                         </div>
 
@@ -97,7 +95,7 @@
 
                     <div class="card-actions">
 
-                        <a href="#"
+                        <a href="{% url 'dashboard:customer:address-edit' address.pk %}"
                            class="action-btn edit-btn"
                            title="ویرایش">
 
