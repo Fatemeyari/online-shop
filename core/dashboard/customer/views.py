@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from dashboard.permissions import HasCustomerAccessPermission
 from accounts.models import User , Profile
-from dashboard.customer.forms import CustomerPasswordChangeForm ,CustomerProfileEditForm 
+from dashboard.customer.forms import CustomerPasswordChangeForm ,CustomerProfileEditForm , UserAddressForm
 from order.models import UserAddressModel 
 
 class CustomerDashboardHomeView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
@@ -50,3 +50,21 @@ class CustomerAddressListView(LoginRequiredMixin,HasCustomerAccessPermission,Lis
         return queryset
 
     
+class CustomerAddressCreateView(LoginRequiredMixin,HasCustomerAccessPermission,CreateView):
+    template_name="dashboard/customer/address_create.html"
+    form_class=UserAddressForm
+    success_message= "آدرس با موفقیت ثبت شد."
+
+    def get_queryset(self):
+        return UserAddressModel.objects.filter(user=self.request.user)
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        
+        super().form_valid(form)
+        return redirect(reverse_lazy("dashboard:customer:address-list"))
+
+    
+    def get_success_url(self):
+        return reverse_lazy("dashboard:customer:address-list")
+

@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/address_create.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="address-create-page">
+
+    <div class="address-create-container">
+
+        <!-- Header -->
+
+        <div class="page-header">
+
+            <div class="header-left">
+
+                <span class="page-tag">
+
+                    مدیریت آدرس‌ها
+
+                </span>
+
+                <h1>
+
+                    افزودن آدرس جدید
+
+                </h1>
+
+                <p>
+
+                    لطفاً اطلاعات آدرس خود را با دقت وارد کنید تا سفارش‌های شما بدون مشکل ارسال شوند.
+
+                </p>
+
+            </div>
+
+            <div class="header-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+        </div>
+
+        <!-- Form Card -->
+
+        <div class="address-form-card">
+
+            <form method="post">
+
+                {% csrf_token %}
+                <div class="form-grid">
+
+    <!-- State -->
+
+    <div class="form-group">
+
+        <label for="{{ form.state.id_for_label }}">
+
+            <i class="fa-solid fa-map"></i>
+
+            استان
+
+        </label>
+
+        {{ form.state }}
+
+        {% if form.state.errors %}
+
+            <small class="form-error">
+
+                {{ form.state.errors|striptags }}
+
+            </small>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- City -->
+
+    <div class="form-group">
+
+        <label for="{{ form.city.id_for_label }}">
+
+            <i class="fa-solid fa-city"></i>
+
+            شهر
+
+        </label>
+
+        {{ form.city }}
+
+        {% if form.city.errors %}
+
+            <small class="form-error">
+
+                {{ form.city.errors|striptags }}
+
+            </small>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- Zip Code -->
+
+    <div class="form-group">
+
+        <label for="{{ form.zip_code.id_for_label }}">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            کد پستی
+
+        </label>
+
+        {{ form.zip_code }}
+
+        {% if form.zip_code.errors %}
+
+            <small class="form-error">
+
+                {{ form.zip_code.errors|striptags }}
+
+            </small>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- Address -->
+
+    <div class="form-group full-width">
+
+        <label for="{{ form.address.id_for_label }}">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            آدرس کامل
+
+        </label>
+
+        {{ form.address }}
+
+        {% if form.address.errors %}
+
+            <small class="form-error">
+
+                {{ form.address.errors|striptags }}
+
+            </small>
+
+        {% endif %}
+
+    </div>
+
+</div>
+                <div class="form-footer">
+
+                    <a href="javascript:history.back()"
+                       class="back-btn">
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                        بازگشت
+
+                    </a>
+
+                    <button type="submit"
+                            class="save-btn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        ثبت آدرس
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

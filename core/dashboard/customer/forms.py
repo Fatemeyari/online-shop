@@ -3,6 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _ 
 
 from accounts.models import Profile
+from order.models import UserAddressModel 
 class CustomerPasswordChangeForm(auth_forms.PasswordChangeForm):
     error_messages={
         "password_incorrect":_(
@@ -21,3 +22,8 @@ class CustomerProfileEditForm(forms.ModelForm):
             "phone_number",
             
         ]
+
+class UserAddressForm(forms.ModelForm):
+    class Meta:
+        model=UserAddressModel
+        fields=["address" , "state" , "city" , "zip_code"]
