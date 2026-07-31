@@ -26,51 +26,15 @@
 
             <h1>
 
-                حذف محصول
+                حذف آدرس
 
             </h1>
 
             <p class="delete-text">
 
-                آیا از حذف این محصول اطمینان دارید؟
+                آیا از حذف این آدرس اطمینان دارید؟
 
             </p>
-
-            <div class="product-box">
-
-                <div class="product-item">
-
-                    <span>
-
-                        عنوان محصول
-
-                    </span>
-
-                    <strong>
-
-                        {{ object.title }}
-
-                    </strong>
-
-                </div>
-
-                <div class="product-item">
-
-                    <span>
-
-                        شناسه محصول
-
-                    </span>
-
-                    <strong>
-
-                        #{{ object.id }}
-
-                    </strong>
-
-                </div>
-
-            </div>
 
             <div class="warning-box">
 
@@ -78,7 +42,7 @@
 
                 <span>
 
-                    پس از حذف، امکان بازگردانی این محصول وجود ندارد.
+                    پس از حذف، امکان بازگردانی این آدرس وجود ندارد.
 
                 </span>
 
@@ -89,7 +53,7 @@
                 {% csrf_token %}
                     <div class="delete-actions">
 
-                    <a href="{% url 'dashboard:admin:product-edit' object.pk %}"
+                    <a href="{% url 'dashboard:customer:address-list' %}"
                        class="cancel-btn">
 
                         <i class="fa-solid fa-arrow-right"></i>
@@ -104,7 +68,7 @@
 
                         <i class="fa-solid fa-trash"></i>
 
-                        حذف محصول
+                        حذف آدرس
 
                     </button>
 

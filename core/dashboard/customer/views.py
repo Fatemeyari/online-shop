@@ -82,3 +82,13 @@ class CustomerAddressEditView(LoginRequiredMixin,HasCustomerAccessPermission,Upd
 
 
 
+class CustomerAddressDeleteView(LoginRequiredMixin,HasCustomerAccessPermission,DeleteView):
+    template_name="dashboard/customer/address_delete.html"
+    success_url=reverse_lazy("dashboard:customer:address-list")
+    success_message= "آدرس با موفقیت حذف شد."
+
+
+    def get_queryset(self):
+        return UserAddressModel.objects.filter(user=self.request.user)
+    
+   
