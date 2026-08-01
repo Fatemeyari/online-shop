@@ -45,7 +45,7 @@ class UserAddressModel(models.Model):
         verbose_name_plural='Addresses'
 
     def __str__(self):
-        return f"{self.user.phone_number}"
+        return f"{self.user.email}"
 
 
 class OrderModel(models.Model):
@@ -64,7 +64,7 @@ class OrderModel(models.Model):
         verbose_name_plural='Orders'
 
     def __str__(self):
-        return f"{self.user.phone_number}"
+        return f"{self.user.email}"
 
 
 class OrderItemModel(models.Model):

@@ -14,7 +14,7 @@ class OrderAdmin(admin.ModelAdmin):
         "created_time"
         )
 
-    search_fields=("user__phone_number", )
+    search_fields=("user__email", )
     list_filter=("user" , "status")
 
 
@@ -30,7 +30,7 @@ class OrderItemAdmin(admin.ModelAdmin):
         "created_time"
         )
 
-    search_fields=("order_user__phone_number", )
+    search_fields=("order_user__email", )
     list_filter=("product" ,)
 
 
@@ -67,6 +67,6 @@ class UserAddressAdmin(admin.ModelAdmin):
         "created_time"
         )
 
-    search_fields=("user__phone_number",)
+    search_fields=("user__email",)
     list_filter=("user" ,"state" , "city")
 
