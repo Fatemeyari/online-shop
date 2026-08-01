@@ -210,7 +210,6 @@
 
 
                 <!-- Address -->
-
                 <div class="checkout-card">
 
                     <div class="card-title">
@@ -218,148 +217,68 @@
                         <i class="fa-solid fa-location-dot"></i>
 
                         <h2>
-
-                            آدرس ارسال
-
+                            انتخاب آدرس ارسال
                         </h2>
 
                     </div>
-                                        <div class="form-grid">
 
-                        <!-- Province -->
+                    <div class="address-list">
 
-                        <div class="form-group">
+                        {% for address in addresses %}
 
-                            <label>
+                        <label class="address-card">
 
-                                استان
+                            <input 
+                                type="radio"
+                                name="address_id"
+                                value="{{address.id}}"
+                                {% if forloop.first %}
+                                    checked
+                                {% endif %}
+                            >
 
-                            </label>
+                            <div class="address-content">
 
-                            <select name="province">
+                                <p>
 
-                                <option value="">انتخاب استان</option>
+                                    {{address.state}}
+                                    -
+                                    {{address.city}}
 
-                                {% for province in provinces %}
+                                </p>
 
-                                    <option value="{{ province.id }}">
+                                <p>
 
-                                        {{ province.name }}
+                                    {{address.address}}
 
-                                    </option>
+                                </p>
 
-                                {% endfor %}
+                                <p>
+                                    کدپستی:
+                                    {{address.zip_code}}
+                                </p>
 
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- City -->
-
-                        <div class="form-group">
-
-                            <label>
-
-                                شهر
-
-                            </label>
-
-                            <select name="city">
-
-                                <option value="">
-
-                                    ابتدا استان را انتخاب کنید
-
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- Postal Code -->
-
-                        <div class="form-group">
-
-                            <label>
-
-                                کد پستی
-
-                            </label>
-
-                            <input
-                                type="text"
-                                name="postal_code"
-                                placeholder="1234567890">
-
-                        </div>
-
-
-
-                        <!-- Unit -->
-
-                        <div class="form-group">
-
-                            <label>
-
-                                پلاک / واحد
-
-                            </label>
-
-                            <input
-                                type="text"
-                                name="unit"
-                                placeholder="مثلاً پلاک ۱۲ - واحد ۳">
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Full Address -->
-
-                    <div class="form-group full-width">
-
-                        <label>
-
-                            آدرس کامل
+                            </div>
 
                         </label>
 
-                        <textarea
-                            name="address"
-                            rows="5"
-                            placeholder="آدرس کامل محل تحویل سفارش را وارد کنید..."></textarea>
+                        {% empty %}
+
+                        <p>
+                            هنوز آدرسی ثبت نکرده‌اید.
+                        </p>
+
+                        {% endfor %}
 
                     </div>
+                    <a href="{% url 'dashboard:customer:address-create' %}"
+                    class="add-address-btn">
 
+                        + افزودن آدرس جدید
 
-
-                    <!-- Order Note -->
-
-                    <div class="form-group full-width">
-
-                        <label>
-
-                            توضیحات سفارش
-
-                            <small>(اختیاری)</small>
-
-                        </label>
-
-                        <textarea
-                            name="description"
-                            rows="3"
-                            placeholder="مثلاً زنگ واحد خراب است، قبل از ارسال تماس بگیرید."></textarea>
-
-                    </div>
+                    </a>
 
                 </div>
-
 
 
                 <!-- Shipping Method -->
@@ -377,7 +296,7 @@
                         </h2>
 
                     </div>
-                                        <div class="shipping-grid">
+                    <div class="shipping-grid">
 
                         <!-- Post -->
 
@@ -418,89 +337,6 @@
                             </span>
 
                         </label>
-
-
-
-                        <!-- Tipax -->
-
-                        <label class="shipping-card">
-
-                            <input
-                                type="radio"
-                                name="shipping"
-                                value="tipax">
-
-                            <div class="shipping-icon">
-
-                                <i class="fa-solid fa-truck"></i>
-
-                            </div>
-
-                            <div class="shipping-info">
-
-                                <h3>
-
-                                    تیپاکس
-
-                                </h3>
-
-                                <p>
-
-                                    تحویل ۱ تا ۲ روز کاری
-
-                                </p>
-
-                            </div>
-
-                            <span class="shipping-price">
-
-                                ۸۰,۰۰۰ تومان
-
-                            </span>
-
-                        </label>
-
-
-
-                        <!-- Express -->
-
-                        <label class="shipping-card">
-
-                            <input
-                                type="radio"
-                                name="shipping"
-                                value="express">
-
-                            <div class="shipping-icon">
-
-                                <i class="fa-solid fa-bolt"></i>
-
-                            </div>
-
-                            <div class="shipping-info">
-
-                                <h3>
-
-                                    ارسال فوری
-
-                                </h3>
-
-                                <p>
-
-                                    تحویل امروز
-
-                                </p>
-
-                            </div>
-
-                            <span class="shipping-price">
-
-                                ۱۲۰,۰۰۰ تومان
-
-                            </span>
-
-                        </label>
-
                     </div>
 
                 </div>
@@ -524,7 +360,7 @@
                     </div>
 
                     <div class="payment-grid">
-                                            <!-- Online Payment -->
+                        <!-- Online Payment -->
 
                         <label class="payment-card">
 
@@ -558,49 +394,11 @@
 
                         </label>
 
-
-
-                        <!-- Cash On Delivery -->
-
-                        <label class="payment-card">
-
-                            <input
-                                type="radio"
-                                name="payment"
-                                value="cash">
-
-                            <div class="payment-icon">
-
-                                <i class="fa-solid fa-money-bill-wave"></i>
-
-                            </div>
-
-                            <div class="payment-info">
-
-                                <h3>
-
-                                    پرداخت هنگام تحویل
-
-                                </h3>
-
-                                <p>
-
-                                    پرداخت نقدی هنگام دریافت سفارش
-
-                                </p>
-
-                            </div>
-
-                        </label>
-
                     </div>
 
                 </div>
 
             </div>
-
-
-
             <!-- ==========================
                     ORDER SUMMARY
             =========================== -->
@@ -625,7 +423,7 @@
 
                         <strong>
 
-                            {{ cart.total_quantity }}
+                            {{ total_quantity }}
 
                         </strong>
 
@@ -641,7 +439,7 @@
 
                         <strong>
 
-                            {{ cart.total_price }} تومان
+                            {{ total_price }} تومان
 
                         </strong>
 
@@ -657,7 +455,7 @@
 
                         <strong>
 
-                            ۵۰,۰۰۰ تومان
+                            50000 تومان
 
                         </strong>
 
@@ -673,7 +471,7 @@
 
                         <strong>
 
-                            {{ cart.discount|default:"۰" }} تومان
+                            {{ total_discount }} تومان
 
                         </strong>
 
@@ -722,7 +520,7 @@
 
                         <strong>
 
-                            {{ cart.final_price }} تومان
+                            {{ final_price }} تومان 
 
                         </strong>
 
@@ -739,7 +537,7 @@
                     </button>
 
                 </div>
-                                <!-- Trust Features -->
+                <!-- Trust Features -->
 
                 <div class="trust-box">
 
