@@ -1,6 +1,6 @@
 from django import forms
-
-from order.models import UserAddressModel
+from django.utils import timezone
+from order.models import UserAddressModel , CouponModel
 
 class CheckOutForm(forms.Form):
     address_id = forms.IntegerField(required=True)
@@ -12,6 +12,10 @@ class CheckOutForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         address_id = cleaned_data.get("address_id")
+        if not address_id:
+            raise forms.ValidationError(
+                "لطفا آدرس را انتخاب کنید."
+            )
         try:
             address = UserAddressModel.objects.get(
                 id=address_id,
@@ -23,3 +27,5 @@ class CheckOutForm(forms.Form):
             )
         cleaned_data["address"] = address
         return cleaned_data
+
+ 
