@@ -7,163 +7,332 @@
 {{ block.super }}
 
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 {% endblock %}
 
-
 {% block content %}
+
 <section class="checkout-page">
 
 <div class="checkout-container">
-
-    <!-- =====================
+    <!-- ==========================
             HEADER
-    ====================== -->
+    =========================== -->
+
     <div class="checkout-header">
 
         <h1>
-            ثبت سفارش
+            تکمیل سفارش
         </h1>
 
         <p>
-            اطلاعات خود را وارد کنید و سفارش را ثبت کنید.
+            اطلاعات سفارش خود را بررسی و تکمیل کنید.
         </p>
 
     </div>
-    <!-- =====================
-            FORM
-    ====================== -->
-    <form method="post">
+    <!-- ==========================
+            STEPS
+    =========================== -->
+    <div class="checkout-steps">
 
-        {% csrf_token %}
+        <div class="step completed">
 
-        <div class="checkout-layout">
-        <!-- =====================
-                CONTENT
-        ====================== -->
-        <div class="checkout-content">
+            <div class="step-circle">
 
-            <!-- CUSTOMER INFO -->
-            <div class="checkout-card">
-
-                <div class="card-title">
-
-                    <i class="fa-solid fa-user"></i>
-
-                    <h2>
-                        اطلاعات گیرنده
-                    </h2>
-
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label>
-                            ایمیل
-                        </label>
-
-                        <input
-                            type="email"
-                            value="{{ request.user.email }}"
-                            readonly>
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>
-                            شماره موبایل
-                        </label>
-
-                        <input
-                            type="text"
-                            name="phone"
-                            value="{{ request.user.user_profile.phone_number }}"
-                            readonly>
-
-                    </div>
-
-                </div>
+                <i class="fa-solid fa-check"></i>
 
             </div>
 
-            <!-- ADDRESS -->
-            <div class="checkout-card">
+            <span>
+                سبد خرید
+            </span>
 
-                <div class="card-title">
+        </div>
 
-                    <i class="fa-solid fa-location-dot"></i>
+        <div class="step-line active"></div>
 
-                    <h2>
-                        آدرس ارسال
-                    </h2>
+        <div class="step active">
 
-                </div>
+            <div class="step-circle">
+                2
+            </div>
 
-                <div class="address-list">
+            <span>
+                تکمیل سفارش
+            </span>
 
-                    {% for address in addresses %}
+        </div>
 
-                    <label class="address-card">
+        <div class="step-line"></div>
 
-                        <input
-                            type="radio"
-                            name="address_id"
-                            value="{{ address.id }}"
-                            {% if forloop.first %}
-                                checked
-                            {% endif %}
-                            required>
+        <div class="step">
 
-                        <div class="address-content">
+            <div class="step-circle">
+                3
+            </div>
 
-                            <p>
+            <span>
+                پرداخت
+            </span>
 
-                                {{ address.state }}
-                                -
-                                {{ address.city }}
+        </div>
 
-                            </p>
+    </div>
+    <!-- ==========================
+            MAIN LAYOUT
+    =========================== -->
 
-                            <p>
+    <div class="checkout-layout">
+        <!-- ==========================
+                LEFT CONTENT
+        =========================== -->
 
-                                {{ address.address }}
+        <div class="checkout-content">
 
-                            </p>
+            <form method="post"
+                action="{% url 'order:checkout' %}">
 
-                            <p>
+                {% csrf_token %}
 
-                                کدپستی:
-                                {{ address.zip_code }}
+                <!-- USER INFO -->
 
-                            </p>
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <h2>
+                            اطلاعات گیرنده
+                        </h2>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                ایمیل
+                            </label>
+
+                            <input
+                                type="email"
+                                value="{{ request.user.email }}"
+                                readonly>
 
                         </div>
 
-                    </label>
+                        <div class="form-group">
 
-                    {% empty %}
-                    <p>
-                        هنوز آدرسی ثبت نکرده‌اید.
-                    </p>
-                    {% endfor %}
+                            <label>
+                                شماره موبایل
+                            </label>
+
+                            <input
+                                type="text"
+                                value="{{ request.user.user_profile.phone_number }}"
+                                readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- ADDRESS -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h2>
+                            آدرس ارسال
+                        </h2>
+
+                    </div>
+
+                    <div class="address-list">
+
+                        {% for address in addresses %}
+
+                        <label class="address-card">
+
+                            <input
+                                type="radio"
+                                name="address_id"
+                                value="{{ address.id }}"
+                                {% if forloop.first %}
+                                checked
+                                {% endif %}
+                                required>
+
+                            <div class="address-content">
+
+                                <h3>
+
+                                    {{ address.state }}
+                                    -
+                                    {{ address.city }}
+
+                                </h3>
+
+                                <p>
+                                    {{ address.address }}
+                                </p>
+
+                                <p>
+                                    کد پستی:
+                                    {{ address.zip_code }}
+                                </p>
+
+                            </div>
+
+                        </label>
+
+                        {% empty %}
+
+                        <p>
+                            هنوز آدرسی ثبت نشده است.
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <a href="{% url 'dashboard:customer:address-create' %}"
+                       class="add-address-btn">
+                        + افزودن آدرس جدید
+                    </a>
+
+                </div>
+                <!-- ==========================
+                        SHIPPING METHOD
+                =========================== -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-truck-fast"></i>
+
+                        <h2>
+                            روش ارسال
+                        </h2>
+
+                    </div>
+
+                    <div class="shipping-grid">
+
+                        <label class="shipping-card">
+
+                            <input
+                                type="radio"
+                                name="shipping"
+                                value="post"
+                                checked
+                                required>
+
+                            <div class="shipping-icon">
+
+                                <i class="fa-solid fa-box"></i>
+
+                            </div>
+
+                            <div class="shipping-info">
+
+                                <h3>
+                                    پست پیشتاز
+                                </h3>
+
+                                <p>
+                                    تحویل سفارش بین ۲ تا ۴ روز کاری
+                                </p>
+
+                            </div>
+
+                            <span class="shipping-price">
+                                ۵۰,۰۰۰ تومان
+                            </span>
+
+                        </label>
+
+                    </div>
 
                 </div>
 
-                <a href="{% url 'dashboard:customer:address-create' %}"
-                   class="add-address-btn">
+                <!-- ==========================
+                        PAYMENT METHOD
+                =========================== -->
+                <div class="checkout-card">
 
-                    + افزودن آدرس جدید
-                </a>
+                    <div class="card-title">
 
-            </div>           
+                        <i class="fa-solid fa-credit-card"></i>
+
+                        <h2>
+                            روش پرداخت
+                        </h2>
+
+                    </div>
+
+                    <div class="payment-grid">
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="online"
+                                checked
+                                required>
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-credit-card"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <h3>
+                                    پرداخت آنلاین
+                                </h3>
+
+                                <p>
+                                    پرداخت امن از طریق درگاه بانکی
+                                </p>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                </div>
+                <!-- ==========================
+                        SUBMIT BUTTON
+                =========================== -->
+                <button
+                    type="submit"
+                    class="checkout-btn">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+                    ثبت سفارش و پرداخت
+
+                </button>
+
+            </form>
 
         </div>
-        <!-- end checkout-content -->
-        <!-- =====================
-                ORDER SUMMARY
-        ====================== -->
+        <!-- ==========================
+                SIDEBAR
+        =========================== -->
+
         <aside class="checkout-sidebar">
 
             <div class="summary-card">
@@ -183,51 +352,115 @@
                     </strong>
 
                 </div>
-                <div class="summary-row discount"> 
-                    <span> تخفیف </span>
-                    <strong> 
-                        {{ total_discount }} تومان 
-                    </strong> 
+
+                <div class="summary-row">
+
+                    <span>
+                        مبلغ کالاها
+                    </span>
+
+                    <strong>
+                        {{ total_price }} تومان
+                    </strong>
+
                 </div>
 
                 <div class="summary-row">
 
                     <span>
-                        جمع کالاها
+                        هزینه ارسال
                     </span>
 
                     <strong>
-                        {{ total_price }} تومان
+                        ۵۰,۰۰۰ تومان
+                    </strong>
+
+                </div>
+
+                <div class="summary-row discount">
+
+                    <span>
+                        تخفیف
+                    </span>
+
+                    <strong>
+                        {{ total_discount }} تومان
                     </strong>
 
                 </div>
 
                 <hr>
+                <!-- ==========================
+                        COUPON
+                =========================== -->
 
+                <div class="coupon-box">
+
+                    <label>
+                        کد تخفیف
+                    </label>
+
+                    {% if request.session.user_coupon %}
+
+                    <div class="coupon-input">
+
+                        <input
+                            type="text"
+                            value="کد تخفیف اعمال شد"
+                            disabled>
+
+                        <a href="#"
+                           class="remove-coupon-btn">
+                            حذف کد تخفیف
+                        </a>
+
+                    </div>
+
+                    {% else %}
+
+                    <form method="post"
+                          action="{% url 'order:applycoupon' %}">
+
+                        {% csrf_token %}
+
+                        <div class="coupon-input">
+
+                            <input
+                                type="text"
+                                name="coupon"
+                                placeholder="کد تخفیف را وارد کنید">
+
+                            <button
+                                type="submit">
+                                اعمال
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    {% endif %}
+
+                </div>
+                <!-- ==========================
+                        FINAL PRICE
+                =========================== -->
                 <div class="summary-total">
 
                     <span>
-                        مبلغ نهایی
+                        مبلغ قابل پرداخت
                     </span>
 
                     <strong>
-                        {{ total_price }} تومان
+                        {{ final_price }} تومان
                     </strong>
 
                 </div>
 
-                <button
-                    type="submit"
-                    class="checkout-btn">
-                    <i class="fa-solid fa-check"></i>
-                    ثبت سفارش
-                </button>
-
             </div>
-            <!-- =====================
+            <!-- ==========================
                     TRUST BOX
-            ====================== -->
-
+            =========================== -->
             <div class="trust-box">
 
                 <div class="trust-item">
@@ -241,33 +474,11 @@
                     <div>
 
                         <h4>
-                            ثبت سفارش امن
+                            پرداخت امن
                         </h4>
 
                         <p>
-                            اطلاعات سفارش شما با امنیت کامل ثبت و نگهداری می‌شود.
-                        </p>
-
-                    </div>
-
-                </div>
-                
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-
-                        <i class="fa-solid fa-truck"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h4>
-                            ارسال سفارش
-                        </h4>
-
-                        <p>
-                            سفارش شما پس از ثبت آماده پردازش خواهد شد.
+                            پرداخت‌های شما از طریق درگاه امن بانکی انجام می‌شود.
                         </p>
 
                     </div>
@@ -278,18 +489,40 @@
 
                     <div class="trust-icon">
 
-                        <i class="fa-solid fa-headset"></i>
+                        <i class="fa-solid fa-truck-fast"></i>
 
                     </div>
 
                     <div>
 
                         <h4>
-                            پشتیبانی
+                            ارسال سریع
                         </h4>
 
                         <p>
-                            در صورت نیاز تیم پشتیبانی پاسخگوی شما خواهد بود.
+                            سفارش شما در سریع‌ترین زمان ممکن ارسال خواهد شد.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="trust-item">
+
+                    <div class="trust-icon">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            ضمانت بازگشت کالا
+                        </h4>
+
+                        <p>
+                            امکان بازگشت کالا طبق قوانین فروشگاه وجود دارد.
                         </p>
 
                     </div>
@@ -300,13 +533,10 @@
 
         </aside>
 
-        </div>
-        <!-- end checkout-layout -->
-
-    </form>
-
+    </div>
+    <!-- END CHECKOUT LAYOUT -->
 </div>
-<!-- end checkout-container -->
+<!-- END CHECKOUT CONTAINER -->
 
 </section>
 

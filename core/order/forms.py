@@ -28,4 +28,32 @@ class CheckOutForm(forms.Form):
         cleaned_data["address"] = address
         return cleaned_data
 
- 
+class ApplyCouponForm(forms.Form):
+
+    coupon = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+
+    def clean_coupon(self):
+        code = self.cleaned_data.get("coupon")
+
+        if not code:
+            return None
+
+        try:
+            coupon = CouponModel.objects.get(code=code)
+
+        except CouponModel.DoesNotExist:
+            raise forms.ValidationError("کد تخفیف اشتباه است")
+
+        if coupon.used_by.count() >= coupon.max_limit_usage:
+            raise forms.ValidationError("محدودیت در تعداد استفاده از این کد تخفیف")
+
+        if coupon.expiration_date and coupon.expiration_data < timezone.now():
+                raise forms.ValidationError("کد تخفیف منقضی شده است")
+
+        if self.user and coupon.used_by.filter(id=self.user.id).exists():
+                raise forms.ValidationError("این کد تخفیف قبلا استفاده شده است.")
+        return coupon
