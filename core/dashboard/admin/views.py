@@ -207,3 +207,15 @@ class CouponEditView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageM
     
     def get_success_url(self):
         return reverse_lazy("dashboard:admin:coupon-list")
+
+
+class CouponDeleteView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,DeleteView):
+    template_name="dashboard/admin/coupon_delete.html"
+    success_url=reverse_lazy("dashboard:admin:coupon-list")
+    success_message= "کپن با موفقیت حذف شد."
+
+
+    def get_queryset(self):
+        return CouponModel.objects.all()
+    
+   
