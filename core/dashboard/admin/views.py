@@ -9,6 +9,7 @@ from dashboard.permissions import HasAdminAccessPermission
 from accounts.models import User , Profile
 from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet
 from shop.models import Product,ProductCategory,ProductStatusType
+from order.models import CouponModel
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
 
@@ -167,3 +168,19 @@ class AdminProductDeleteView(LoginRequiredMixin,HasAdminAccessPermission,Success
     success_message="حذف محصول با موفقیت انجام شد."
     success_url = reverse_lazy("dashboard:admin:product-list")
 
+
+class CouponListView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,ListView):
+    template_name="dashboard/admin/coupon_list.html"
+
+    def get_queryset(self):
+        queryset = CouponModel.objects.all()
+        
+        if search_q:= self.request.GET.get("coupon"):
+            queryset = queryset.filter(code__icontains=search_q)
+
+        if search_q := self.request.GET.get("order_by"):
+            try:
+                queryset = queryset.order_by(order_by)
+            except FieldError:
+                pass
+        return queryset
