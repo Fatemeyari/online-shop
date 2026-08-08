@@ -23,19 +23,19 @@
 
                 <span class="page-tag">
 
-                    مدیریت آدرس‌ها
+                    مدیریت کپن ها
 
                 </span>
 
                 <h1>
 
-                    افزودن آدرس جدید
+                    افزودن کپن جدید
 
                 </h1>
 
                 <p>
 
-                    لطفاً اطلاعات آدرس خود را با دقت وارد کنید تا سفارش‌های شما بدون مشکل ارسال شوند.
+                    لطفاً اطلاعات کپن خود را با دقت وارد کنید.
 
                 </p>
 
@@ -62,21 +62,21 @@
 
                     <div class="form-group">
 
-                        <label for="{{ form.state.id_for_label }}">
+                        <label for="{{ form.code.id_for_label }}">
 
                             <i class="fa-solid fa-map"></i>
 
-                            استان
+                            کپن
 
                         </label>
 
-                        {{ form.state }}
+                        {{ form.code }}
 
-                        {% if form.state.errors %}
+                        {% if form.code.errors %}
 
                             <small class="form-error">
 
-                                {{ form.state.errors|striptags }}
+                                {{ form.code.errors|striptags }}
 
                             </small>
 
@@ -86,25 +86,22 @@
 
 
 
-                    <!-- City -->
 
                     <div class="form-group">
 
-                        <label for="{{ form.city.id_for_label }}">
+                        <label for="{{ form.discount_percent.id_for_label }}">
 
                             <i class="fa-solid fa-city"></i>
-
-                            شهر
-
+                            درصد تخفیف
                         </label>
 
-                        {{ form.city }}
+                        {{ form.discount_percent }}
 
-                        {% if form.city.errors %}
+                        {% if form.discount_percent.errors %}
 
                             <small class="form-error">
 
-                                {{ form.city.errors|striptags }}
+                                {{ form.discount_percent.errors|striptags }}
 
                             </small>
 
@@ -114,25 +111,24 @@
 
 
 
-                    <!-- Zip Code -->
 
                     <div class="form-group">
 
-                        <label for="{{ form.zip_code.id_for_label }}">
+                        <label for="{{ form.max_limit_usage.id_for_label }}">
 
                             <i class="fa-solid fa-envelope"></i>
 
-                            کد پستی
+                            تعداد مجاز استفاده 
 
                         </label>
 
-                        {{ form.zip_code }}
+                        {{ form.max_limit_usage }}
 
-                        {% if form.zip_code.errors %}
+                        {% if form.max_limit_usage.errors %}
 
                             <small class="form-error">
 
-                                {{ form.zip_code.errors|striptags }}
+                                {{ form.max_limit_usage.errors|striptags }}
 
                             </small>
 
@@ -142,25 +138,66 @@
 
 
 
-                    <!-- Address -->
 
                     <div class="form-group full-width">
 
-                        <label for="{{ form.address.id_for_label }}">
+                        <label for="{{ form.used_by.id_for_label }}">
 
                             <i class="fa-solid fa-location-dot"></i>
-
-                            آدرس کامل
-
+                            کاربرهای استفاده کرده
                         </label>
 
-                        {{ form.address }}
+                        {{ form.used_by }}
 
-                        {% if form.address.errors %}
+                        {% if form.used_by.errors %}
 
                             <small class="form-error">
 
-                                {{ form.address.errors|striptags }}
+                                {{ form.used_by.errors|striptags }}
+
+                            </small>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group full-width">
+
+                        <label for="{{ form.expiration_date.id_for_label }}">
+
+                            <i class="fa-solid fa-location-dot"></i>
+                            تاریخ انقضا
+                        </label>
+
+                        {{ form.expiration_date }}
+
+                        {% if form.expiration_date.errors %}
+
+                            <small class="form-error">
+
+                                {{ form.expiration_date.errors|striptags }}
+
+                            </small>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group full-width">
+
+                        <label for="{{ form.is_default.id_for_label }}">
+
+                            <i class="fa-solid fa-location-dot"></i>
+                            کد تخفیف پیش فرض
+                        </label>
+
+                        {{ form.is_default }}
+
+                        {% if form.is_default.errors %}
+
+                            <small class="form-error">
+
+                                {{ form.is_default.errors|striptags }}
 
                             </small>
 
@@ -185,7 +222,7 @@
 
                         <i class="fa-solid fa-floppy-disk"></i>
 
-                        ثبت آدرس
+                        ثبت کپن
 
                     </button>
 

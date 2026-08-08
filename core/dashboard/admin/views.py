@@ -7,9 +7,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from dashboard.permissions import HasAdminAccessPermission
 from accounts.models import User , Profile
-from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet
+from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet , AdminCouponForm
 from shop.models import Product,ProductCategory,ProductStatusType
 from order.models import CouponModel
+
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
 
@@ -184,3 +185,14 @@ class CouponListView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageM
             except FieldError:
                 pass
         return queryset
+
+class CouponCreateView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,CreateView):
+    template_name="dashboard/admin/coupon_create.html"
+    form_class=AdminCouponForm
+    success_message= "کپن با موفقیت ثبت شد."
+
+    def get_queryset(self):
+        return CouponModel.objects.all()
+
+    def get_success_url(self):
+        return reverse_lazy("dashboard:admin:coupon-list")

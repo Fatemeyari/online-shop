@@ -6,6 +6,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from accounts.models import Profile
 from shop.models import Product , ProductImage
+from order.models import CouponModel
 
 class AdminPasswordChangeForm(auth_forms.PasswordChangeForm):
     error_messages={
@@ -42,3 +43,17 @@ ProductImageFormSet = inlineformset_factory(
     can_delete=True
 
 )
+
+class AdminCouponForm(forms.ModelForm):
+    class Meta:
+        model=CouponModel
+        fields=["code" , "discount_percent" , "max_limit_usage" , "used_by" , "expiration_date" , "is_default"]
+
+
+        widgets = {
+                "expiration_date": forms.DateInput(
+                    attrs={
+                        "type": "date",
+                    }
+                ),
+            }
