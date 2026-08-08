@@ -196,3 +196,14 @@ class CouponCreateView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessag
 
     def get_success_url(self):
         return reverse_lazy("dashboard:admin:coupon-list")
+
+class CouponEditView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,UpdateView):
+    template_name="dashboard/admin/coupon_edit.html"
+    form_class=AdminCouponForm
+    success_message= "کپن با موفقیت تغییر یافت."
+
+    def get_queryset(self):
+        return CouponModel.objects.all()
+    
+    def get_success_url(self):
+        return reverse_lazy("dashboard:admin:coupon-list")
