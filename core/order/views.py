@@ -124,7 +124,14 @@ class ApplyCouponView(LoginRequiredMixin,HasCustomerAccessPermission,View):
         messages.success(request ,"کد تخفیف با موفقیت اعمال شد.")
 
         return redirect("order:checkout")
-
+ 
+class DeleteCouponView(LoginRequiredMixin,HasCustomerAccessPermission,View):
+    template_name="order/checkout.html"
+    def get(self , request):
+        cart=CartModel.objects.get(user=self.request.user)
+        request.session.pop("user_coupon", None)
+        request.session.pop("user_total_price", None)
+        return redirect("order:checkout")
 
 class OrderCompleteView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
     template_name="order/completed.html"
