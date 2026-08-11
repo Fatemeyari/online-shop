@@ -50,6 +50,7 @@ class UserAddressModel(models.Model):
 
 class OrderModel(models.Model):
     user = models.ForeignKey('accounts.User' , on_delete=models.PROTECT, related_name="orders")
+    payment = models.ForeignKey('payment.PayMentModel' , on_delete=models.SET_NULL,null=True , blank=True )
     address=models.ForeignKey(UserAddressModel , on_delete=models.CASCADE, related_name="orders")
     total_price=models.DecimalField(default=0 , max_digits=10 , decimal_places=0)
     status=models.IntegerField(choices=OrderStatusType.choices, default=OrderStatusType.pending.value)
