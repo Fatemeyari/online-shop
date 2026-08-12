@@ -10,3 +10,4 @@ celery==5.4.0
 redis==5.0.1
 Faker==40.23.0
 django-ckeditor==6.7.2
+requests==2.34.2
