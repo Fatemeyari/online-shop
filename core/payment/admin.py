@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import PayMentModel 
 
 @admin.register(PayMentModel)
-class OrderAdmin(admin.ModelAdmin):
+class PayMentAdmin(admin.ModelAdmin):
     list_display=(
         "id",
         "authority_id" ,

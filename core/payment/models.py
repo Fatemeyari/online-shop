@@ -16,3 +16,11 @@ class PayMentModel(models.Model):
     status = models.IntegerField(choices=PaymentStatusType.choices , default=PaymentStatusType.pending.value)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering=['-created_time']
+        verbose_name='Payment'
+        verbose_name_plural='Payments'
+
+    def __str__(self):
+        return f"{self.authority_id}"
