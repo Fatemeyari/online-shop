@@ -10,7 +10,8 @@ from order.forms import CheckOutForm,ApplyCouponForm
 from cart.models import CartModel
 from cart.cart import CartSession
 from decimal import Decimal
-
+from payment.zarinpal_client import ZarinPalSandBox
+from payment.models import PayMentModel
 
 class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView):
     template_name="order/checkout.html"
@@ -24,9 +25,10 @@ class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView)
 
     def form_valid(self , form):
 
+
         user=self.request.user
         cleaned_data=form.cleaned_data
-
+        
         address = cleaned_data['address_id']
         address = UserAddressModel.objects.get(id=address)
         
@@ -47,15 +49,19 @@ class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView)
 
         self.create_order_items(order , cart)
         order.save()
+
         if coupon:
             coupon.used_by.add(user)
+
+        
         self.clear_cart(cart)
+
         self.request.session.pop("user_coupon", None)
         self.request.session.pop("user_total_price", None)
-        return redirect("order:completed")
-     
- 
-        
+
+        return redirect(self.create_payment(order))      
+
+    
       
     def create_order(self , address , total_price, coupon=None):
         return OrderModel.objects.create(
@@ -78,6 +84,22 @@ class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView)
     def clear_cart(self , cart):
         cart.cart_items.all().delete()
         CartSession(self.request.session).clear()
+
+    def create_payment(self , order):
+        zarinpal = ZarinPalSandBox()
+        response = zarinpal.payment_request(order.total_price)
+        print(response)
+        payment_obj= PayMentModel.objects.create(
+            authority_id = response["data"]["authority"],
+            amount = order.total_price
+
+        )
+        order.payment = payment_obj
+        order.save()
+        return zarinpal.generate_payment_url(response["data"]["authority"])
+
+
+
           
     def form_invalid(self, form):
         return super().form_invalid(form)
@@ -133,5 +155,7 @@ class DeleteCouponView(LoginRequiredMixin,HasCustomerAccessPermission,View):
         request.session.pop("user_total_price", None)
         return redirect("order:checkout")
 
+
 class OrderCompleteView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
+    
     template_name="order/completed.html"
