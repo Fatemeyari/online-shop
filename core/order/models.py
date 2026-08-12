@@ -4,9 +4,10 @@ from django.core.validators import MaxValueValidator , MinValueValidator
 class OrderStatusType(models.IntegerChoices):
     pending = 1 , "در حالت انتظار"
     processing = 2, "در حال پرداخت"
-    shipped = 3 , "ارسال شده"
-    delivered = 4 ,"تحویل شده"
-    canceled = 5 , "لغو شده"
+    success = 3 , "پرداخت موفق"
+    failed = 4 , "پرداخت ناموفق"
+    shipped = 5 , "ارسال شده"
+    canceled = 6 , "لغو شده"
 
 class CouponModel(models.Model):
     code=models.CharField(max_length=100)

@@ -51,7 +51,7 @@ class ApplyCouponForm(forms.Form):
         if coupon.used_by.count() >= coupon.max_limit_usage:
             raise forms.ValidationError("محدودیت در تعداد استفاده از این کد تخفیف")
 
-        if coupon.expiration_date and coupon.expiration_data < timezone.now():
+        if coupon.expiration_date and coupon.expiration_date < timezone.now():
                 raise forms.ValidationError("کد تخفیف منقضی شده است")
 
         if self.user and coupon.used_by.filter(id=self.user.id).exists():
