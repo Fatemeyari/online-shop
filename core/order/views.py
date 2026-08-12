@@ -159,3 +159,8 @@ class DeleteCouponView(LoginRequiredMixin,HasCustomerAccessPermission,View):
 class OrderCompleteView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
     
     template_name="order/completed.html"
+
+class OrderFailedView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
+    template_name="order/failed.html"
+    
+ 

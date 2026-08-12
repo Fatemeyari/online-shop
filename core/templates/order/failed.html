@@ -9,46 +9,43 @@
 
 {% block content %}
 
-  
-    <section class="order-result-page">
+<section class="order-result-page">
 
     <div class="order-result-container">
 
-        <div class="order-result-card success-card">
+        <div class="order-result-card failed-card">
 
-            <!-- Success Icon -->
+            <!-- Failed Icon -->
 
-            <div class="result-icon success-icon">
+            <div class="result-icon failed-icon">
 
-                <i class="fa-solid fa-check"></i>
+                <i class="fa-solid fa-xmark"></i>
 
             </div>
 
 
-            <!-- Title -->
+            <!-- Content -->
 
             <div class="result-content">
 
-                <span class="result-label">
+                <span class="result-label failed-label">
 
-                    پرداخت موفق
+                    پرداخت ناموفق
 
                 </span>
 
                 <h1>
 
-                    سفارش شما با موفقیت ثبت شد
+                    ثبت سفارش انجام نشد
 
                 </h1>
 
                 <p>
 
-                    پرداخت شما با موفقیت انجام شد و سفارش شما
-                    برای پردازش و ارسال آماده شده است.
+                    متأسفانه پرداخت سفارش شما با موفقیت انجام نشد.
+                    لطفاً دوباره تلاش کنید.
 
                 </p>
-
-            </div>
 
             </div>
 
@@ -63,5 +60,10 @@
 
             </div>
 
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}
