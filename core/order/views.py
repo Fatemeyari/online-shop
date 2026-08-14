@@ -1,10 +1,9 @@
 from django.shortcuts import render , redirect
 from django.views.generic import FormView , TemplateView , View
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
-from order.permissions import HasCustomerAccessPermission
+from order.permissions import HasCustomerAccessPermission,HasCartCustomerPermission
 from order.models import UserAddressModel , OrderModel ,OrderItemModel ,CouponModel
 from order.forms import CheckOutForm,ApplyCouponForm
 from cart.models import CartModel
@@ -13,7 +12,7 @@ from decimal import Decimal
 from payment.zarinpal_client import ZarinPalSandBox
 from payment.models import PayMentModel
 
-class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView):
+class OrderCheckOutView(LoginRequiredMixin,HasCartCustomerPermission,FormView):
     template_name="order/checkout.html"
     form_class=CheckOutForm
     success_url=reverse_lazy("order:completed")
@@ -23,9 +22,9 @@ class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView)
         kwargs["user"] = self.request.user
         return kwargs
 
+    
     def form_valid(self , form):
-
-
+       
         user=self.request.user
         cleaned_data=form.cleaned_data
         
@@ -88,7 +87,6 @@ class OrderCheckOutView(LoginRequiredMixin,HasCustomerAccessPermission,FormView)
     def create_payment(self , order):
         zarinpal = ZarinPalSandBox()
         response = zarinpal.payment_request(order.total_price)
-        print(response)
         payment_obj= PayMentModel.objects.create(
             authority_id = response["data"]["authority"],
             amount = order.total_price
@@ -135,8 +133,6 @@ class ApplyCouponView(LoginRequiredMixin,HasCustomerAccessPermission,View):
             messages.error(request ,"لطفا کد تخفییف را وارد کنید.")
             return redirect("order:checkout")
 
-
-            
         cart=CartModel.objects.get(user=request.user)
         total_price = cart.calculate_total_price()
         discount = (total_price * Decimal(coupon.discount_percent)) / 100

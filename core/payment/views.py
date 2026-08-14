@@ -30,8 +30,6 @@ class PaymentVerifyView(View):
             payment_obj.authority_id
         )
 
-        print("VERIFY RESPONSE:", response)
-
         data = response.get("data", {})
 
         ref_id = data.get("ref_id")
@@ -54,7 +52,7 @@ class PaymentVerifyView(View):
             if status_code in {100, 101}
             else OrderStatusType.failed.value
         )
-
+        
         order.save()
 
         if status_code in {100, 101}:

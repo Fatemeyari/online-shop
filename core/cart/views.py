@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View ,TemplateView
-
+from django.contrib import messages
 from django.http import JsonResponse
 
 from shop.models import Product ,ProductStatusType
@@ -11,7 +11,6 @@ class SessionAddProductView(View):
     def post(self,request,*args, **kwargs):
         cart=CartSession(request.session)
         product_id=request.POST.get("product_id")
-        print(product_id)
         if product_id and Product.objects.filter(id=product_id , status=ProductStatusType.publish.value).exists():
             cart.add_product(product_id)
         if request.user.is_authenticated:
@@ -52,7 +51,7 @@ class RemoveProductView(View):
     
 class CartSummaryView(TemplateView):
     template_name="cart/cart_summary.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart=CartSession(self.request.session)
