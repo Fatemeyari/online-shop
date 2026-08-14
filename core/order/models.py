@@ -2,12 +2,12 @@ from django.db import models
 from django.core.validators import MaxValueValidator , MinValueValidator
 
 class OrderStatusType(models.IntegerChoices):
-    pending = 1 , "در حالت انتظار"
-    processing = 2, "در حال پرداخت"
-    success = 3 , "پرداخت موفق"
-    failed = 4 , "پرداخت ناموفق"
-    shipped = 5 , "ارسال شده"
-    canceled = 6 , "لغو شده"
+    pending = 1 , " در انتظار پرداخت"
+    success = 2 , "پرداخت موفق"
+    failed = 3 , "پرداخت ناموفق"
+
+
+
 
 class CouponModel(models.Model):
     code=models.CharField(max_length=100)
