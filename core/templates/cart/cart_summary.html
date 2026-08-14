@@ -326,16 +326,8 @@
                     </strong>
 
                 </div>
-
-                <a href="{% url 'order:checkout' %}" class="checkout-btn">
-
-                    <i class="fa-solid fa-credit-card"></i>
-
-                    ادامه فرایند پرداخت
-
-                </a>
-
-                <a
+                {% if not cart_items %}
+                 <a
                     href="{% url 'shop:product-grid' %}"
                     class="continue-btn">
 
@@ -344,7 +336,18 @@
                     ادامه خرید
 
                 </a>
-                                <!-- باکس پرداخت امن -->
+                 
+                {% else %}
+                <a href="{% url 'order:checkout' %}" class="checkout-btn">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    ادامه فرایند پرداخت
+
+                </a>
+                {% endif %}
+               
+                <!-- باکس پرداخت امن -->
 
                 <div class="secure-box">
 
