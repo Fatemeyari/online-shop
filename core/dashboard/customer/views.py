@@ -142,6 +142,12 @@ class CustomerFailedOrderListView(LoginRequiredMixin,HasCustomerAccessPermission
         return context
 
 
+class CustomerOrderDetailView(LoginRequiredMixin,HasCustomerAccessPermission,DetailView):
+    template_name="dashboard/customer/order_detail.html"
+
+    def get_queryset(self):
+        return OrderModel.objects.filter(user=self.request.user)
+
 
 
 
