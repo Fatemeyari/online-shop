@@ -1,0 +1,472 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet"
+      href="{% static 'css/order_list.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="orders-page">
+
+    <div class="orders-container">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="orders-header">
+
+            <div class="orders-header-content">
+
+                <span class="page-tag">
+
+
+                    {% if request.GET.status == "failed" %}
+
+                        سفارش‌های ناموفق
+
+                    {% else %}
+
+                        سفارش‌های من
+
+                    {% endif %}
+
+                </span>
+
+
+                <h1>
+
+                
+                    {% if request.GET.status == "failed" %}
+
+                        سفارش‌های ناموفق
+
+                    {% else %}
+
+                        سفارش‌های شما
+
+                    {% endif %}
+
+                </h1>
+
+
+                <p>
+
+                
+                    {% if request.GET.status == "failed" %}
+
+                        سفارش‌هایی که پرداخت یا ثبت آن‌ها با موفقیت انجام نشده است.
+
+                    {% else %}
+
+                        در این بخش می‌توانید سفارش‌های خود را مشاهده و پیگیری کنید.
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+
+            <div class="orders-header-icon">
+
+                {% if request.GET.status == "failed" %}
+
+                    <i class="fa-solid fa-circle-xmark"></i>
+
+                {% else %}
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+        <!-- ================= ORDERS ================= -->
+
+        <div class="orders-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        {% if request.GET.status == "failed" %}
+
+                            سفارش‌های ناموفق
+
+                        {% else %}
+
+                            سفارش‌های شما
+
+                        {% endif %}
+
+                    </h2>
+
+
+                    <span>
+
+                        {{ failed_orders.count }} سفارش
+
+                    </span>
+
+                </div>
+
+
+                <div class="section-icon
+                    {% if request.GET.status == 'failed' %}
+                        cancelled-icon
+                    {% else %}
+                        active-icon
+                    {% endif %}">
+
+                    {% if request.GET.status == "failed" %}
+
+                        <i class="fa-solid fa-ban"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            {% if failed_orders %}
+
+                <div class="orders-list">
+
+
+                    {% for order in failed_orders %}
+
+                        <article class="order-card">
+
+
+                            <!-- Order Information -->
+
+                            <div class="order-main">
+
+
+                                <div class="order-info">
+
+                                    <span>
+
+                                        شماره سفارش
+
+                                    </span>
+
+                                    <strong>
+
+                                        #{{ order.id }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="order-info">
+
+                                    <span>
+
+                                        کاربر
+
+                                    </span>
+
+                                    <strong>
+
+                                        {{ order.user.user_profile.get_fullname }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="order-info">
+
+                                    <span>
+
+                                        تاریخ ثبت
+
+                                    </span>
+
+                                    <strong>
+
+                                        {{ order.created_time|date:"Y/m/d" }}
+
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- Price -->
+
+                            <div class="order-price">
+
+                                <span>
+
+                                    مبلغ سفارش
+
+                                </span>
+
+                                <strong>
+
+                                    {{ order.total_price|floatformat:0 }}
+
+                                    <small>
+
+                                        تومان
+
+                                    </small>
+
+                                </strong>
+
+                            </div>
+
+
+                            <!-- Status -->
+
+                            <div class="order-status">
+
+                                <span>
+
+                                    وضعیت
+
+                                </span>
+
+
+                                {% if request.GET.status == "success" %}
+
+                                    <span class="status-badge status-success">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        {{ order.get_status_display }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-badge status-failed">
+
+                                        <i class="fa-solid fa-circle-xmark"></i>
+
+                                        {{ order.get_status_display }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- Invoice -->
+
+                            <div class="order-action">
+
+                                <a href="#"
+                                   class="invoice-btn">
+
+                                    <i class="fa-solid fa-file-invoice"></i>
+
+                                    مشاهده فاکتور
+
+                                </a>
+                                <a href="{% url 'dashboard:customer:order-detail' order.pk %}"
+                                   class="invoice-btn">
+
+                                    <i class="fa-solid fa-file-invoice"></i>
+
+                                   مشاهده سفارش 
+
+                                </a>
+
+                            </div>
+                          
+
+
+                        </article>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- Empty State -->
+
+                <div class="empty-orders">
+
+
+                    <div class="empty-orders-icon">
+
+                        {% if request.GET.status == "failed" %}
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        {% else %}
+
+                            <i class="fa-solid fa-box-open"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <h3>
+
+                      
+
+                        {% if request.GET.status == "failed" %}
+
+                            سفارش ناموفقی ندارید
+
+                        {% else %}
+
+                            هنوز سفارشی ثبت نکرده‌اید
+
+                        {% endif %}
+
+                    </h3>
+
+
+                    <p>
+
+                      
+
+                        {% if request.GET.status == "failed" %}
+
+                            سفارش‌هایی که پرداخت آن‌ها ناموفق باشد در این قسمت نمایش داده می‌شوند.
+
+                        {% else %}
+
+                            سفارش‌های شما در این قسمت نمایش داده خواهند شد.
+
+                        {% endif %}
+
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+        </div>
+                <!-- ================= PAGINATION ================= -->
+
+        {% if page_obj.has_other_pages %}
+
+            <div class="orders-pagination">
+
+
+                {% if page_obj.has_previous %}
+
+                    <a
+                        class="pagination-btn"
+                        href="?page={{ page_obj.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                        قبلی
+
+                    </a>
+
+                {% endif %}
+
+
+
+                <div class="pagination-pages">
+
+
+                    {% for page in page_obj.paginator.page_range %}
+
+                        {% if page == page_obj.number %}
+
+                            <span class="pagination-number active">
+
+                                {{ page }}
+
+                            </span>
+
+
+                        {% elif page >= page_obj.number|add:"-2" and page <= page_obj.number|add:"2" %}
+
+                            <a
+                                class="pagination-number"
+                                href="?page={{ page }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">
+
+                                {{ page }}
+
+                            </a>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                </div>
+
+
+
+                {% if page_obj.has_next %}
+
+                    <a
+                        class="pagination-btn"
+                        href="?page={{ page_obj.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">
+
+                        بعدی
+
+                        <i class="fa-solid fa-angle-left"></i>
+
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- ================= BACK ================= -->
+
+        <div class="orders-footer">
+
+            <a href="javascript:history.back()"
+               class="back-btn">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
