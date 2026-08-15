@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block extra_css %}
 
 {{ block.super }}
 
-<link rel="stylesheet" href="{% static 'css/customer_home.css' %}">
+<link rel="stylesheet"
+      href="{% static 'css/customer_home.css' %}">
 
 {% endblock %}
 
@@ -14,149 +16,238 @@
 
 <section class="dashboard-page">
 
-<div class="dashboard-container">
+    <div class="dashboard-container">
 
-    <!-- ================= SIDEBAR ================= -->
 
-    <aside class="dashboard-sidebar">
+        <!-- ================= SIDEBAR ================= -->
 
-        <div class="profile-box">
+        <aside class="dashboard-sidebar">
 
-            <div class="profile-avatar">
+
+            <!-- Profile -->
+
+            <div class="profile-box">
+
+                <div class="profile-avatar">
 
                     {% if request.user.user_profile.image %}
+
                         <img
                             src="{{ request.user.user_profile.image.url }}"
                             alt="Profile Image">
+
                     {% else %}
+
                         <i class="fa-solid fa-user"></i>
+
                     {% endif %}
 
-            </div>
-
-            <h3>
-                {{ request.user.user_profile.get_fullname }}
-            </h3>
-
-            <span>
-                {{ request.user.email }}
-            </span>
-
-    </div>
+                </div>
 
 
-        <div class="sidebar-menu">
+                <h3>
 
-            <a href="#" class="active">
+                    {{ request.user.user_profile.get_fullname }}
 
-                <i class="fa-solid fa-house"></i>
+                </h3>
 
-                <span>داشبورد</span>
+                <span>
 
-            </a>
+                    {{ request.user.email }}
 
-
-            <a href="{% url 'dashboard:customer:profile-edit' %}">
-
-                <i class="fa-solid fa-user-gear"></i>
-
-                <span>تنظیمات پروفایل</span>
-
-            </a>
-
-
-            <a href="{% url 'dashboard:customer:security-edit' %}">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-                <span>امنیت</span>
-
-            </a>
-
-
-            <a href="#">
-
-                <i class="fa-solid fa-box"></i>
-
-                <span>سفارشات شما</span>
-
-            </a>
-
-
-            <a href="#">
-
-                <i class="fa-regular fa-heart"></i>
-
-                <span>لیست علاقه‌مندی‌ها</span>
-
-            </a>
-
-
-            <a href="{% url 'dashboard:customer:address-list' %}">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                <span>نشانی‌ها</span>
-
-            </a>
-
-
-            <hr>
-
-
-            <a href="{% url 'accounts:logout' %}" class="logout">
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                <span>خروج</span>
-
-            </a>
-
-        </div>
-
-    </aside>
-
-
-
-    <!-- ================= CONTENT ================= -->
-
-    <section class="dashboard-content">
-
-        <div class="dashboard-header">
-
-            <div>
-
-                <h1>
-
-                    سلام
-                    {{request.user.first_name}}
-                    👋
-
-                </h1>
-
-                <p>
-
-                    خوش اومدی، مدیریت حساب کاربری از این قسمت انجام میشه.
-
-                </p>
+                </span>
 
             </div>
 
-            <div class="dashboard-badge">
 
-                <i class="fa-solid fa-crown"></i>
+            <!-- Sidebar Menu -->
 
-                حساب کاربری
+            <div class="sidebar-menu">
+
+
+                <!-- Dashboard -->
+
+                <a href="#"
+                   class="active">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+
+                        داشبورد
+
+                    </span>
+
+                </a>
+
+
+                <!-- Profile -->
+
+                <a href="{% url 'dashboard:customer:profile-edit' %}">
+
+                    <i class="fa-solid fa-user-gear"></i>
+
+                    <span>
+
+                        تنظیمات پروفایل
+
+                    </span>
+
+                </a>
+
+
+                <!-- Security -->
+
+                <a href="{% url 'dashboard:customer:security-edit' %}">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+
+                        امنیت
+
+                    </span>
+
+                </a>
+                <!-- ================= ORDERS ================= -->
+
+                <div class="sidebar-orders">
+                    <!-- Orders Sub Menu -->
+
+                    <div class="sidebar-orders-submenu">
+
+                        <!-- Successful Orders -->
+
+                        <a href="{% url 'dashboard:customer:success-order-list' %}"
+                           class="order-sub-link">
+
+                            <span class="sub-link-icon success-sub-icon">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </span>
+
+                            <span>
+
+                                سفارش‌های موفق
+
+                            </span>
+
+                        </a>
+
+
+                        <!-- Failed Orders -->
+
+                        <a href="#"
+                           class="order-sub-link">
+
+                            <span class="sub-link-icon failed-sub-icon">
+
+                                <i class="fa-solid fa-circle-xmark"></i>
+
+                            </span>
+
+                            <span>
+
+                                سفارش‌های ناموفق
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Wishlist -->
+
+                <a href="#">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                    <span>
+
+                        لیست علاقه‌مندی‌ها
+
+                    </span>
+
+                </a>
+
+
+                <!-- Addresses -->
+
+                <a href="{% url 'dashboard:customer:address-list' %}">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+
+                        نشانی‌ها
+
+                    </span>
+
+                </a>
+
+
+                <hr>
+
+
+                <!-- Logout -->
+
+                <a href="{% url 'accounts:logout' %}"
+                   class="logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+
+                        خروج
+
+                    </span>
+
+                </a>
 
             </div>
 
-        </div>
+        </aside>
 
 
+        <!-- ================= CONTENT ================= -->
 
-       
-         
-            <!-- ================= ACCOUNT ================= -->
+        <section class="dashboard-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <h1>
+
+                        سلام
+                        {{ request.user.first_name }}
+                        👋
+
+                    </h1>
+
+                    <p>
+
+                        خوش اومدی، مدیریت حساب کاربری از این قسمت انجام میشه.
+
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-badge">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                    حساب کاربری
+
+                </div>
+
+            </div>
+            <!-- ================= ACCOUNT INFO ================= -->
 
             <div class="dashboard-card">
 
@@ -169,6 +260,7 @@
                     </h3>
 
                 </div>
+
 
                 <ul class="account-info">
 
@@ -188,6 +280,7 @@
 
                     </li>
 
+
                     <li>
 
                         <span>
@@ -198,11 +291,12 @@
 
                         <strong>
 
-                            {{request.user.user_profile.last_name}}
+                            {{ request.user.user_profile.last_name }}
 
                         </strong>
 
                     </li>
+
 
                     <li>
 
@@ -214,11 +308,12 @@
 
                         <strong>
 
-                            {{request.user.user_profile.email}}
+                            {{ request.user.user_profile.email }}
 
                         </strong>
 
                     </li>
+
 
                     <li>
 
@@ -240,41 +335,41 @@
 
             </div>
 
-        </div>
+
+            <!-- ================= SYSTEM MESSAGE ================= -->
+
+            <div class="dashboard-card system-card">
+
+                <div class="system-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
 
 
-        <!-- ================= SYSTEM MESSAGE ================= -->
+                <div>
 
-        <div class="dashboard-card system-card">
+                    <h4>
 
-            <div class="system-icon">
+                        اطلاعیه
 
-                <i class="fa-solid fa-circle-info"></i>
+                    </h4>
+
+                    <p>
+
+                        برای افزایش امنیت حساب کاربری، پیشنهاد می‌شود
+                        رمز عبور خود را هر چند وقت یکبار تغییر دهید.
+
+                    </p>
+
+                </div>
 
             </div>
 
-            <div>
 
-                <h4>
+        </section>
 
-                    اطلاعیه
-
-                </h4>
-
-                <p>
-
-                    برای افزایش امنیت حساب کاربری، پیشنهاد می‌شود
-                    رمز عبور خود را هر چند وقت یکبار تغییر دهید.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</div>
+    </div>
 
 </section>
 

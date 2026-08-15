@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.urls import reverse_lazy
-from django.views.generic import View , TemplateView , UpdateView , ListView , CreateView , DeleteView
+from django.views.generic import View , TemplateView , UpdateView , ListView , CreateView , DeleteView , DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin 
@@ -8,7 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from dashboard.permissions import HasCustomerAccessPermission
 from accounts.models import User , Profile
 from dashboard.customer.forms import CustomerPasswordChangeForm ,CustomerProfileEditForm , UserAddressForm
-from order.models import UserAddressModel 
+from order.models import UserAddressModel , OrderModel  ,OrderStatusType
 
 class CustomerDashboardHomeView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
     template_name="dashboard/customer/home.html"
@@ -91,4 +91,30 @@ class CustomerAddressDeleteView(LoginRequiredMixin,HasCustomerAccessPermission,D
     def get_queryset(self):
         return UserAddressModel.objects.filter(user=self.request.user)
     
-   
+
+
+
+class CustomerSuccessOrderListView(LoginRequiredMixin,HasCustomerAccessPermission,ListView):
+    template_name="dashboard/customer/success_order_list.html"
+    paginate_by = 5 
+    
+    def get_queryset(self):
+        queryset = OrderModel.objects.filter(user=self.request.user)
+        
+        if order_by := self.request.GET.get("order_by"):
+            try:
+                queryset = queryset.order_by(order_by)
+            except FieldError:
+                pass
+        return queryset
+
+    
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+
+        success_orders=OrderModel.objects.filter(user=self.request.user , status=OrderStatusType.success)
+        context["success_orders"] =success_orders
+
+        return context
+
+
