@@ -15,7 +15,9 @@ urlpatterns = [
    path('coupon-list/' , views.CouponListView.as_view() , name="coupon-list"),
    path('coupon-create/' , views.CouponCreateView.as_view() , name="coupon-create"),
    path('coupon/<int:pk>/detail/', views.CouponEditView.as_view() , name="coupon-edit"),
-   path('coupon/<int:pk>/delete/' , views.CouponDeleteView.as_view() , name="coupon-delete")
+   path('coupon/<int:pk>/delete/' , views.CouponDeleteView.as_view() , name="coupon-delete"),
+   path('success-order-list/' , views.AdminSuccessOrderListView.as_view() , name="success-order-list"),
+
 
 
   

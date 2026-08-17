@@ -103,19 +103,56 @@
 
             </a>
 
-            <a href="#">
+            <!-- ================= ORDERS ================= -->
 
-                <i class="fa-solid fa-cart-shopping"></i>
+            <div class="sidebar-orders">
+                <!-- Orders Sub Menu -->
 
-                <span>
+                <div class="sidebar-orders-submenu">
 
-                    سفارشات
+                    <!-- Successful Orders -->
 
-                </span>
+                    <a href="{% url 'dashboard:admin:success-order-list' %}"
+                       class="order-sub-link">
 
-            </a>
+                        <span class="sub-link-icon success-sub-icon">
 
-             <a href="{% url 'dashboard:admin:coupon-list' %}">
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </span>
+                        <span>
+
+                            سفارش‌های موفق
+
+                        </span>
+
+                    </a>
+
+
+                    <!-- Failed Orders -->
+
+                    <a href="#"
+                        class="order-sub-link">
+                        <span class="sub-link-icon failed-sub-icon">
+
+                            <i class="fa-solid fa-circle-xmark"></i>
+
+                        </span>
+
+                        <span>
+
+                            سفارش‌های ناموفق
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="{% url 'dashboard:admin:coupon-list' %}">
 
                 <i class="fa-solid fa-envelope-open-text"></i>
 
