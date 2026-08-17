@@ -244,3 +244,26 @@ class AdminSuccessOrderListView(LoginRequiredMixin,HasAdminAccessPermission,List
 
         return context
 
+    
+class AdminFailedOrderListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
+    template_name="dashboard/customer/failed_order_list.html"
+    paginate_by = 5 
+    
+    def get_queryset(self):
+        queryset = OrderModel.objects.all()
+        
+        if order_by := self.request.GET.get("order_by"):
+            try:
+                queryset = queryset.order_by(order_by)
+            except FieldError:
+                pass
+        return queryset
+
+    
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+
+        failed_orders=OrderModel.objects.filter(status=OrderStatusType.failed)
+        context["failed_orders"] =failed_orders
+
+        return context
