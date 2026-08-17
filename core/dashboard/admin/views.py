@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.urls import reverse_lazy
-from django.views.generic import View , TemplateView , UpdateView , ListView , UpdateView , DeleteView , CreateView
+from django.views.generic import View , TemplateView , UpdateView , ListView , UpdateView , DeleteView , CreateView , DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin 
@@ -222,7 +222,7 @@ class CouponDeleteView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessag
    
 
 class AdminSuccessOrderListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
-    template_name="dashboard/customer/success_order_list.html"
+    template_name="dashboard/admin/success_order_list.html"
     paginate_by = 5 
     
     def get_queryset(self):
@@ -246,7 +246,7 @@ class AdminSuccessOrderListView(LoginRequiredMixin,HasAdminAccessPermission,List
 
     
 class AdminFailedOrderListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
-    template_name="dashboard/customer/failed_order_list.html"
+    template_name="dashboard/admin/failed_order_list.html"
     paginate_by = 5 
     
     def get_queryset(self):
@@ -267,3 +267,15 @@ class AdminFailedOrderListView(LoginRequiredMixin,HasAdminAccessPermission,ListV
         context["failed_orders"] =failed_orders
 
         return context
+
+
+
+
+class AdminOrderDetailView(LoginRequiredMixin,HasAdminAccessPermission,DetailView):
+    template_name="dashboard/customer/order_detail.html"
+
+    def get_queryset(self):
+        return OrderModel.objects.all()
+
+
+
