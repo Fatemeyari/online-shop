@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator , MinValueValidator
+from decimal import Decimal
+
 
 class OrderStatusType(models.IntegerChoices):
     pending = 1 , " در انتظار پرداخت"
@@ -51,7 +53,7 @@ class UserAddressModel(models.Model):
 
 class OrderModel(models.Model):
     user = models.ForeignKey('accounts.User' , on_delete=models.PROTECT, related_name="orders")
-    payment = models.ForeignKey('payment.PayMentModel' , on_delete=models.SET_NULL,null=True , blank=True , related_name="payment_order" )
+    payment = models.ForeignKey('payment.PayMentModel' , on_delete=models.SET_NULL, null=True , blank=True , related_name="payment_order" )
     address=models.ForeignKey(UserAddressModel , on_delete=models.CASCADE, related_name="address_order")
     total_price=models.DecimalField(default=0 , max_digits=10 , decimal_places=0)
     status=models.IntegerField(choices=OrderStatusType.choices, default=OrderStatusType.pending.value)
@@ -70,6 +72,11 @@ class OrderModel(models.Model):
 
     def calculate_total_price(self):
         return sum(item.price * item.quantity for item in self.order_items.all())
+
+    def calculate_discount_percent(self):
+        price = self.calculate_total_price()
+        discount = int(price) - int(self.total_price)
+        return Decimal(discount)
 
 
 
