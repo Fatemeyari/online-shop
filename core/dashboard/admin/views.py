@@ -272,10 +272,21 @@ class AdminFailedOrderListView(LoginRequiredMixin,HasAdminAccessPermission,ListV
 
 
 class AdminOrderDetailView(LoginRequiredMixin,HasAdminAccessPermission,DetailView):
-    template_name="dashboard/customer/order_detail.html"
+    template_name="dashboard/admin/order_detail.html"
 
     def get_queryset(self):
         return OrderModel.objects.all()
+
+
+
+class CustomerOrderInvoiceView(LoginRequiredMixin,HasAdminAccessPermission,DetailView):
+    template_name="dashboard/customer/order_invoice.html"
+
+    def get_queryset(self):
+        return OrderModel.objects.all()
+
+
+
 
 
 

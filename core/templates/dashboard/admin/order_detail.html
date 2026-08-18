@@ -1,0 +1,890 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet"
+      href="{% static 'css/order_detail.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="order-detail-page">
+
+    <div class="order-detail-container">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="order-detail-header">
+
+            <div class="order-detail-header-content">
+
+                <a href="javascript:history.back()"
+                   class="order-back-btn">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    بازگشت به سفارش‌ها
+
+                </a>
+
+
+                <div class="order-title-row">
+
+                    <div>
+
+                        <span class="page-tag">
+
+                            جزئیات سفارش
+
+                        </span>
+
+                        <h1>
+
+                            سفارش #{{ object.id }}
+
+                        </h1>
+
+                    </div>
+
+
+                    {% if object.get_status_display %}
+
+                        <span class="order-detail-status">
+
+                            {{ object.get_status_display }}
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="order-header-icon">
+
+                <i class="fa-solid fa-receipt"></i>
+
+            </div>
+
+        </div>
+                <!-- ================= ORDER INFORMATION ================= -->
+
+        <div class="detail-card order-info-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-card-icon order-icon">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        مشخصات سفارش
+
+                    </h2>
+
+                    <span>
+
+                        اطلاعات اصلی این سفارش
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-info-grid">
+
+
+                <!-- Order ID -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        شماره سفارش
+
+                    </span>
+
+                    <strong>
+
+                        #{{ object.id }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Created Time -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        تاریخ ثبت سفارش
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.created_time|date:"Y/m/d - H:i" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Updated Time -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        آخرین بروزرسانی
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.updated_time|date:"Y/m/d - H:i" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        وضعیت سفارش
+
+                    </span>
+
+                    <strong class="order-status-text">
+
+                        {{ object.get_status_display }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Total Price -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        مبلغ کل
+
+                    </span>
+
+                    <strong class="order-total-price">
+
+                        {{ object.calculate_total_price }}
+
+                        <small>
+
+                            تومان
+
+                        </small>
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Coupon -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        کد تخفیف
+
+                    </span>
+
+                    <strong>
+
+                        {% if object.coupon %}
+
+                            {{ object.coupon }} - درصد {{ object.coupon.discount_percent }} 
+
+                        {% else %}
+
+                            بدون تخفیف
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Payment -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        پرداخت
+
+                    </span>
+
+                    <strong>
+
+                        {% if object.payment %}
+
+                            پرداخت موفق 
+
+                        {% else %}
+
+                            پرداخت ناموفق 
+
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Address -->
+
+                <div class="detail-info-item">
+
+                     <span>
+
+                        مبلغ نهایی با تخفیف  
+
+                    </span>
+
+                    <strong class="order-total-price">
+
+                        {{ object.total_price|floatformat:0 }}
+
+                        <small>
+
+                            تومان
+
+                        </small>
+
+                    </strong>
+
+
+            </div>
+
+        </div>
+        <!-- ================= USER INFORMATION ================= -->
+
+        <div class="detail-card user-info-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-card-icon user-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        مشخصات کاربر
+
+                    </h2>
+
+                    <span>
+
+                        اطلاعات صاحب سفارش
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-info-grid">
+
+
+                <!-- First Name -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        نام
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.user_profile.first_name|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Last Name -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        نام خانوادگی
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.user_profile.last_name|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        ایمیل
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.email|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Mobile -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        شماره موبایل
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.user_profile.phone_number|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-- ================= SHIPPING ADDRESS ================= -->
+
+        <div class="detail-card address-info-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-card-icon address-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        آدرس ارسال
+
+                    </h2>
+
+                    <span>
+
+                        آدرسی که سفارش به آن ارسال خواهد شد
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-details">
+
+
+                <!-- State -->
+
+                <div class="address-item">
+
+                    <span>
+
+                        استان
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.address.state|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- City -->
+
+                <div class="address-item">
+
+                    <span>
+
+                        شهر
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.address.city|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Zip Code -->
+
+                <div class="address-item">
+
+                    <span>
+
+                        کد پستی
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.address.zip_code|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Full Address -->
+
+                <div class="address-item full-address">
+
+                    <span>
+
+                        آدرس کامل
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.address.address|default:"-" }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-- ================= ORDER ITEMS ================= -->
+
+        <div class="detail-card order-items-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-card-icon items-icon">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        آیتم‌های سفارش
+
+                    </h2>
+
+                    <span>
+
+                        محصولات موجود در این سفارش
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {% if object.order_items.all %}
+
+                <div class="order-items-list">
+
+
+                    {% for item in object.order_items.all %}
+
+                        <div class="order-item">
+
+
+                            <!-- Product -->
+
+                            <div class="order-item-product">
+
+                                <div class="product-placeholder">
+
+                                    <i class="fa-solid fa-box"></i>
+
+                                </div>
+
+
+                                <div class="product-info">
+
+                                    <div class="product-placeholder">
+                                        {% if item.product.image %}
+                                                <img
+                                                    src="{{ item.product.image.url }}"
+                                                    alt="{{ item.product.title }}"
+                                                >
+                                            {% else %}
+                                                <i class="fa-solid fa-box"></i>
+                                            {% endif %}
+
+                                        </div>
+ 
+
+                                    <strong>
+
+                                        {{ item.product.title }}
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Quantity -->
+
+                            <div class="order-item-info">
+
+                                <span>
+
+                                    تعداد
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.quantity }}
+
+                                </strong>
+
+                            </div>
+
+
+                            <!-- Unit Price -->
+
+                            <div class="order-item-info">
+
+                                <span>
+
+                                    قیمت واحد
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.price|floatformat:0 }}
+
+                                    <small>
+
+                                        تومان
+
+                                    </small>
+
+                                </strong>
+
+                            </div>
+
+
+                            <!-- Total -->
+
+                            <div class="order-item-info item-total">
+
+                                <span>
+
+                                    مجموع
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.price|floatformat:0 }}
+
+                                    <small>
+
+                                        تومان
+
+                                    </small>
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-items">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <p>
+
+                        آیتمی برای این سفارش ثبت نشده است.
+
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- Order Summary -->
+
+            <div class="order-summary">
+
+                <span>
+
+                    مبلغ کل سفارش
+
+                </span>
+
+                <strong>
+
+                    {{ object.total_price|floatformat:0 }}
+
+                    <small>
+
+                        تومان
+
+                    </small>
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!-- ================= PAYMENT INFORMATION ================= -->
+
+        <div class="detail-card payment-info-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-card-icon payment-icon">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        مشخصات پرداخت
+
+                    </h2>
+
+                    <span>
+
+                        اطلاعات مربوط به تراکنش این سفارش
+
+                    </span>
+
+                </div>
+
+            </div>
+            
+
+            <div class="detail-info-grid">
+
+
+                <!-- Payment Status -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        وضعیت پرداخت
+
+                    </span>
+
+                    <strong class="payment-success">
+
+                        {% if object.payment %}
+                            پرداخت موفق 
+                        {% else %}
+                           پرداخت ناموفق 
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Payment Amount -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        مبلغ پرداختی
+
+                    </span>
+
+                    <strong class="order-total-price">
+
+                        {{ object.payment.amount|floatformat:0 }}
+
+                        <small>
+
+                            تومان
+
+                        </small>
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Authority -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        شماره مرجع پرداخت
+
+                    </span>
+
+                    <strong>
+
+                        {% if object.payment %}
+
+                            {{ object.payment.authority_id }}
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Payment Date -->
+
+                <div class="detail-info-item">
+
+                    <span>
+
+                        تاریخ پرداخت
+
+                    </span>
+
+                    <strong>
+
+                        {% if object.payment %}
+
+                            {{ object.payment.created_time|date:"Y/m/d - H:i" }}
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-- ================= ORDER FOOTER ================= -->
+
+        <div class="order-detail-footer">
+
+            <a href="javascript:history.back()"
+               class="order-back-btn footer-back-btn">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت به سفارش‌ها
+
+            </a>
+
+
+            <a href="{% url 'dashboard:admin:order-invoice' object.pk %}"
+               class="invoice-btn detail-invoice-btn">
+
+                <i class="fa-solid fa-file-invoice"></i>
+
+                مشاهده فاکتور
+
+            </a>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
