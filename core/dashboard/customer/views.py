@@ -148,9 +148,13 @@ class CustomerOrderDetailView(LoginRequiredMixin,HasCustomerAccessPermission,Det
     def get_queryset(self):
         return OrderModel.objects.filter(user=self.request.user)
 
-
-
-
     
+class CustomerOrderInvoiceView(LoginRequiredMixin,HasCustomerAccessPermission,DetailView):
+    template_name="dashboard/customer/order_invoice.html"
+
+    def get_queryset(self):
+        return OrderModel.objects.filter(user=self.request.user)
+
+
 
     

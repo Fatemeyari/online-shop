@@ -198,7 +198,7 @@
 
                     <strong class="order-total-price">
 
-                        {{ object.total_price|floatformat:0 }}
+                        {{ object.calculate_total_price }}
 
                         <small>
 
@@ -250,13 +250,14 @@
 
                     <strong>
 
-                        {% if order.payment %}
+                        {% if object.payment %}
 
-                            پرداخت انجام شده
+                            پرداخت موفق 
 
                         {% else %}
 
-                            بدون پرداخت
+                            پرداخت ناموفق 
+
 
                         {% endif %}
 
@@ -269,19 +270,23 @@
 
                 <div class="detail-info-item">
 
-                    <span>
+                     <span>
 
-                        آدرس ارسال
+                        مبلغ نهایی با تخفیف  
 
                     </span>
 
-                    <strong>
+                    <strong class="order-total-price">
 
-                        {{ object.address.city }} - {{ object.address.state }}
+                        {{ object.total_price|floatformat:0 }}
+
+                        <small>
+
+                            تومان
+
+                        </small>
 
                     </strong>
-
-                </div>
 
 
             </div>
@@ -758,13 +763,9 @@
                     <strong class="payment-success">
 
                         {% if object.payment %}
-
-                            پرداخت شده
-
+                            پرداخت موفق 
                         {% else %}
-
-                            پرداخت نشده
-
+                           پرداخت ناموفق 
                         {% endif %}
 
                     </strong>
@@ -868,7 +869,7 @@
             </a>
 
 
-            <a href="#"
+            <a href="{% url 'dashboard:customer:order-invoice' object.pk %}"
                class="invoice-btn detail-invoice-btn">
 
                 <i class="fa-solid fa-file-invoice"></i>

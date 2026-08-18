@@ -1,0 +1,651 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+
+{{ block.super }}
+
+<link rel="stylesheet"
+      href="{% static 'css/order_invoice.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="invoice-page">
+
+    <div class="invoice-container">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="invoice-header">
+
+            <div class="invoice-header-content">
+
+                <a href="javascript:history.back()"
+                   class="invoice-back-btn">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    بازگشت
+
+                </a>
+
+
+                <span class="page-tag">
+
+                    فاکتور سفارش
+
+                </span>
+
+
+                <div class="invoice-title-row">
+
+                    <div>
+
+                        <h1>
+
+                            فاکتور
+
+                        </h1>
+
+                        <p>
+
+                            جزئیات کامل سفارش و مبلغ پرداختی
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="invoice-number">
+
+                        <span>
+
+                            شماره سفارش
+
+                        </span>
+
+                        <strong>
+
+                            #{{ object.id }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="invoice-header-icon">
+
+                <i class="fa-solid fa-file-invoice"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= ORDER INFORMATION ================= -->
+
+        <div class="invoice-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        اطلاعات سفارش
+
+                    </h2>
+
+                    <span>
+
+                        مشخصات ثبت سفارش
+
+                    </span>
+
+                </div>
+
+
+                <div class="section-icon active-icon">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="invoice-info-grid">
+
+
+                <!-- Order Number -->
+
+                <div class="invoice-info-item">
+
+                    <span>
+
+                        شماره سفارش
+
+                    </span>
+
+                    <strong>
+
+                        #{{ object.id }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Customer -->
+
+                <div class="invoice-info-item">
+
+                    <span>
+
+                        سفارش‌دهنده
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.user_profile.get_fullname }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Order Date -->
+
+                <div class="invoice-info-item">
+
+                    <span>
+
+                        زمان سفارش
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.created_time|date:"Y/m/d - H:i" }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Order Status -->
+
+                <div class="invoice-info-item">
+
+                    <span>
+
+                        وضعیت سفارش
+
+                    </span>
+
+                    <strong class="invoice-status">
+
+                        {{ object.get_status_display }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= ADDRESS ================= -->
+
+        <div class="invoice-section address-info-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        آدرس تحویل
+
+                    </h2>
+
+                    <span>
+
+                        آدرس ثبت‌شده برای ارسال سفارش
+
+                    </span>
+
+                </div>
+
+
+                <div class="section-icon address-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-details">
+
+
+                <div class="address-item">
+
+                    <span>
+
+                        آدرس گیرنده
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.address.state }} - {{ object.address.city }} - {{ object.address.address }} -{{ object.address.zip_code }} کد پستی 
+
+                    </strong>
+
+                </div>
+
+
+                <div class="address-item">
+
+                    <span>
+
+                        شماره تماس
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.user.user_profile.phone_number }}
+
+                    </strong>
+
+                </div>
+
+        </div>
+        <!-- ================= ORDER ITEMS ================= -->
+
+        <div class="invoice-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        آیتم‌های سفارش
+
+                    </h2>
+
+                    <span>
+
+                        محصولات موجود در این سفارش
+
+                    </span>
+
+                </div>
+
+
+                <div class="section-icon items-icon">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                </div>
+
+            </div>
+
+
+
+            {% if object.order_items.all %}
+
+                <div class="invoice-items-list">
+
+
+                    {% for item in object.order_items.all %}
+
+                        <article class="invoice-item">
+
+
+                            <!-- ================= PRODUCT ================= -->
+
+                            <div class="invoice-item-product">
+
+
+                                <div class="invoice-product-image">
+
+                                    {% if item.product.image.url %}
+
+                                        <img
+                                            src="{{ item.product.image.url }}"
+                                            alt="{{ item.product.title }}">
+
+                                    {% else %}
+
+                                        <i class="fa-solid fa-box"></i>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="invoice-product-info">
+
+                                    <span>
+
+                                        محصول
+
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.product.title }}
+
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- ================= QUANTITY ================= -->
+
+                            <div class="invoice-item-info">
+
+                                <span>
+
+                                    تعداد
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.quantity }}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- ================= UNIT PRICE ================= -->
+
+                            <div class="invoice-item-info">
+
+                                <span>
+
+                                    قیمت واحد
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.price|floatformat:0 }}
+
+                                    <small>
+
+                                        تومان
+
+                                    </small>
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- ================= ITEM TOTAL ================= -->
+
+                            <div class="invoice-item-total">
+
+                                <span>
+
+                                    قیمت کل
+
+                                </span>
+
+                                <strong>
+
+                                    {{ item.price|floatformat:0 }}
+
+                                    تومان
+
+                                </strong>
+
+                            </div>
+
+
+                        </article>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- ================= EMPTY ITEMS ================= -->
+
+                <div class="invoice-empty-items">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <p>
+
+                        آیتمی برای این سفارش وجود ندارد.
+
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+                <!-- ================= PRICE SUMMARY ================= -->
+
+        <div class="invoice-section invoice-price-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        خلاصه فاکتور
+
+                    </h2>
+
+                    <span>
+
+                        جزئیات مبلغ این سفارش
+
+                    </span>
+
+                </div>
+
+
+                <div class="section-icon price-icon">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="invoice-price-content">
+
+
+                <!-- ================= ORDER TOTAL ================= -->
+
+                <div class="invoice-price-row">
+
+                    <span>
+
+                        مبلغ سفارش
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.calculate_total_price|floatformat:0 }}
+
+                        تومان
+
+                    </strong>
+
+                </div>
+
+
+
+                <!-- ================= DISCOUNT ================= -->
+
+                <div class="invoice-price-row invoice-discount">
+
+                    <span>
+
+                        تخفیف کوپن
+
+                    </span>
+
+                    <strong>
+
+                        {% if object.coupon %}
+
+                            {{ object.calculate_discount_percent }}
+
+                            تومان
+
+                        {% else %}
+
+                            ۰ تومان
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+
+                <!-- ================= COUPON ================= -->
+
+                {% if object.coupon %}
+
+                    <div class="invoice-coupon">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                        <span>
+
+                            کد تخفیف استفاده‌شده:
+
+                        </span>
+
+                        <strong>
+
+                            {{ object.coupon.code }}
+
+                        </strong>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <div class="invoice-price-divider"></div>
+
+
+
+                <!-- ================= FINAL PRICE ================= -->
+
+                <div class="invoice-price-row invoice-final-price">
+
+                    <span>
+
+                        مبلغ نهایی
+
+                    </span>
+
+                    <strong>
+
+                        {{ object.total_price|floatformat:0 }}
+
+                        تومان
+
+                    </strong>
+
+                </div>
+
+
+                <small class="invoice-price-note">
+
+                    مبلغ نهایی پرداخت‌شده برای این سفارش
+
+                </small>
+
+
+            </div>
+
+
+        </div>
+                <!-- ================= FOOTER ================= -->
+
+        <div class="invoice-footer">
+
+
+            <a href="javascript:history.back()"
+               class="invoice-footer-back">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                بازگشت
+
+            </a>
+
+
+            <a href="#"
+               class="invoice-print-btn">
+
+                <i class="fa-solid fa-print"></i>
+
+                چاپ فاکتور
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
