@@ -5,7 +5,7 @@ from django.views.generic import View
 from .models import PayMentModel, PaymentStatusType
 from .zarinpal_client import ZarinPalSandBox
 from order.models import OrderModel, OrderStatusType
-
+from shop.models import Product
 
 class PaymentVerifyView(View):
 
@@ -57,5 +57,9 @@ class PaymentVerifyView(View):
 
         if status_code in {100, 101}:
             return redirect("order:completed")
-
-        return redirect("order:failed")
+        else:
+            for item in order.order_items.all():
+                item.product.stock += item.quantity
+                item.product.save()
+            
+            return redirect("order:failed")
