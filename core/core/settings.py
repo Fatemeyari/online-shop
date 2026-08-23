@@ -168,7 +168,12 @@ LOGOUT_REDIRECT_URL = '/'
 CELERY_BROKER_URL= "redis://redis:6379/0"
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 
-
+CELERY_BEAT_SCHEDULE = {
+    "failed-pending-orders-every-5-minutes": {
+        "task": "payment.tasks.failed_pending_orders",
+        "schedule": 300.0,
+    },
+}
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
