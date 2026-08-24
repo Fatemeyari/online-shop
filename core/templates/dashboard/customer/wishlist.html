@@ -297,14 +297,12 @@
                                 مشاهده
 
                             </a>
-
-                            <a href="#"
-                               class="view-btn">
-
-                                حذف 
-
-                            </a>
-
+                            <form action="{% url 'dashboard:customer:wishlist-delete' pk=favorite.pk %}" method="post"> 
+                                {% csrf_token %}
+                                <button class="view-btn" type="submit">حذف</button>
+                            
+                            </form>
+                            
 
 
                         </div>

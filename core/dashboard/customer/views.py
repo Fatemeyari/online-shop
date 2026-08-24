@@ -174,3 +174,12 @@ class CustomerWishListView(LoginRequiredMixin,HasCustomerAccessPermission,ListVi
         context["wishlist"] =wishlist
 
         return context
+
+class CustomerWishListDeleteView(LoginRequiredMixin,HasCustomerAccessPermission,SuccessMessageMixin,DeleteView):
+    http_method_names = ["post"]
+    success_url = reverse_lazy('dashboard:customer:wishlist-list')
+    success_message = "محصول با موفقیت از لیست حذف شد ."
+    def get_queryset(self):
+        return WishlistProduct.objects.filter(user=self.request.user)
+
+
