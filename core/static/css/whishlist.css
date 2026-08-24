@@ -1,0 +1,637 @@
+/* =====================================================
+                    WISHLIST PAGE
+===================================================== */
+
+.favorites-page {
+    width: 100%;
+    padding: 50px 20px 70px;
+    background: #fff;
+}
+
+.favorites-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+                    FAVORITES HEADER
+===================================================== */
+
+.favorites-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+    padding: 20px 5px;
+}
+
+.favorites-header h2 {
+    margin: 0 0 5px;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    color: #222;
+}
+
+.favorites-header p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+.favorites-count {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 12px;
+
+    background: #fff3ed;
+
+    color: #ff5f00;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.favorites-count i {
+    font-size: 16px;
+}
+
+
+/* =====================================================
+                    PRODUCTS GRID
+===================================================== */
+
+.favorites-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+
+/* =====================================================
+                    PRODUCT CARD
+===================================================== */
+
+.favorite-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    background: #fff;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    border: 1px solid #eee;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.favorite-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =====================================================
+                    PRODUCT IMAGE
+===================================================== */
+
+.favorite-image {
+    position: relative;
+
+    width: 100%;
+    height: 230px;
+
+    overflow: hidden;
+
+    background: #f7f7f7;
+}
+
+.favorite-image > a {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+.favorite-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: 0.4s;
+}
+
+.favorite-card:hover .favorite-image img {
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+                    IMAGE PLACEHOLDER
+===================================================== */
+
+.favorite-image-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #aaa;
+
+    font-size: 40px;
+
+    background: #f5f5f5;
+}
+
+
+/* =====================================================
+                    DISCOUNT
+===================================================== */
+
+.favorite-image .discount {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    z-index: 2;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    background: #ff3d00;
+
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+                    WISHLIST BUTTON
+===================================================== */
+
+.wishlist-btn {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    z-index: 3;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    color: #ff3d00;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.12);
+
+    transition: 0.3s;
+}
+
+.wishlist-btn:hover {
+    background: #ff3d00;
+
+    color: #fff;
+
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+                    PRODUCT BODY
+===================================================== */
+
+.favorite-body {
+    padding: 18px;
+}
+
+
+/* =====================================================
+                    TITLE
+===================================================== */
+
+.favorite-title {
+    margin: 0 0 10px;
+
+    min-height: 52px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    line-height: 1.6;
+
+    color: #222;
+}
+
+.favorite-title a {
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.favorite-title a:hover {
+    color: #ff5f00;
+}
+
+
+/* =====================================================
+                    CATEGORY
+===================================================== */
+
+.favorite-category {
+    margin: 0 0 7px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.favorite-category i {
+    margin-left: 5px;
+
+    color: #ff6a00;
+}
+
+
+/* =====================================================
+                    BRAND
+===================================================== */
+
+.favorite-brand {
+    margin: 0 0 7px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.favorite-brand i {
+    margin-left: 5px;
+
+    color: #ff6a00;
+}
+
+
+/* =====================================================
+                    RATE
+===================================================== */
+
+.favorite-rate {
+    margin: 12px 0;
+
+    color: #555;
+
+    font-size: 13px;
+}
+
+.favorite-rate i {
+    margin-left: 5px;
+
+    color: #ff9f00;
+}
+
+
+/* =====================================================
+                    PRICE
+===================================================== */
+
+.favorite-price {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 10px;
+}
+
+.favorite-price .old-price {
+    color: #999;
+
+    font-size: 13px;
+
+    text-decoration: line-through;
+}
+
+.favorite-price .new-price {
+    color: #ff5f00;
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+                    STOCK
+===================================================== */
+
+.favorite-stock {
+    margin-top: 12px;
+
+    font-size: 13px;
+}
+
+.in-stock {
+    color: #27834b;
+}
+
+.out-stock {
+    color: #e53935;
+}
+
+.favorite-stock i {
+    margin-left: 5px;
+}
+
+
+/* =====================================================
+                    FOOTER
+===================================================== */
+
+.favorite-footer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 18px 18px;
+}
+
+.favorite-footer form {
+    flex: 1;
+}
+
+.favorite-footer .cart-btn {
+    width: 100%;
+
+    padding: 11px 10px;
+
+    font-size: 13px;
+}
+
+.favorite-footer .view-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 75px;
+
+    padding: 11px 14px;
+
+    border-radius: 12px;
+
+    background: #222;
+
+    color: #fff;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+.favorite-footer .view-btn:hover {
+    background: #ff6a00;
+
+    color: #fff;
+}
+
+
+/* =====================================================
+                    DISABLED
+===================================================== */
+
+.favorite-footer .cart-btn.disabled {
+    background: #ddd;
+
+    color: #777;
+
+    cursor: not-allowed;
+}
+
+.favorite-footer .cart-btn.disabled:hover {
+    background: #ddd;
+
+    transform: none;
+}
+
+
+/* =====================================================
+                    EMPTY WISHLIST
+===================================================== */
+
+.no-favorites {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 90px 20px;
+}
+
+.no-favorites > i {
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 50%;
+
+    background: #fff3ed;
+
+    color: #ff6a00;
+
+    font-size: 38px;
+}
+
+.no-favorites h2 {
+    margin: 0 0 10px;
+
+    color: #222;
+
+    font-size: 22px;
+}
+
+.no-favorites p {
+    margin: 0 0 25px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+.browse-products-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #ff8c00,
+        #ff4d00
+    );
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.browse-products-btn:hover {
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(255, 95, 0, 0.25);
+}
+
+
+/* =====================================================
+                    RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .favorites-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .favorites-container {
+        width: 95%;
+    }
+
+    .favorites-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .favorites-page {
+        padding: 35px 15px 50px;
+    }
+
+    .favorites-container {
+        width: 100%;
+    }
+
+    .favorites-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 15px 5px;
+    }
+
+    .favorites-header h2 {
+        font-size: 22px;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .favorite-image {
+        height: 280px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .favorite-footer {
+        flex-direction: column;
+    }
+
+    .favorite-footer form,
+    .favorite-footer .view-btn {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+
+    {{ block.super }}
+
+    <link rel="stylesheet"
+          href="{% static 'css/whishlist.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="page-header">
+
+    <div class="page-title">
+
+        <span class="page-badge">
+
+            <i class="fa-solid fa-heart"></i>
+
+            علاقه‌مندی‌ها
+
+        </span>
+
+        <h1>
+            محصولات مورد علاقه
+        </h1>
+
+        <p>
+            محصولاتی که به لیست علاقه‌مندی‌های خود اضافه کرده‌اید.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WISHLIST ================= -->
+
+<section class="favorites-page">
+
+    <div class="favorites-container">
+
+
+        {% if object_list %}
+
+            <div class="favorites-header">
+
+                <div>
+
+                    <h2>
+                        لیست علاقه‌مندی‌ها
+                    </h2>
+
+                    <p>
+                        محصولات ذخیره‌شده شما
+                    </p>
+
+                </div>
+
+                <div class="favorites-count">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    {{ object_list|length }} محصول
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PRODUCTS GRID ================= -->
+
+            <div class="favorites-grid">
+
+
+                {% for favorite in object_list %}
+
+                    <article class="favorite-card">
+
+
+                        <!-- ================= IMAGE ================= -->
+
+                        <div class="favorite-image">
+
+
+                            {% if favorite.product.discount_percent %}
+
+                                <span class="discount">
+
+                                    {{ favorite.product.discount_percent }}٪
+
+                                </span>
+
+                            {% endif %}
+
+
+                            <!-- Product -->
+
+                            <a href="{% url 'shop:product-detail' slug=favorite.product.slug %}">
+
+                                {% if favorite.product.image %}
+
+                                    <img
+                                        src="{{ favorite.product.image.url }}"
+                                        alt="{{ favorite.product.title }}">
+
+                                {% else %}
+
+                                    <div class="favorite-image-placeholder">
+
+                                        <i class="fa-solid fa-image"></i>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </a>
+
+
+
+                        </div>
+
+
+                        <!-- ================= PRODUCT BODY ================= -->
+
+                        <div class="favorite-body">
+
+
+                            <!-- Title -->
+
+                            <h3 class="favorite-title">
+
+                                <a href="{% url 'shop:product-detail' slug=favorite.product.slug %}">
+
+                                    {{ favorite.product.title }}
+
+                                </a>
+
+                            </h3>
+
+
+                            <!-- Category -->
+
+                            <p class="favorite-category">
+
+                                <i class="fa-solid fa-tag"></i>
+
+                                {% for category in favorite.product.category.all %}
+
+                                    {{category.title}}{% if not forloop.last %} ، {% endif %}
+
+                                {% endfor %}
+
+                            </p>
+
+                            <!-- Rate -->
+
+                            <div class="favorite-rate">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                {{ favorite.product.avg_rate }}
+
+                            </div>
+
+
+                            <!-- Price -->
+
+                            <div class="favorite-price">
+
+
+                                {% if favorite.product.discount_percent %}
+
+                                    <span class="old-price">
+
+                                        {{ favorite.product.price|floatformat:0 }}
+
+                                        تومان
+
+                                    </span>
+
+
+                                    <span class="new-price">
+
+                                        {{ favorite.product.get_price|floatformat:0 }}
+
+                                        تومان
+
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="new-price">
+
+                                        {{ favorite.product.price|floatformat:0 }}
+
+                                        تومان
+
+                                    </span>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                            <!-- Stock -->
+
+                            <div class="favorite-stock">
+
+
+                                {% if favorite.product.stock > 0 %}
+
+                                    <span class="in-stock">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        موجود در انبار
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="out-stock">
+
+                                        <i class="fa-solid fa-circle-xmark"></i>
+
+                                        ناموجود
+
+                                    </span>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ================= FOOTER ================= -->
+
+                        <div class="favorite-footer">
+
+
+                            {% if favorite.product.stock > 0 %}
+
+                                <form action="{% url 'cart:session-add-product' %}"
+                                      method="post">
+
+                                    {% csrf_token %}
+
+                                    <input
+                                        type="hidden"
+                                        name="product_id"
+                                        value="{{ favorite.product.id }}">
+
+
+                                    <button type="submit"
+                                            class="cart-btn">
+
+                                        <i class="fa-solid fa-cart-shopping"></i>
+
+                                        افزودن به سبد
+
+                                    </button>
+
+                                </form>
+
+                            {% else %}
+
+                                <button type="button"
+                                        class="cart-btn disabled"
+                                        disabled>
+
+                                    <i class="fa-solid fa-ban"></i>
+
+                                    ناموجود
+
+                                </button>
+
+                            {% endif %}
+
+
+                            <a href="{% url 'shop:product-detail' slug=favorite.product.slug %}"
+                               class="view-btn">
+
+                                مشاهده
+
+                            </a>
+
+                            <a href="#"
+                               class="view-btn">
+
+                                حذف 
+
+                            </a>
+
+
+
+                        </div>
+
+
+                    </article>
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- ================= EMPTY ================= -->
+
+            <div class="no-favorites">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <h2>
+                    لیست علاقه‌مندی‌های شما خالی است.
+                </h2>
+
+                <p>
+                    هنوز محصولی را به لیست علاقه‌مندی‌های خود اضافه نکرده‌اید.
+                </p>
+
+                <a href="{% url 'shop:product-list' %}"
+                   class="browse-products-btn">
+
+                    <i class="fa-solid fa-store"></i>
+
+                    مشاهده محصولات
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

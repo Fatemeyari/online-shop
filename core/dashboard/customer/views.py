@@ -8,7 +8,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from dashboard.permissions import HasCustomerAccessPermission
 from accounts.models import User , Profile
 from dashboard.customer.forms import CustomerPasswordChangeForm ,CustomerProfileEditForm , UserAddressForm
-from order.models import UserAddressModel , OrderModel  ,OrderStatusType
+from order.models import UserAddressModel ,OrderModel  ,OrderStatusType 
+from shop.models import WishlistProduct 
 
 class CustomerDashboardHomeView(LoginRequiredMixin,HasCustomerAccessPermission,TemplateView):
     template_name="dashboard/customer/home.html"
@@ -157,4 +158,19 @@ class CustomerOrderInvoiceView(LoginRequiredMixin,HasCustomerAccessPermission,De
 
 
 
+class CustomerWishListView(LoginRequiredMixin,HasCustomerAccessPermission,ListView):
+    template_name="dashboard/customer/wishlist.html"
+    paginate_by = 5 
     
+    def get_queryset(self):
+        queryset = WishlistProduct.objects.filter(user=self.request.user)
+        return queryset
+
+    
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+
+        wishlist=WishlistProduct.objects.filter(user=self.request.user)
+        context["wishlist"] =wishlist
+
+        return context

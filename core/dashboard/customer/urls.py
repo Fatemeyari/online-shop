@@ -15,7 +15,8 @@ urlpatterns = [
    path('success-order-list/',views.CustomerSuccessOrderListView.as_view() , name="success-order-list"),
    path('failed-order-list/',views.CustomerFailedOrderListView.as_view() , name="failed-order-list"),
    path('order/<int:pk>/detail/', views.CustomerOrderDetailView.as_view() , name="order-detail" ),
-   path('order/<int:pk>/invoice/' , views.CustomerOrderInvoiceView.as_view() , name="order-invoice")
+   path('order/<int:pk>/invoice/' , views.CustomerOrderInvoiceView.as_view() , name="order-invoice"),
+   path('whishlist/list/' , views.CustomerWishListView.as_view() , name="whishlist-list")
 
 
 ]
