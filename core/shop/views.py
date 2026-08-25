@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 
-from .models import Product , ProductStatusType , ProductCategory
+from .models import Product , ProductStatusType , ProductCategory , WishlistProduct
 
 class ShopProductGridView(ListView):
     template_name="shop/product_grid.html"
@@ -53,6 +53,10 @@ class ShopProductGridView(ListView):
     def get_context_data(self , **kwargs):
         context= super().get_context_data(**kwargs)
         context["total_items"] =self.get_queryset().count()
+        if self.request.user.is_authenticated:
+            context["wish_items"] = WishlistProduct.objects.filter(user=self.request.user).values_list("product__id" , flat=True)
+        else:
+            context["wish_items"]=[]
         context["categories"]= ProductCategory.objects.all()
         return context    
     
@@ -61,3 +65,7 @@ class ShopProductGridView(ListView):
 class ShopProductDetailView(DetailView):
     template_name="shop/product_single.html"
     queryset= Product.objects.filter(status=ProductStatusType.publish.value)
+
+
+
+    
