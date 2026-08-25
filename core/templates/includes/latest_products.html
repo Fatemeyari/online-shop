@@ -1,14 +1,24 @@
 <section class="latest-products">
 
+    <!-- ================= HEADER ================= -->
+
     <div class="latest-header">
 
-        <h2>🔥 جدیدترین محصولات</h2>
+        <h2>
+            🔥 جدیدترین محصولات
+        </h2>
 
-        <a href="{% url 'shop:product-grid' %}" class="latest-all-btn">
+        <a
+            href="{% url 'shop:product-grid' %}"
+            class="latest-all-btn"
+        >
             مشاهده همه
         </a>
 
     </div>
+
+
+    <!-- ================= PRODUCTS ================= -->
 
     <div class="latest-grid">
 
@@ -16,76 +26,213 @@
 
         <div class="latest-card">
 
+            <!-- ================= DISCOUNT ================= -->
+
             {% if product.discount_percent %}
+
                 <span class="latest-discount">
-                    {{product.discount_percent}}٪
+                    {{ product.discount_percent }}٪
                 </span>
+
             {% endif %}
 
-            <a href="{% url 'shop:product-detail' slug=product.slug %}" class="latest-image">
-                <img src="{{product.image.url}}" alt="{{product.title}}">
+
+            <!-- ================= WISHLIST ================= -->
+
+            <form
+                action="{% url 'dashboard:customer:wishlist-create' %}"
+                method="post"
+                class="wishlist-form"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="product_id"
+                    value="{{ product.id }}"
+                >
+
+                <button
+                    type="submit"
+                    class="wishlist-btn"
+                >
+
+                    {% if product.id in wish_items %}
+
+                        <i class="fa-solid fa-heart wishlist-active"></i>
+
+                    {% else %}
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    {% endif %}
+
+                </button>
+
+            </form>
+
+
+            <!-- ================= IMAGE ================= -->
+
+            <a
+                href="{% url 'shop:product-detail' slug=product.slug %}"
+                class="latest-image"
+            >
+
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.title }}"
+                >
+
             </a>
+
+
+            <!-- ================= BODY ================= -->
 
             <div class="latest-body">
 
-                <h3>{{product.title}}</h3>
+                <h3>
+                    {{ product.title }}
+                </h3>
+
+
+                <!-- CATEGORY -->
 
                 <p>
+
                     {% for category in product.category.all %}
-                        {{category.title}}{% if not forloop.last %} ، {% endif %}
+
+                        {{ category.title }}
+
+                        {% if not forloop.last %}
+                            ،
+                        {% endif %}
+
+                    {% empty %}
+
+                        بدون دسته‌بندی
+
                     {% endfor %}
+
                 </p>
 
+
+                <!-- RATE -->
+
                 <div class="latest-rate">
-                    ⭐ {{product.avg_rate}}
+
+                    ⭐ {{ product.avg_rate }}
+
                 </div>
+
+
+                <!-- PRICE -->
 
                 {% if product.discount_percent %}
 
                     <div class="latest-old-price">
-                        {{product.price}} تومان
+
+                        {{ product.price }} تومان
+
                     </div>
 
                     <div class="latest-price">
-                        {{product.get_price}} تومان
+
+                        {{ product.get_price }} تومان
+
                     </div>
 
                 {% else %}
 
                     <div class="latest-price">
-                        {{product.price}} تومان
+
+                        {{ product.price }} تومان
+
                     </div>
 
                 {% endif %}
 
             </div>
 
+
+            <!-- ================= FOOTER ================= -->
+
             <div class="latest-footer">
-            {% if product.stock %}
-                <form action="{% url 'cart:session-add-product' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{product.id}}">
 
-                        <button type="submit" class="latest-cart-btn">
+                {% if product.stock %}
+
+                    <form
+                        action="{% url 'cart:session-add-product' %}"
+                        method="post"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="product_id"
+                            value="{{ product.id }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="latest-cart-btn"
+                        >
+
                             <i class="fa-solid fa-cart-shopping"></i>
-                                افزودن به سبد خرید
+
+                            افزودن به سبد خرید
+
                         </button>
-                </form>
-            {% else %}
-                <button type="button" class="cart-btn disabled" disabled>
-                    <i class="fa-solid fa-ban"></i>
-                    ناموجود 
-                </button>
-            {% endif %}
+
+                    </form>
+
+                {% else %}
+
+                    <button
+                        type="button"
+                        class="latest-cart-btn disabled"
+                        disabled
+                    >
+
+                        <i class="fa-solid fa-ban"></i>
+
+                        ناموجود
+
+                    </button>
+
+                {% endif %}
 
 
-                <a href="{% url 'shop:product-detail' slug=product.slug %}" class="latest-view-btn">
+                <!-- VIEW PRODUCT -->
+
+                <a
+                    href="{% url 'shop:product-detail' slug=product.slug %}"
+                    class="latest-view-btn"
+                >
+
                     مشاهده
+
                 </a>
 
             </div>
 
         </div>
+
+        {% empty %}
+
+            <!-- ================= EMPTY ================= -->
+
+            <div class="no-product">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h2>
+                    محصولی یافت نشد.
+                </h2>
+
+            </div>
 
         {% endfor %}
 

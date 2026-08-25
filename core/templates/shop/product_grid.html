@@ -285,11 +285,30 @@
 
                 {% endif %}
 
-                <button class="wishlist-btn">
+                <form action="{% url 'dashboard:customer:wishlist-create' %}" method="post">
+                    {% csrf_token %}
 
-                    <i class="fa-regular fa-heart"></i>
+                    <input
+                        type="hidden"
+                        name="product_id"
+                        value="{{ object.id }}"
+                    >
 
-                </button>
+                    <button type="submit" class="wishlist-btn">
+
+                        {% if object.id in wish_items %}
+
+                            <i class="fa-solid fa-heart wishlist-active"></i>
+
+                        {% else %}
+
+                            <i class="fa-regular fa-heart"></i>
+
+                        {% endif %}
+
+                    </button>
+
+                </form>
 
                 <a href="{% url 'shop:product-detail' slug=object.slug %}" class="product-image">
 

@@ -1,5 +1,4 @@
 {% load static %}
-{% load static %}
 
 <h2>🛍 محصولات مشابه</h2>
 
@@ -9,43 +8,111 @@
 
     <div class="product-card">
 
+        <!-- ================= DISCOUNT ================= -->
+
         {% if product.discount_percent %}
+
             <span class="discount">
-                {{product.discount_percent}}٪
+                {{ product.discount_percent }}٪
             </span>
+
         {% endif %}
 
-        <button class="wishlist-btn">
-            <i class="fa-regular fa-heart"></i>
-        </button>
 
-        <a href="{% url 'shop:product-detail' slug=product.slug %}" class="product-image">
+        <!-- ================= WISHLIST ================= -->
 
-            <img src="{{product.image.url}}" alt="{{product.title}}">
+        <form
+            action="{% url 'dashboard:customer:wishlist-create' %}"
+            method="post"
+            class="wishlist-form"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="product_id"
+                value="{{ product.id }}"
+            >
+
+            <button
+                type="submit"
+                class="wishlist-btn"
+                title="افزودن به علاقه‌مندی‌ها"
+            >
+
+                {% if product.id in wish_items %}
+
+                    <i class="fa-solid fa-heart wishlist-active"></i>
+
+                {% else %}
+
+                    <i class="fa-regular fa-heart"></i>
+
+                {% endif %}
+
+            </button>
+
+        </form>
+
+
+        <!-- ================= PRODUCT IMAGE ================= -->
+
+        <a
+            href="{% url 'shop:product-detail' slug=product.slug %}"
+            class="product-image"
+        >
+
+            <img
+                src="{{ product.image.url }}"
+                alt="{{ product.title }}"
+            >
 
         </a>
 
+
+        <!-- ================= PRODUCT BODY ================= -->
+
         <div class="product-body">
 
+            <!-- TITLE -->
+
             <h3 class="product-title">
-                {{product.title}}
+                {{ product.title }}
             </h3>
+
+
+            <!-- CATEGORY -->
 
             <p class="product-category">
 
                 <i class="fa-solid fa-tag"></i>
 
                 {% for category in product.category.all %}
-                    {{category.title}}{% if not forloop.last %} ، {% endif %}
+
+                    {{ category.title }}
+
+                    {% if not forloop.last %}
+                        ،
+                    {% endif %}
+
                 {% empty %}
+
                     بدون دسته‌بندی
+
                 {% endfor %}
 
             </p>
 
+
+            <!-- RATE -->
+
             <div class="product-rate">
-                ⭐ {{product.avg_rate}}
+                ⭐ {{ product.avg_rate }}
             </div>
+
+
+            <!-- PRICE -->
 
             <div class="product-price">
 
@@ -53,22 +120,25 @@
 
                     <span class="old-price">
                         قیمت اصلی:
-                        {{product.price}} تومان
+                        {{ product.price }} تومان
                     </span>
 
                     <span class="new-price">
-                        {{product.get_price}} تومان
+                        {{ product.get_price }} تومان
                     </span>
 
                 {% else %}
 
                     <span class="new-price">
-                        {{product.price}} تومان
+                        {{ product.price }} تومان
                     </span>
 
                 {% endif %}
 
             </div>
+
+
+            <!-- STOCK -->
 
             <div class="product-stock">
 
@@ -88,47 +158,82 @@
 
         </div>
 
-        <div class="product-footer">
-            {% if product.stock != 0 %}
-             <form action="{% url 'cart:session-add-product' %}" method="post" class="cart-form">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{product.id}}">
 
-                <button type="submit" class="cart-btn">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    افزودن به سبد خرید
-                </button>
-            </form>
+        <!-- ================= FOOTER ================= -->
+
+        <div class="product-footer">
+
+            {% if product.stock > 0 %}
+
+                <form
+                    action="{% url 'cart:session-add-product' %}"
+                    method="post"
+                    class="cart-form"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="product_id"
+                        value="{{ product.id }}"
+                    >
+
+                    <button
+                        type="submit"
+                        class="cart-btn"
+                    >
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        افزودن به سبد خرید
+
+                    </button>
+
+                </form>
+
             {% else %}
-            <button type="button" class="cart-btn disabled" disabled>
-                <i class="fa-solid fa-ban"></i>
-                 ناموجود 
-            </button>
+
+                <button
+                    type="button"
+                    class="cart-btn disabled"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-ban"></i>
+
+                    ناموجود
+
+                </button>
+
             {% endif %}
 
-            <a href="{% url 'shop:product-detail' slug=product.slug %}" class="view-btn">
 
+            <!-- VIEW PRODUCT -->
+
+            <a
+                href="{% url 'shop:product-detail' slug=product.slug %}"
+                class="view-btn"
+            >
                 مشاهده محصول
-
             </a>
 
         </div>
 
     </div>
 
+
     {% empty %}
 
-    <div class="no-product">
+        <div class="no-product">
 
-        <i class="fa-solid fa-box-open"></i>
+            <i class="fa-solid fa-box-open"></i>
 
-        <h2>
+            <h2>
+                محصول مشابهی یافت نشد.
+            </h2>
 
-            محصول مشابهی یافت نشد.
-
-        </h2>
-
-    </div>
+        </div>
 
     {% endfor %}
 

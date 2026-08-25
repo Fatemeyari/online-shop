@@ -4,6 +4,7 @@ from django.views.generic import View , TemplateView , UpdateView , ListView , C
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin 
+from django.contrib import messages
 
 from dashboard.permissions import HasCustomerAccessPermission
 from accounts.models import User , Profile
@@ -183,3 +184,18 @@ class CustomerWishListDeleteView(LoginRequiredMixin,HasCustomerAccessPermission,
         return WishlistProduct.objects.filter(user=self.request.user)
 
 
+class WishListCreateView(LoginRequiredMixin,HasCustomerAccessPermission,View):
+    def post(self,request,*args, **kwargs):
+        product_id=request.POST.get("product_id")
+        user=request.user
+        user_wishlist=WishlistProduct.objects.filter(user=request.user).values_list("product__id" , flat=True)
+        if int(product_id) in user_wishlist:
+            messages.error(request ,"محصول در لیست علاقه مندی ها موجود است ")
+            return redirect(request.META.get("HTTP_REFERER", "/"))        
+
+        
+        wishlist_obj=WishlistProduct.objects.create(product_id=product_id , user=user)
+        wishlist_obj.save()
+        messages.success(request ,"محصول به لیست علاقه مندی ها اضافه شد . ")
+
+        return redirect(request.META.get("HTTP_REFERER", "/"))        

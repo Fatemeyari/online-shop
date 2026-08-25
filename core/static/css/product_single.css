@@ -344,14 +344,43 @@
 
 }
 
+.wishlist-btn{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px;
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#888;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+
+    z-index:20;
+
+}
+
 .wishlist-btn:hover{
-
-    background:#ff4d00;
-
+    background:#ff3b3b;
     color:#fff;
+}
 
-    transform:translateY(-4px);
-
+.wishlist-btn .wishlist-active{
+    color:#ff3b3b;
 }
 
 .share-btn:hover{
