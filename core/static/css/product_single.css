@@ -1156,6 +1156,262 @@
 
     font-size: 15px;
 }
+/*==================================================
+    COMMENT CARD
+==================================================*/
+
+.comment-card {
+    background: #fff;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #f1f1f1;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .07);
+
+    transition: .35s;
+}
+
+.comment-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, .09);
+}
+
+
+/*==================================================
+    COMMENT HEADER
+==================================================*/
+
+.comment-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+/*==================================================
+    COMMENT USER
+==================================================*/
+
+.comment-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+
+/*==================================================
+    COMMENT AVATAR
+==================================================*/
+
+.comment-avatar {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #fff;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, .10);
+}
+
+
+/* DEFAULT AVATAR */
+
+.comment-avatar-default {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #ff8c00,
+        #ff4d00
+    );
+
+    color: #fff;
+
+    font-size: 20px;
+}
+
+
+/*==================================================
+    USER INFO
+==================================================*/
+
+.comment-user-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.comment-user-name {
+    color: #222;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.comment-date {
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+/*==================================================
+    COMMENT RATING
+==================================================*/
+
+.comment-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 3px;
+
+    direction: ltr;
+
+    flex-shrink: 0;
+}
+
+.comment-rating i {
+    color: #ffc107;
+
+    font-size: 15px;
+}
+
+
+/*==================================================
+    COMMENT CONTENT
+==================================================*/
+
+.comment-content {
+    padding-right: 64px;
+}
+
+.comment-content p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 2.1;
+}
+
+
+/*==================================================
+    NO COMMENTS
+==================================================*/
+
+.no-comments {
+    background: #fff;
+
+    border: 1px dashed #ddd;
+
+    border-radius: 20px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #888;
+}
+
+.no-comments i {
+    display: block;
+
+    font-size: 35px;
+
+    color: #ff6b00;
+
+    margin-bottom: 15px;
+}
+
+.no-comments p {
+    margin: 0;
+}
+
+
+/*==================================================
+    RESPONSIVE — 768px
+==================================================*/
+
+@media (max-width: 768px) {
+
+    .comment-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .comment-content {
+        padding-right: 0;
+    }
+
+}
+
+
+/*==================================================
+    RESPONSIVE — 480px
+==================================================*/
+
+@media (max-width: 480px) {
+
+    .comment-card {
+        padding: 20px;
+    }
+
+    .comment-avatar {
+        width: 45px;
+        height: 45px;
+    }
+
+    .comment-user-name {
+        font-size: 14px;
+    }
+
+    .comment-rating i {
+        font-size: 13px;
+    }
+
+    .comment-content p {
+        font-size: 14px;
+
+        line-height: 2;
+    }
+
+}
 
 
 /*==================================================

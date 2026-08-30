@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 
 from .models import Product , ProductStatusType , ProductCategory , WishlistProduct
-
+from review.models import ReviewModel , ReviewStatusType
 class ShopProductGridView(ListView):
     template_name="shop/product_grid.html"
     paginate_by = 9
@@ -69,11 +69,12 @@ class ShopProductDetailView(DetailView):
 
     def get_context_data(self , **kwargs):
         context= super().get_context_data(**kwargs)
+        product=self.get_object()
         if self.request.user.is_authenticated:
             context["wish_items"] = WishlistProduct.objects.filter(user=self.request.user).values_list("product__id" , flat=True)
         else:
             context["wish_items"]=[]
-        context["categories"]= ProductCategory.objects.all()
+        context["reviews"] = ReviewModel.objects.filter(product=product, status=ReviewStatusType.accepted.value)     
         return context    
     
 

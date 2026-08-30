@@ -665,37 +665,54 @@
     </div>
 
 
-    <!-- EXISTING COMMENTS -->
+    <!-- ================= EXISTING COMMENTS ================= -->
 
-    {% for comment in comments %}
+    {% for review in reviews %}
 
         <div class="comment-card">
 
-            <div class="comment-top">
+            <!-- COMMENT HEADER -->
+            <div class="comment-header">
 
-                <div class="user">
+                <!-- USER INFO -->
+                <div class="comment-user">
 
-                    <i class="fa-solid fa-user"></i>
+                    {% if review.user.user_profile.image %}
+                        <img
+                            src="{{ review.user.user_profile.image.url }}"
+                            alt="{{ review.user }}"
+                            class="comment-avatar"
+                        >
+                    {% else %}
+                        <div class="comment-avatar comment-avatar-default">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    {% endif %}
 
-                    <strong>
-                        {{ comment.user }}
-                    </strong>
+                    <div class="comment-user-info">
+
+                        <strong class="comment-user-name">
+                            {{ review.user }}
+                        </strong>
+
+                        <span class="comment-date">
+                            {{ review.created_time|date:"Y/m/d" }}
+                        </span>
+
+                    </div>
 
                 </div>
 
 
-                <div class="stars">
+                <!-- COMMENT RATING -->
+                <div class="comment-rating">
 
                     {% for i in "12345" %}
 
-                        {% if forloop.counter <= comment.rate %}
-
-                            ⭐
-
+                        {% if forloop.counter <= review.rate %}
+                            <i class="fa-solid fa-star"></i>
                         {% else %}
-
-                            ☆
-
+                            <i class="fa-regular fa-star"></i>
                         {% endif %}
 
                     {% endfor %}
@@ -705,9 +722,14 @@
             </div>
 
 
-            <p>
-                {{ comment.description }}
-            </p>
+            <!-- COMMENT TEXT -->
+            <div class="comment-content">
+
+                <p>
+                    {{ review.description }}
+                </p>
+
+            </div>
 
         </div>
 
@@ -724,8 +746,6 @@
         </div>
 
     {% endfor %}
-
-</section>
 
 
 <!-- ================= SIMILAR PRODUCTS ================= -->
