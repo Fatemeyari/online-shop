@@ -67,5 +67,16 @@ class ShopProductDetailView(DetailView):
     queryset= Product.objects.filter(status=ProductStatusType.publish.value)
 
 
+    def get_context_data(self , **kwargs):
+        context= super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["wish_items"] = WishlistProduct.objects.filter(user=self.request.user).values_list("product__id" , flat=True)
+        else:
+            context["wish_items"]=[]
+        context["categories"]= ProductCategory.objects.all()
+        return context    
+    
+
+
 
     
