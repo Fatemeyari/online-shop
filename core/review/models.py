@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator , MinValueValidator
 class ReviewStatusType(models.IntegerChoices):
     pending = 1 , "در انتظا تایید"
     accepted = 2 , "تایید شده "
-    rejected = 3 , "vn ani "
+    rejected = 3 , "رد شده"
 
 
 class ReviewModel(models.Model):
