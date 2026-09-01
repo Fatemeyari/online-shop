@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+
+    لیست نظرات
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/review_list.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="reviews-section">
+
+    <div class="reviews-container">
+
+
+        <!-- =========================================
+                Header
+        ========================================== -->
+
+        <div class="reviews-header">
+
+
+            <span class="reviews-badge">
+
+                <i class="fa-solid fa-comments"></i>
+
+                نظرات کاربران
+
+            </span>
+
+
+            <h1>
+
+                دیدگاه کاربران
+
+            </h1>
+
+
+            <p>
+
+                نظرات و تجربه‌های کاربران درباره محصولات
+
+            </p>
+
+
+            <!-- Total Reviews -->
+
+            <div class="reviews-count">
+
+                <span class="reviews-count-number">
+
+                    {{ total_items }}
+
+                </span>
+
+
+                <span class="reviews-count-text">
+
+                    نظر ثبت شده
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+                Reviews List
+        ========================================== -->
+
+        {% if object_list %}
+
+
+            <div class="reviews-grid">
+
+
+                {% for review in object_list %}
+
+
+                    <article class="review-card">
+
+
+                        <!-- =================================
+                                User Information
+                        ================================== -->
+
+                        <div class="review-top">
+
+
+                            <div class="user-info">
+
+
+                                <!-- Avatar -->
+
+                                <div class="user-avatar">
+
+
+                                    {% if review.user.user_profile.image %}
+
+                                        <img
+                                            src="{{ review.user.user_profile.image.url }}"
+                                            alt="{{ review.user }}"
+                                            class="comment-avatar"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="comment-avatar comment-avatar-default">
+
+                                            <i class="fa-solid fa-user"></i>
+
+                                        </div>
+
+                                    {% endif %}
+
+
+                                </div>
+
+
+
+                                <!-- User Details -->
+
+                                <div class="user-details">
+
+
+                                    <h3>
+
+                                        {{ review.user.user_profile.get_fullname }}
+
+                                    </h3>
+
+
+                                    <span>
+
+                                        {{ review.created_time|date:"Y/m/d" }}
+
+                                    </span>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- Rating -->
+
+                            <div class="review-rate">
+
+
+                                <span>
+
+                                    {{ review.rate }}
+
+                                </span>
+
+
+                                <i class="fa-solid fa-star"></i>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- =================================
+                                Product
+                        ================================== -->
+
+                        <div class="review-product">
+
+
+                            <span>
+
+                                محصول
+
+                            </span>
+
+
+                            <strong>
+
+                                {{ review.product.title }}
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- =================================
+                                Description
+                        ================================== -->
+
+                        <div class="review-description">
+
+
+                            <p>
+
+                                {{ review.description }}
+
+                            </p>
+
+
+                        </div>
+
+
+
+                        <!-- =================================
+                                Footer
+                        ================================== -->
+
+                        <div class="review-footer">
+
+
+                            <div class="review-status">
+
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+
+                                <span>
+
+                                    {{ review.get_status_display }}
+
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="review-footer-left">
+
+
+                                <span class="review-date">
+
+                                    {{ review.created_time|date:"Y/m/d - H:i" }}
+
+                                </span>
+
+
+                                <!-- Edit -->
+
+                                <a
+                                    href="#"
+                                    class="review-edit-btn"
+                                >
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                    ویرایش
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =========================================
+                    Empty Reviews
+            ========================================== -->
+
+            <div class="empty-reviews">
+
+
+                <div class="empty-icon">
+
+                    <i class="fa-regular fa-comment-dots"></i>
+
+                </div>
+
+
+                <h2>
+
+                    هنوز نظری ثبت نشده است
+
+                </h2>
+
+
+                <p>
+
+                    در حال حاضر هیچ نظری برای نمایش وجود ندارد.
+
+                </p>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

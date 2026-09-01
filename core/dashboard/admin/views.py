@@ -10,7 +10,7 @@ from accounts.models import User , Profile
 from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet , AdminCouponForm
 from shop.models import Product,ProductCategory,ProductStatusType
 from order.models import CouponModel , OrderModel , OrderStatusType
-
+from review.models import ReviewModel
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
 
@@ -286,6 +286,20 @@ class CustomerOrderInvoiceView(LoginRequiredMixin,HasAdminAccessPermission,Detai
         return OrderModel.objects.all()
 
 
+class CustomerReviewListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
+    template_name="dashboard/admin/review_list.html"
+    paginate_by = 5 
+    
+    def get_queryset(self):
+        queryset = ReviewModel.objects.all()
+        return queryset
+
+    
+    def get_context_data(self , **kwargs):
+        context=super().get_context_data(**kwargs)
+        review=ReviewModel.objects.all()
+        context["total_items"] = self.get_queryset().count()  
+        return context
 
 
 
