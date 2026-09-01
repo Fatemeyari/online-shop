@@ -7,6 +7,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from accounts.models import Profile
 from shop.models import Product , ProductImage
 from order.models import CouponModel
+from review.models import ReviewModel
 
 class AdminPasswordChangeForm(auth_forms.PasswordChangeForm):
     error_messages={
@@ -57,3 +58,8 @@ class AdminCouponForm(forms.ModelForm):
                     }
                 ),
             }
+
+class AdminReviewEditForm(forms.ModelForm):
+    class Meta:
+        model=ReviewModel
+        fields=["description" , "rate" , "status"]

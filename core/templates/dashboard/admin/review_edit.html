@@ -1,0 +1,583 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+
+    ویرایش نظر
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/style.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/review_edit.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="review-edit-section">
+
+    <div class="review-edit-container">
+
+
+        <!-- =========================================
+                Header
+        ========================================== -->
+
+        <div class="review-edit-header">
+
+            <div class="header-icon">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+            </div>
+
+            <div>
+
+                <span class="header-badge">
+
+                    مدیریت نظرات
+
+                </span>
+
+                <h1>
+
+                    ویرایش نظر
+
+                </h1>
+
+                <p>
+
+                    اطلاعات، امتیاز و وضعیت این دیدگاه را مدیریت کنید.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+                Review Card
+        ========================================== -->
+
+        <div class="review-edit-card">
+
+
+            <!-- =========================================
+                    User & Product
+            ========================================== -->
+
+            <div class="review-info-grid">
+
+
+                <!-- User -->
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>
+
+                            کاربر
+
+                        </span>
+
+                        <strong>
+
+                            {{ object.user.user_profile.get_fullname }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Product -->
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>
+
+                            محصول
+
+                        </span>
+
+                        <strong>
+
+                            {{ object.product.title }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-divider"></div>
+
+
+
+            <!-- =========================================
+                    Form
+            ========================================== -->
+
+            <form
+                method="post"
+                class="review-edit-form"
+            >
+
+                {% csrf_token %}
+
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="id_description">
+
+                        <i class="fa-regular fa-comment"></i>
+
+                        متن دیدگاه
+
+                    </label>
+
+                    <textarea
+                        name="description"
+                        id="id_description"
+                        placeholder="متن دیدگاه را وارد کنید..."
+                        required
+                    >{{ form.description.value|default:"" }}</textarea>
+
+                    {% if form.description.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.description.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =========================================
+                        Rating
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-star"></i>
+
+                        امتیاز کاربر
+
+                    </label>
+
+
+                    <div class="rating-options">
+
+
+                        <!-- 1 -->
+
+                        <label class="rating-item">
+
+                            <input
+                                type="radio"
+                                name="rate"
+                                value="1"
+                                {% if object.rate == 1 %}checked{% endif %}
+                            >
+
+                            <span class="rating-content">
+
+                                <span class="stars">
+
+                                    ⭐
+
+                                </span>
+
+                                <strong>
+
+                                    ۱
+
+                                </strong>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- 2 -->
+
+                        <label class="rating-item">
+
+                            <input
+                                type="radio"
+                                name="rate"
+                                value="2"
+                                {% if object.rate == 2 %}checked{% endif %}
+                            >
+
+                            <span class="rating-content">
+
+                                <span class="stars">
+
+                                    ⭐⭐
+
+                                </span>
+
+                                <strong>
+
+                                    ۲
+
+                                </strong>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- 3 -->
+
+                        <label class="rating-item">
+
+                            <input
+                                type="radio"
+                                name="rate"
+                                value="3"
+                                {% if object.rate == 3 %}checked{% endif %}
+                            >
+
+                            <span class="rating-content">
+
+                                <span class="stars">
+
+                                    ⭐⭐⭐
+
+                                </span>
+
+                                <strong>
+
+                                    ۳
+
+                                </strong>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- 4 -->
+
+                        <label class="rating-item">
+
+                            <input
+                                type="radio"
+                                name="rate"
+                                value="4"
+                                {% if object.rate == 4 %}checked{% endif %}
+                            >
+
+                            <span class="rating-content">
+
+                                <span class="stars">
+
+                                    ⭐⭐⭐⭐
+
+                                </span>
+
+                                <strong>
+
+                                    ۴
+
+                                </strong>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- 5 -->
+
+                        <label class="rating-item">
+
+                            <input
+                                type="radio"
+                                name="rate"
+                                value="5"
+                                {% if object.rate == 5 %}checked{% endif %}
+                            >
+
+                            <span class="rating-content">
+
+                                <span class="stars">
+
+                                    ⭐⭐⭐⭐⭐
+
+                                </span>
+
+                                <strong>
+
+                                    ۵
+
+                                </strong>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    {% if form.rate.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.rate.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =========================================
+                        Status
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        وضعیت دیدگاه
+
+                    </label>
+
+
+                    <div class="status-options">
+
+
+                        <!-- Pending -->
+
+                        <label class="status-item pending">
+
+                            <input
+                                type="radio"
+                                name="status"
+                                value="1"
+                                {% if object.status == 1 %}checked{% endif %}
+                            >
+
+                            <span class="status-content">
+
+                                <span class="status-icon">
+
+                                    <i class="fa-regular fa-clock"></i>
+
+                                </span>
+
+                                <span class="status-text">
+
+                                    <strong>
+
+                                        در انتظار تأیید
+
+                                    </strong>
+
+                                    <small>
+
+                                        هنوز بررسی نشده
+
+                                    </small>
+
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- Accepted -->
+
+                        <label class="status-item accepted">
+
+                            <input
+                                type="radio"
+                                name="status"
+                                value="2"
+                                {% if object.status == 2 %}checked{% endif %}
+                            >
+
+                            <span class="status-content">
+
+                                <span class="status-icon">
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                </span>
+
+                                <span class="status-text">
+
+                                    <strong>
+
+                                        تأیید شده
+
+                                    </strong>
+
+                                    <small>
+
+                                        نمایش نظر برای کاربران
+
+                                    </small>
+
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- Rejected -->
+
+                        <label class="status-item rejected">
+
+                            <input
+                                type="radio"
+                                name="status"
+                                value="3"
+                                {% if object.status == 3 %}checked{% endif %}
+                            >
+
+                            <span class="status-content">
+
+                                <span class="status-icon">
+
+                                    <i class="fa-solid fa-xmark"></i>
+
+                                </span>
+
+                                <span class="status-text">
+
+                                    <strong>
+
+                                        رد شده
+
+                                    </strong>
+
+                                    <small>
+
+                                        نظر تأیید نشده است
+
+                                    </small>
+
+                                </span>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    {% if form.status.errors %}
+
+                        <div class="field-error">
+
+                            {{ form.status.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =========================================
+                        Actions
+                ========================================== -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'dashboard:admin:review-list' %}"
+                        class="back-btn"
+                    >
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                        بازگشت
+
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        ذخیره تغییرات
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

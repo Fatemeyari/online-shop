@@ -7,10 +7,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from dashboard.permissions import HasAdminAccessPermission
 from accounts.models import User , Profile
-from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet , AdminCouponForm
+from dashboard.admin.forms import AdminPasswordChangeForm ,AdminProfileEditForm,ProductForm , ProductImageFormSet , AdminCouponForm ,AdminReviewEditForm
 from shop.models import Product,ProductCategory,ProductStatusType
 from order.models import CouponModel , OrderModel , OrderStatusType
 from review.models import ReviewModel
+
 class AdminDashboardHomeView(LoginRequiredMixin,HasAdminAccessPermission,TemplateView):
     template_name="dashboard/admin/home.html"
 
@@ -279,14 +280,14 @@ class AdminOrderDetailView(LoginRequiredMixin,HasAdminAccessPermission,DetailVie
 
 
 
-class CustomerOrderInvoiceView(LoginRequiredMixin,HasAdminAccessPermission,DetailView):
+class AdminOrderInvoiceView(LoginRequiredMixin,HasAdminAccessPermission,DetailView):
     template_name="dashboard/customer/order_invoice.html"
 
     def get_queryset(self):
         return OrderModel.objects.all()
 
 
-class CustomerReviewListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
+class AdminReviewListView(LoginRequiredMixin,HasAdminAccessPermission,ListView):
     template_name="dashboard/admin/review_list.html"
     paginate_by = 5 
     
@@ -302,5 +303,12 @@ class CustomerReviewListView(LoginRequiredMixin,HasAdminAccessPermission,ListVie
         return context
 
 
+class AdminReviewEditView(LoginRequiredMixin,HasAdminAccessPermission,SuccessMessageMixin,UpdateView):
+    template_name="dashboard/admin/review_edit.html"
+    form_class = AdminReviewEditForm
+    success_url = reverse_lazy("dashboard:admin:review-list")
+    success_message= "به روزرسانی کامنت با موفقیت انجام شد."
 
-
+    def get_queryset(self):
+        return ReviewModel.objects.all()
+  
