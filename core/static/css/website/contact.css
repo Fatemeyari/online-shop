@@ -1,0 +1,525 @@
+/* =====================================================
+   CONTACT PAGE
+===================================================== */
+
+.contact-wrapper {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 80px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        0.85fr 1.15fr;
+
+    gap: 60px;
+
+    align-items: start;
+
+    direction: rtl;
+}
+
+
+/* =====================================================
+   CONTACT INFO
+===================================================== */
+
+.contact-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   CONTACT CARD
+===================================================== */
+
+.contact-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, .05);
+
+    transition: .3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #ffd9c2;
+
+    box-shadow:
+        0 16px 30px rgba(255, 106, 0, .10);
+}
+
+
+/* =====================================================
+   CONTACT ICON
+===================================================== */
+
+.contact-icon {
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1e7,
+            #fff8f3
+        );
+
+    color: #ff6a00;
+
+    font-size: 22px;
+
+    transition: .3s;
+}
+
+.contact-card:hover .contact-icon {
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3d00,
+            #ff8c00
+        );
+
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   CONTACT CARD CONTENT
+===================================================== */
+
+.contact-card-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.contact-card h3 {
+    margin: 0 0 5px;
+
+    color: #222;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+.contact-card p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   CONTACT FORM
+===================================================== */
+
+.contact-form {
+    background: #fff;
+
+    padding: 38px;
+
+    border-radius: 24px;
+
+    border: 1px solid #eee;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, .07);
+
+    direction: rtl;
+}
+
+
+/* =====================================================
+   FORM HEADER
+===================================================== */
+
+.contact-form-header {
+    margin-bottom: 30px;
+}
+
+.contact-form-header span {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #ff6a00;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+.contact-form-header h2 {
+    margin: 0 0 8px;
+
+    color: #222;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.contact-form-header p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+
+/* =====================================================
+   FORM ROW
+===================================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #e5e5e5;
+
+    outline: none;
+
+    background: #fafafa;
+
+    color: #333;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    border-radius: 13px;
+
+    transition: .3s;
+}
+
+.form-group input {
+    height: 50px;
+
+    padding: 0 15px;
+}
+
+.form-group textarea {
+    min-height: 150px;
+
+    resize: vertical;
+
+    padding: 14px 15px;
+
+    line-height: 1.9;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #aaa;
+}
+
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff7a00;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 4px rgba(255, 106, 0, .08);
+}
+
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.contact-submit {
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff8c00,
+            #ff4d00
+        );
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    box-shadow:
+        0 8px 20px rgba(255, 106, 0, .18);
+}
+
+.contact-submit i {
+    font-size: 16px;
+
+    transition: .3s;
+}
+
+.contact-submit:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(255, 106, 0, .28);
+}
+
+.contact-submit:hover i {
+    transform: translateX(-4px);
+}
+
+.contact-submit:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header h1 {
+    margin: 0 0 10px;
+
+    font-size: 38px;
+
+    font-weight: 900;
+}
+
+.page-header p {
+    margin: 0;
+
+    font-size: 16px;
+
+    opacity: .9;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+        max-width: 700px;
+    }
+
+    .contact-info {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .page-header {
+        padding: 55px 20px;
+
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .contact-wrapper {
+        width: 92%;
+
+        margin: 50px auto;
+
+        gap: 30px;
+    }
+
+    .contact-info {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .contact-card {
+        padding: 18px;
+
+        border-radius: 16px;
+    }
+
+    .contact-icon {
+        width: 52px;
+        height: 52px;
+
+        font-size: 20px;
+
+        border-radius: 14px;
+    }
+
+    .contact-card h3 {
+        font-size: 16px;
+    }
+
+    .contact-card p {
+        font-size: 13px;
+    }
+
+    .contact-form {
+        padding: 25px 20px;
+
+        border-radius: 20px;
+    }
+
+    .contact-form-header h2 {
+        font-size: 24px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .contact-wrapper {
+        width: 94%;
+    }
+
+    .contact-form {
+        padding: 22px 16px;
+    }
+
+    .contact-form-header h2 {
+        font-size: 22px;
+    }
+
+    .form-group input {
+        height: 48px;
+    }
+
+    .form-group textarea {
+        min-height: 130px;
+    }
+
+    .contact-submit {
+        height: 50px;
+    }
+}

@@ -7,7 +7,7 @@
 {{ block.super }}
 
 <link rel="stylesheet"
-      href="{% static 'css/customer_home.css' %}">
+      href="{% static 'css/dashboard/customer/customer_home.css' %}">
 
 {% endblock %}
 
@@ -276,6 +276,7 @@
 
                             {{ request.user.user_profile.first_name }}
 
+
                         </strong>
 
                     </li>
@@ -308,8 +309,7 @@
 
                         <strong>
 
-                            {{ request.user.user_profile.email }}
-
+                            {{ request.user.email }}
                         </strong>
 
                     </li>

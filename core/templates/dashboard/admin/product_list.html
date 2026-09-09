@@ -6,7 +6,7 @@
 {{ block.super }}
 
 <link rel="stylesheet"
-      href="{% static 'css/product_list.css' %}">
+      href="{% static 'css/dashboard/admin/product_list.css' %}">
 
 {% endblock %}
 
@@ -105,7 +105,7 @@
 
                 <h2>
 
-                    {{ object_list|length }}
+                    {{ objects_totla }}
 
                 </h2>
 
@@ -149,7 +149,7 @@
             </div>
 
             <div class="filter-grid">
-                                <!-- Category -->
+                <!-- Category -->
 
                 <div class="field">
 

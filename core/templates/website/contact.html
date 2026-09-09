@@ -1,70 +1,166 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/website/contact.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
 
-<!-- HEADER -->
+<!-- =====================================================
+     PAGE HEADER
+===================================================== -->
+
 <section class="page-header">
-  <h1>تماس با ما</h1>
-  <p>برای ارتباط با تیم پشتیبانی در هر زمان آماده‌ایم</p>
+    <h1>تماس با ما</h1>
+
+    <p>
+        برای ارتباط با تیم پشتیبانی در هر زمان آماده‌ایم
+    </p>
 </section>
 
-<!-- CONTACT MAIN -->
+
+<!-- =====================================================
+     CONTACT MAIN
+===================================================== -->
+
 <section class="contact-wrapper">
 
-  <!-- INFO -->
-  <div class="contact-info">
+    <!-- =================================================
+         CONTACT INFO
+    ================================================== -->
 
-    <div class="contact-card">
-      <h3>📍 آدرس</h3>
-      <p>تهران، خیابان نمونه، پلاک ۱۲۳</p>
+    <div class="contact-info">
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div class="contact-card-content">
+                <h3>آدرس</h3>
+                <p>تهران، خیابان نمونه، پلاک ۱۲۳</p>
+            </div>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+
+            <div class="contact-card-content">
+                <h3>تلفن</h3>
+                <p>021-00000000</p>
+            </div>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="contact-card-content">
+                <h3>ایمیل</h3>
+                <p>support@shop.com</p>
+            </div>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div class="contact-card-content">
+                <h3>ساعت کاری</h3>
+                <p>هر روز 9 صبح تا 9 شب</p>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="contact-card">
-      <h3>📞 تلفن</h3>
-      <p>021-00000000</p>
-    </div>
 
-    <div class="contact-card">
-      <h3>✉️ ایمیل</h3>
-      <p>support@shop.com</p>
-    </div>
+    <!-- =================================================
+         CONTACT FORM
+    ================================================== -->
 
-    <div class="contact-card">
-      <h3>⏰ ساعت کاری</h3>
-      <p>هر روز 9 صبح تا 9 شب</p>
-    </div>
+    <form
+        class="contact-form"
+        method="post"
+        action="{% url 'website:contact' %}"
+    >
 
-  </div>
+        {% csrf_token %}
 
-  <!-- FORM -->
-  
-  <form class="contact-form" method="post" action="{% url 'website:contact' %}">
-    {% csrf_token %}
 
-    <!-- Messages -->
-    {% if messages %}
-        {% for message in messages %}
-            <script>
-                Toastify({
-                    text: "{{ message|escapejs }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    close: true,
-                    style: {
-                        background:
-                        "{% if message.tags == 'success' %}#22c55e{% else %}#ef4444{% endif %}"
-                    }
-                }).showToast();
-            </script>
-        {% endfor %}
-    {% endif %}
+        <!-- =================================================
+             TOAST MESSAGES
+        ================================================== -->
 
-    <!-- Form Errors -->
-    {% if form %}
-        {% for field in form %}
-            {% for error in field.errors %}
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <script>
+                    Toastify({
+                        text: "{{ message|escapejs }}",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        close: true,
+                        style: {
+                            background:
+                            "{% if message.tags == 'success' %}#22c55e{% else %}#ef4444{% endif %}"
+                        }
+                    }).showToast();
+                </script>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- =================================================
+             FORM ERRORS
+        ================================================== -->
+
+        {% if form %}
+
+            {% for field in form %}
+
+                {% for error in field.errors %}
+
+                    <script>
+                        Toastify({
+                            text: "{{ error|escapejs }}",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            close: true,
+                            style: {
+                                background: "#ef4444"
+                            }
+                        }).showToast();
+                    </script>
+
+                {% endfor %}
+
+            {% endfor %}
+
+
+            {% for error in form.non_field_errors %}
+
                 <script>
                     Toastify({
                         text: "{{ error|escapejs }}",
@@ -77,59 +173,136 @@
                         }
                     }).showToast();
                 </script>
+
             {% endfor %}
-        {% endfor %}
 
-        {% for error in form.non_field_errors %}
-            <script>
-                Toastify({
-                    text: "{{ error|escapejs }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    close: true,
-                    style: {
-                        background: "#ef4444"
-                    }
-                }).showToast();
-            </script>
-        {% endfor %}
-    {% endif %}
+        {% endif %}
 
-    <input
-        type="text"
-        name="fullname"
-        placeholder="نام و نام خانوادگی"
-        value="{{ form.fullname.value|default:'' }}">
 
-    <input
-        type="email"
-        name="email"
-        placeholder="ایمیل"
-        value="{{ form.email.value|default:'' }}">
+        <!-- =================================================
+             FORM HEADER
+        ================================================== -->
 
-    <input
-        type="tel"
-        name="phone_number"
-        placeholder="شماره تماس"
-        value="{{ form.phone_number.value|default:'' }}">
+        <div class="contact-form-header">
 
-    <input
-        type="text"
-        name="subject"
-        placeholder="موضوع"
-        value="{{ form.subject.value|default:'' }}">
+            <span>در ارتباط باشیم</span>
 
-    <textarea
-        rows="6"
-        name="message"
-        placeholder="پیام شما">{{ form.message.value|default:'' }}</textarea>
+            <h2>پیام خود را ارسال کنید</h2>
 
-    <button type="submit">
-        ارسال پیام
-    </button>
-</form>
+            <p>
+                سوال یا پیشنهادی دارید؟
+                پیام خود را برای ما ارسال کنید.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             INPUTS
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label for="fullname">
+                نام و نام خانوادگی
+            </label>
+
+            <input
+                id="fullname"
+                type="text"
+                name="fullname"
+                placeholder="نام و نام خانوادگی"
+                value="{{ form.fullname.value|default:'' }}"
+            >
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="email">
+                    ایمیل
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="example@email.com"
+                    value="{{ form.email.value|default:'' }}"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone_number">
+                    شماره تماس
+                </label>
+
+                <input
+                    id="phone_number"
+                    type="tel"
+                    name="phone_number"
+                    placeholder="شماره تماس"
+                    value="{{ form.phone_number.value|default:'' }}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="subject">
+                موضوع
+            </label>
+
+            <input
+                id="subject"
+                type="text"
+                name="subject"
+                placeholder="موضوع پیام"
+                value="{{ form.subject.value|default:'' }}"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="message">
+                پیام
+            </label>
+
+            <textarea
+                id="message"
+                rows="6"
+                name="message"
+                placeholder="پیام خود را بنویسید..."
+            >{{ form.message.value|default:'' }}</textarea>
+
+        </div>
+
+
+        <!-- =================================================
+             SUBMIT
+        ================================================== -->
+
+        <button type="submit" class="contact-submit">
+
+            <span>ارسال پیام</span>
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+        </button>
+
+    </form>
 
 </section>
 
-{% endblock %}
+{% endblock content %}

@@ -1,90 +1,177 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/website/about.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
 
 <!-- HERO -->
 <section class="page-header">
-  <h1>درباره ما</h1>
-  <p>ما تجربه خرید آنلاین را ساده‌تر، سریع‌تر و مطمئن‌تر می‌کنیم</p>
+    <h1>درباره ما</h1>
+    <p>
+        ما تجربه خرید آنلاین را ساده‌تر، سریع‌تر و مطمئن‌تر می‌کنیم
+    </p>
 </section>
+
 
 <!-- ABOUT INTRO -->
 <section class="about-intro">
 
-  <div class="about-text">
+    <div class="about-text">
 
-    <h2>ما کی هستیم؟</h2>
+        <span class="about-label">درباره SHOP+</span>
 
-    <p>
-      فروشگاه <b>SHOP+</b> با هدف ارائه محصولات باکیفیت و قیمت مناسب فعالیت خود را آغاز کرده است.
-      ما تلاش می‌کنیم تجربه‌ای متفاوت از خرید آنلاین برای کاربران ایجاد کنیم.
-    </p>
+        <h2>ما کی هستیم؟</h2>
 
-    <p>
-      تمرکز ما روی کیفیت محصولات، ارسال سریع و پشتیبانی واقعی است تا مشتریان بتوانند با خیال راحت خرید کنند.
-    </p>
+        <p>
+            فروشگاه <strong>SHOP+</strong> با هدف ارائه محصولات باکیفیت
+            و قیمت مناسب فعالیت خود را آغاز کرده است.
+            ما تلاش می‌کنیم تجربه‌ای متفاوت و لذت‌بخش از خرید آنلاین
+            برای کاربران ایجاد کنیم.
+        </p>
 
-  </div>
+        <p>
+            تمرکز ما روی کیفیت محصولات، ارسال سریع و پشتیبانی واقعی است
+            تا مشتریان بتوانند با خیال راحت خرید کنند و تجربه‌ای مطمئن
+            از فروشگاه ما داشته باشند.
+        </p>
 
-  <div class="about-image">
-    <img src="{% static 'img/about-us.png' %}" alt="about">
-  </div>
+        <div class="about-features">
+
+            <div class="about-feature">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>محصولات باکیفیت</span>
+            </div>
+
+            <div class="about-feature">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>ارسال سریع</span>
+            </div>
+
+            <div class="about-feature">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>پشتیبانی واقعی</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="about-image">
+
+        <div class="image-decoration"></div>
+
+        <img
+            src="{% static 'img/about-us.png' %}"
+            alt="درباره فروشگاه SHOP+"
+        >
+
+    </div>
 
 </section>
+
 
 <!-- STATS -->
 <section class="about-stats">
 
-  <div class="stat">
-    <h3>+5000</h3>
-    <p>مشتری راضی</p>
-  </div>
+    <div class="stat">
+        <i class="fa-solid fa-users"></i>
+        <h3>+5000</h3>
+        <p>مشتری راضی</p>
+    </div>
 
-  <div class="stat">
-    <h3>+2000</h3>
-    <p>محصول فعال</p>
-  </div>
+    <div class="stat">
+        <i class="fa-solid fa-box-open"></i>
+        <h3>+2000</h3>
+        <p>محصول فعال</p>
+    </div>
 
-  <div class="stat">
-    <h3>24/7</h3>
-    <p>پشتیبانی</p>
-  </div>
+    <div class="stat">
+        <i class="fa-solid fa-headset"></i>
+        <h3>24/7</h3>
+        <p>پشتیبانی</p>
+    </div>
 
-  <div class="stat">
-    <h3>+10</h3>
-    <p>سال تجربه</p>
-  </div>
+    <div class="stat">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h3>+10</h3>
+        <p>سال تجربه</p>
+    </div>
 
 </section>
+
 
 <!-- VALUES -->
 <section class="about-values">
 
-  <h2>ارزش‌های ما</h2>
+    <div class="section-title">
 
-  <div class="values-grid">
+        <span>چرا SHOP+؟</span>
 
-    <div class="value-card">
-      <i class="fa-solid fa-shield"></i>
-      <h3>اعتماد</h3>
-      <p>ارائه خدمات شفاف و قابل اعتماد برای مشتریان</p>
+        <h2>ارزش‌های ما</h2>
+
+        <p>
+            چیزی که باعث می‌شود تجربه خرید از SHOP+ متفاوت باشد.
+        </p>
+
     </div>
 
-    <div class="value-card">
-      <i class="fa-solid fa-truck-fast"></i>
-      <h3>سرعت</h3>
-      <p>ارسال سریع و مطمئن در سراسر کشور</p>
-    </div>
 
-    <div class="value-card">
-      <i class="fa-solid fa-star"></i>
-      <h3>کیفیت</h3>
-      <p>انتخاب بهترین محصولات با استاندارد بالا</p>
-    </div>
+    <div class="values-grid">
 
-  </div>
+        <div class="value-card">
+
+            <div class="value-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>اعتماد</h3>
+
+            <p>
+                ارائه خدمات شفاف و قابل اعتماد برای مشتریان
+                و ایجاد تجربه‌ای مطمئن در تمام مراحل خرید.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
+
+            <h3>سرعت</h3>
+
+            <p>
+                تلاش می‌کنیم سفارش‌ها در سریع‌ترین زمان ممکن
+                آماده و با اطمینان به دست مشتری برسند.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                <i class="fa-solid fa-star"></i>
+            </div>
+
+            <h3>کیفیت</h3>
+
+            <p>
+                انتخاب محصولات باکیفیت و استاندارد برای اینکه
+                مشتری با خیال راحت خرید خود را انجام دهد.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
-{% endblock %}
+{% endblock content %}

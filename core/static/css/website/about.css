@@ -1,0 +1,685 @@
+/* =====================================================
+   ABOUT PAGE
+===================================================== */
+
+.about-intro {
+    width: 90%;
+    max-width: 1200px;
+    margin: 80px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+    direction: rtl;
+}
+
+
+/* =====================================================
+   ABOUT TEXT
+===================================================== */
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-label {
+    display: inline-block;
+    color: #ff6a00;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.about-label::after {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 3px;
+    background: #ff6a00;
+    border-radius: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.about-text h2 {
+    margin: 0 0 20px;
+    font-size: 36px;
+    font-weight: 900;
+    color: #222;
+}
+
+.about-text p {
+    margin: 0 0 16px;
+    color: #666;
+    font-size: 16px;
+    line-height: 2.1;
+    text-align: right;
+}
+
+.about-text strong {
+    color: #ff5f00;
+}
+
+
+/* =====================================================
+   ABOUT FEATURES
+===================================================== */
+
+.about-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.about-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #fff7f1;
+    border-radius: 12px;
+    color: #444;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.about-feature i {
+    color: #ff6a00;
+    font-size: 17px;
+}
+
+.about-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 106, 0, .12);
+}
+
+
+/* =====================================================
+   ABOUT IMAGE
+===================================================== */
+
+.about-image {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image img {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 500px;
+    height: 420px;
+
+    object-fit: cover;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, .12);
+
+    transition: .4s;
+}
+
+.about-image:hover img {
+    transform: translateY(-8px);
+}
+
+
+/* =====================================================
+   IMAGE DECORATION
+===================================================== */
+
+.image-decoration {
+    position: absolute;
+
+    width: 80%;
+    height: 80%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6a00,
+            #ff9a3c
+        );
+
+    border-radius: 35px;
+
+    left: 5%;
+    top: 12%;
+
+    transform: rotate(-6deg);
+
+    opacity: .15;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.about-stats {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto 90px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    direction: rtl;
+}
+
+.stat {
+    background: #fff;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border: 1px solid #eee;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .06);
+
+    transition: .3s;
+}
+
+.stat:hover {
+    transform: translateY(-7px);
+
+    border-color: #ff6a00;
+
+    box-shadow:
+        0 18px 35px rgba(255, 106, 0, .12);
+}
+
+.stat i {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 15px;
+
+    border-radius: 16px;
+
+    background: #fff4eb;
+
+    color: #ff6a00;
+
+    font-size: 23px;
+}
+
+.stat h3 {
+    margin: 0;
+
+    color: #222;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.stat p {
+    margin: 5px 0 0;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   VALUES SECTION
+===================================================== */
+
+.about-values {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 0 auto 100px;
+
+    direction: rtl;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    text-align: center;
+
+    max-width: 650px;
+
+    margin: 0 auto 50px;
+}
+
+.section-title span {
+    display: inline-block;
+
+    color: #ff6a00;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.section-title h2 {
+    margin: 0 0 12px;
+
+    font-size: 32px;
+
+    font-weight: 900;
+
+    color: #222;
+}
+
+.section-title p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+}
+
+
+/* =====================================================
+   VALUES GRID
+===================================================== */
+
+.values-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.value-card {
+    position: relative;
+
+    background: #fff;
+
+    padding: 35px 28px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    border: 1px solid #eee;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .06);
+
+    transition: .35s;
+
+    overflow: hidden;
+}
+
+.value-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3d00,
+            #ff8c00
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: right;
+
+    transition: .35s;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, .10);
+
+    border-color: #ffe0cc;
+}
+
+.value-card:hover::before {
+    transform: scaleX(1);
+}
+
+
+/* =====================================================
+   VALUE ICON
+===================================================== */
+
+.value-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1e7,
+            #fff8f3
+        );
+
+    color: #ff6a00;
+
+    font-size: 27px;
+
+    transition: .35s;
+}
+
+.value-card:hover .value-icon {
+    transform: scale(1.08) rotate(3deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6a00,
+            #ff8c00
+        );
+
+    color: #fff;
+}
+
+.value-card h3 {
+    margin: 0 0 12px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    color: #222;
+}
+
+.value-card p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 2;
+}
+
+
+/* =====================================================
+   PAGE HEADER IMPROVEMENT
+===================================================== */
+
+.page-header h1 {
+    margin: 0 0 10px;
+
+    font-size: 38px;
+
+    font-weight: 900;
+}
+
+.page-header p {
+    margin: 0;
+
+    font-size: 16px;
+
+    opacity: .9;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .about-intro {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        margin-top: 60px;
+    }
+
+    .about-text {
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-text p {
+        text-align: center;
+    }
+
+    .about-features {
+        justify-content: center;
+    }
+
+    .about-image {
+        order: -1;
+    }
+
+    .about-image img {
+        max-width: 600px;
+    }
+
+    .about-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .values-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .page-header {
+        padding: 55px 20px;
+
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .about-intro {
+        width: 92%;
+
+        margin: 50px auto;
+
+        gap: 40px;
+    }
+
+    .about-text h2 {
+        font-size: 29px;
+    }
+
+    .about-text p {
+        font-size: 14px;
+
+        line-height: 2;
+    }
+
+    .about-features {
+        flex-direction: column;
+
+        width: 100%;
+
+        align-items: stretch;
+    }
+
+    .about-feature {
+        justify-content: center;
+    }
+
+    .about-image {
+        min-height: 300px;
+    }
+
+    .about-image img {
+        height: 300px;
+
+        border-radius: 22px;
+    }
+
+    .image-decoration {
+        border-radius: 25px;
+    }
+
+    .about-stats {
+        width: 92%;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+
+        margin-bottom: 70px;
+    }
+
+    .stat {
+        padding: 22px 12px;
+
+        border-radius: 16px;
+    }
+
+    .stat h3 {
+        font-size: 23px;
+    }
+
+    .stat p {
+        font-size: 13px;
+    }
+
+    .stat i {
+        width: 48px;
+        height: 48px;
+
+        font-size: 20px;
+
+        border-radius: 14px;
+    }
+
+    .about-values {
+        width: 92%;
+
+        margin-bottom: 70px;
+    }
+
+    .section-title {
+        margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+        font-size: 27px;
+    }
+
+    .section-title p {
+        font-size: 14px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .value-card {
+        padding: 30px 22px;
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .about-image {
+        min-height: 250px;
+    }
+
+    .about-image img {
+        height: 250px;
+    }
+
+    .about-text h2 {
+        font-size: 26px;
+    }
+
+    .about-features {
+        gap: 8px;
+    }
+
+    .about-feature {
+        font-size: 13px;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat {
+        padding: 18px 8px;
+    }
+
+    .stat h3 {
+        font-size: 21px;
+    }
+
+    .stat p {
+        font-size: 12px;
+    }
+}
